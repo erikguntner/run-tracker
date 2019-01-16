@@ -11,15 +11,15 @@ import {
   UPDATE_TRANSPORTATION,
   UPDATE_VIEWPORT,
 } from './types';
-// import { keys } from '../config';
+import { keys } from '../config';
 
 import { getDistanceFromLatLonInMi, roundTo } from '../utils';
 
-// const googleMapsElevationKey = keys.googleMapsElevationKey;
-// const graphHopperKey = keys.graphHopperKey;
+const googleMapsElevationKey = keys.googleMapsElevationKey;
+const graphHopperKey = keys.graphHopperKey;
 
-const graphHopperKey = process.env.GRAPH_HOPPER_KEY;
-const googleMapsElevationKey = process.env.GOOGLE_MAPS_ELEVATION_KEY;
+// const graphHopperKey = process.env.GRAPH_HOPPER_KEY;
+// const googleMapsElevationKey = process.env.GOOGLE_MAPS_ELEVATION_KEY;
 
 export const addLocation = (newPoint) => {
   return {

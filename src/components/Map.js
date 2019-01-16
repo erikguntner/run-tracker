@@ -13,7 +13,7 @@ import { updateViewport } from '../actions';
 
 import styles from '../stylesheets/Map.module.scss';
 import { hexToRGBA, getDistanceFromLatLonInMi } from '../utils';
-// import { keys } from '../config';
+import { keys } from '../config';
 
 
 class Map extends Component {
@@ -106,8 +106,9 @@ class Map extends Component {
 
   render() {
     const { geoJSONPoints, geoJSONLines, distance, viewport, updateViewport } = this.props;
-    // const mapToken = keys.mapToken;
-    const mapToken = process.env.MAP_TOKEN;
+    const mapToken = keys.mapToken;
+    // const mapToken = process.env.MAP_TOKEN;
+    console.log(process);
 
     return (
       <Fragment>
