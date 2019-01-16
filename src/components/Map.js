@@ -106,6 +106,7 @@ class Map extends Component {
 
   render() {
     const { geoJSONPoints, geoJSONLines, distance, viewport, updateViewport } = this.props;
+    const mapToken = process.env.MAP_TOKEN || keys.mapToken;
 
     return (
       <Fragment>
@@ -113,7 +114,7 @@ class Map extends Component {
         <TransportationSelect />
         <ReactMapGL
           {...viewport}
-          mapboxApiAccessToken={keys.mapToken}
+          mapboxApiAccessToken={mapToken}
           onViewportChange={(viewport) => updateViewport(viewport)}
           width={'100%'}
           style={{ display: 'flex', flex: '1' }}

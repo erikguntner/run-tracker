@@ -1,8 +1,8 @@
-import React, { Component, StrictMode } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { updateTransportation } from '../actions/index';
-import { faCar, faBicycle, faWalking, faAngleRight, faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
+import { faCar, faBicycle, faWalking, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import styles from '../stylesheets/TransportationSelect.module.scss';
 
 

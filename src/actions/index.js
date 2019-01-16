@@ -15,8 +15,8 @@ import { keys } from '../config';
 
 import { getDistanceFromLatLonInMi, roundTo } from '../utils';
 
-const googleMapsElevationKey = keys.googleMapsElevationKey;
-const graphHopperKey = keys.graphHopperKey;
+const googleMapsElevationKey = process.env.GOOGLE_MAPS_ELEVATION_KEY || keys.googleMapsElevationKey;
+const graphHopperKey = process.env.GRAPH_HOPPER_KEY || keys.graphHopperKey;
 
 export const addLocation = (newPoint) => {
   return {
