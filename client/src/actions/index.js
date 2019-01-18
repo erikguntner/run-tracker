@@ -98,7 +98,7 @@ export function* fetchPathData(action, ...args) {
         // Path data contains the result from the api call
         const pathData = yield call(
           apiPost,
-          `http://localhost:3090/locations`,
+          `https://pacific-crag-45485.herokuapp.com/locations`,
           {
             startLat,
             startLong,
@@ -186,10 +186,14 @@ export function* fetchPathData(action, ...args) {
 export function* fetchElevationData(data) {
   const { pointString, numberOfPoints } = data.data;
 
-  const elevationData = yield call(apiPost, "http://localhost:3090/elevation", {
-    pointString,
-    numberOfPoints
-  });
+  const elevationData = yield call(
+    apiPost,
+    "https://pacific-crag-45485.herokuapp.com/elevation",
+    {
+      pointString,
+      numberOfPoints
+    }
+  );
 
   yield put({
     type: UPDATE_ELEVATION_DATA,

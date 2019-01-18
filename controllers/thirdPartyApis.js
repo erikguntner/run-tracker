@@ -1,7 +1,6 @@
 const axios = require("axios");
 
 exports.getLocations = (req, res) => {
-  console.log(req.body);
   const { startLat, startLong, newLat, newLong, transportationType } = req.body;
 
   axios
@@ -15,7 +14,6 @@ exports.getLocations = (req, res) => {
 };
 
 exports.getElevation = (req, res) => {
-  console.log(req.body);
   const { pointString, numberOfPoints } = req.body;
 
   axios
