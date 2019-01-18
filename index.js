@@ -1,6 +1,5 @@
 // Main starting point of application
 const express = require("express");
-const http = require("http");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
@@ -40,5 +39,4 @@ if (process.env.NODE_ENV === "production") {
 
 //Server Setup
 const port = process.env.PORT || 3090;
-const server = http.createServer(app);
-server.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(port, () => console.log(`listening on port ${port}`));
