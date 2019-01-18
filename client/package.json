@@ -10,6 +10,7 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
+  "proxy": "http://localhost:3090",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.10",
     "@fortawesome/free-solid-svg-icons": "^5.6.1",
