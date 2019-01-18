@@ -7,28 +7,28 @@ const tokenForUser = user => {
 };
 
 exports.signup = (req, res, next) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  if (!email || !password) {
+  if (!username || !password) {
     return res
       .status(422)
-      .send({ error: "You must provide and email and password" });
+      .send({ error: "You must provide and username and password" });
   }
 
-  // See if a user with the given email exists
-  User.findOne({ email: email }, (err, existingUser) => {
+  // See if a user with the given username exists
+  User.findOne({ username: username }, (err, existingUser) => {
     if (err) {
       return next(err);
     }
 
-    // If a user with email does exist, return an error
+    // If a user with username does exist, return an error
     if (existingUser) {
-      return res.status(422).send({ error: "Email is in use" });
+      return res.status(422).send({ error: "Username is in use" });
     }
 
-    //If a user with email does NOT exist, create and save user record
+    //If a user with username does NOT exist, create and save user record
     const user = new User({
-      email,
+      username,
       password
     });
 
@@ -41,7 +41,7 @@ exports.signup = (req, res, next) => {
 };
 
 exports.signin = (req, res, next) => {
-  //User has already had their email and password auth'd
+  //User has already had their username and password auth'd
   // we just need to give them a token
   res.send({ token: tokenForUser(req.user) });
 };
