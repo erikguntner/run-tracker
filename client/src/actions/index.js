@@ -16,6 +16,13 @@ import {
 
 import { getDistanceFromLatLonInMi, roundTo } from "../utils";
 
+const server =
+  process.env.NODE_ENV === "production"
+    ? "https://pacific-crag-45485.herokuapp.com"
+    : "http://localhost:3090";
+
+console.log(process.env.NODE_ENV);
+
 export const addLocation = newPoint => {
   return {
     type: ADD_LOCATION,
@@ -96,17 +103,13 @@ export function* fetchPathData(action, ...args) {
 
       if (clipPath) {
         // Path data contains the result from the api call
-        const pathData = yield call(
-          apiPost,
-          `https://pacific-crag-45485.herokuapp.com/locations`,
-          {
-            startLat,
-            startLong,
-            newLat,
-            newLong,
-            transportationType
-          }
-        );
+        const pathData = yield call(apiPost, `${server}/locations`, {
+          startLat,
+          startLong,
+          newLat,
+          newLong,
+          transportationType
+        });
         // put acts like dispatch from redux/redux-thunk
         // this is "dispatching" the ADD_LINE action to the reducer
         numberOfPoints = pathData.data.paths[0].points.coordinates.length.toString();
@@ -186,14 +189,10 @@ export function* fetchPathData(action, ...args) {
 export function* fetchElevationData(data) {
   const { pointString, numberOfPoints } = data.data;
 
-  const elevationData = yield call(
-    apiPost,
-    "https://pacific-crag-45485.herokuapp.com/elevation",
-    {
-      pointString,
-      numberOfPoints
-    }
-  );
+  const elevationData = yield call(apiPost, `${server}/elevation`, {
+    pointString,
+    numberOfPoints
+  });
 
   yield put({
     type: UPDATE_ELEVATION_DATA,
