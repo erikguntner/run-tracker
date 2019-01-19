@@ -17,5 +17,5 @@ module.exports = app => {
   });
   app.post("/signin", requireSignin, Authentication.signin);
   app.post("/signup", Authentication.signup);
-  app.get("/signup", Authentication.getall);
+  app.get("/users", Authentication.getall);
 };

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactMapGL, {
   NavigationControl,
@@ -138,7 +138,7 @@ class Map extends Component {
     } = this.props;
 
     return (
-      <Fragment>
+      <div className={styles.mapContainer}>
         <Controls />
         <TransportationSelect />
         <ReactMapGL
@@ -203,7 +203,7 @@ class Map extends Component {
           </div>
         </ReactMapGL>
         <ElevationProfile />
-      </Fragment>
+      </div>
     );
   }
 }

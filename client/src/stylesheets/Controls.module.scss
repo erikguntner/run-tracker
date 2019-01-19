@@ -1,14 +1,12 @@
-
 $primary-color: #333;
-$light-grey-1: #F5F7FA;
-$light-grey-2: #E4E7EB;
-$light-grey-3: #CBD2D9;
-$light-grey-4: #9AA5B1;
-
+$light-grey-1: #f5f7fa;
+$light-grey-2: #e4e7eb;
+$light-grey-3: #cbd2d9;
+$light-grey-4: #9aa5b1;
 
 .controls {
   position: absolute;
-  top: 20px;
+  top: 100px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -17,7 +15,6 @@ $light-grey-4: #9AA5B1;
   justify-content: center;
   z-index: 10;
 }
-
 
 .button {
   height: 40px;
@@ -60,7 +57,7 @@ $light-grey-4: #9AA5B1;
     width: 0;
   }
 
-  &:disabled .innerButton{
+  &:disabled .innerButton {
     transform: translate3d(0, -3px, 0);
   }
 
@@ -81,7 +78,7 @@ $light-grey-4: #9AA5B1;
   font-size: 20px;
   text-transform: uppercase;
   transform: translate3d(0, -6px, 0);
-  transition: .2s all linear;
+  transition: 0.2s all linear;
 
   &Active {
     height: 100%;
@@ -91,9 +88,9 @@ $light-grey-4: #9AA5B1;
     align-items: center;
     justify-content: center;
     transform: translate3d(0, -3px, 0);
-    background-color: #0991D3;
+    background-color: #0991d3;
     color: #fff;
-    transition: .2s all ease;
+    transition: 0.2s all ease;
   }
 
   &:not(:last-child) {
@@ -104,7 +101,6 @@ $light-grey-4: #9AA5B1;
   //   border-radius: 5px 0 0 5px;
   // }
 }
-
 
 // .button::after {
 //   content: "";
