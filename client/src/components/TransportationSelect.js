@@ -1,21 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCar, faBicycle, faWalking, faAngleRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { updateTransportation } from '../actions/index';
-import { faCar, faBicycle, faWalking, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import styles from '../stylesheets/TransportationSelect.module.scss';
 
 
 class TransportationSelect extends Component {
-
   render() {
     const { updateTransportation, transportationType } = this.props;
 
     const transportationIcon = {
       foot: faWalking,
       car: faCar,
-      bike: faBicycle
-    }
+      bike: faBicycle,
+    };
 
     return (
       <div className={styles.dropdown}>
@@ -33,20 +35,21 @@ class TransportationSelect extends Component {
           <li onClick={() => updateTransportation('car')}><FontAwesomeIcon icon={faCar} /></li>
         </ul>
       </div>
-    )
+    );
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateTransportation: (transportation) => dispatch(updateTransportation(transportation))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  updateTransportation: transportation => dispatch(updateTransportation(transportation)),
+});
 
-const mapStateToProps = store => {
-  return {
-    transportationType: store.map.transportationType
-  }
-}
+const mapStateToProps = store => ({
+  transportationType: store.map.transportationType,
+});
+
+TransportationSelect.propTypes = {
+  updateTransportation: PropTypes.func,
+  transportationType: PropTypes.string,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransportationSelect);

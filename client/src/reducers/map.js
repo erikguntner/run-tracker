@@ -9,16 +9,16 @@ import {
   CHANGE_TO_CLIP_PATH,
   SHOW_ELEVATION,
   UPDATE_TRANSPORTATION,
-  UPDATE_VIEWPORT
-} from "../actions/types";
-import { updateElevationData, removeLastPoint } from "../mapUtils";
+  UPDATE_VIEWPORT,
+} from '../actions/types';
+import { updateElevationData, removeLastPoint } from '../mapUtils';
 
 const initialState = {
   clipPath: true,
   elevation: false,
   maxElevation: -Infinity,
   minElevation: Infinity,
-  transportationType: "foot",
+  transportationType: 'foot',
   elevationLoading: false,
   elevationData: [],
   startPoint: [],
@@ -28,26 +28,27 @@ const initialState = {
     longitude: -117.718497126,
     zoom: 14,
     bearing: 0,
-    pitch: 0
+    pitch: 0,
   },
   geoJSONPoints: {
-    type: "FeatureCollection",
+    type: 'FeatureCollection',
     properties: {
-      color: "#0991D3"
+      color: '#0991D3',
     },
-    features: []
+    features: [],
   },
   geoJSONLines: {
-    type: "FeatureCollection",
+    type: 'FeatureCollection',
     properties: {
-      color: "#0991D3"
+      color: '#0991D3',
     },
-    features: []
+    features: [],
   },
-  distance: [0]
+  distance: [0],
 };
 
-export default function(state = initialState, action) {
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case ADD_LOCATION:
       return {
@@ -55,9 +56,9 @@ export default function(state = initialState, action) {
         startPoint: action.payload.geometry.coordinates,
         endPoint: action.payload.geometry.coordinates,
         geoJSONPoints: {
-          type: "FeatureCollection",
-          features: [...state.geoJSONPoints.features, action.payload]
-        }
+          type: 'FeatureCollection',
+          features: [...state.geoJSONPoints.features, action.payload],
+        },
       };
     case ADD_LINE:
       return {
@@ -66,25 +67,25 @@ export default function(state = initialState, action) {
         viewport: {
           ...state.viewport,
           latitude: action.payload.newPoint.geometry.coordinates[1],
-          longitude: action.payload.newPoint.geometry.coordinates[0]
+          longitude: action.payload.newPoint.geometry.coordinates[0],
         },
         geoJSONPoints: {
-          type: "FeatureCollection",
-          features: [...state.geoJSONPoints.features, action.payload.newPoint]
+          type: 'FeatureCollection',
+          features: [...state.geoJSONPoints.features, action.payload.newPoint],
         },
         geoJSONLines: {
-          type: "FeatureCollection",
-          features: [...state.geoJSONLines.features, action.payload.newLine]
+          type: 'FeatureCollection',
+          features: [...state.geoJSONLines.features, action.payload.newLine],
         },
         distance: [
           ...state.distance,
-          (state.distance[state.distance.length - 1] += action.payload.distance)
-        ]
+          state.distance[state.distance.length - 1] + action.payload.distance,
+        ],
       };
     case API_CALL_ELEVATION:
       return {
         ...state,
-        elevationLoading: !state.elevationLoading
+        elevationLoading: !state.elevationLoading,
       };
     case CLEAR_ROUTE:
       return {
@@ -94,41 +95,41 @@ export default function(state = initialState, action) {
         endPoint: [],
         elevationData: [],
         geoJSONPoints: {
-          type: "FeatureCollection",
-          features: []
+          type: 'FeatureCollection',
+          features: [],
         },
         geoJSONLines: {
-          type: "FeatureCollection",
-          features: []
-        }
+          type: 'FeatureCollection',
+          features: [],
+        },
       };
     case CLOSE_ROUTE:
       return {
-        ...state
+        ...state,
       };
     case CHANGE_TO_CLIP_PATH:
       return {
         ...state,
-        clipPath: action.payload
+        clipPath: action.payload,
       };
     case REMOVE_LATEST_POINT:
       return removeLastPoint(state);
     case SHOW_ELEVATION:
       return {
         ...state,
-        elevation: !state.elevation
+        elevation: !state.elevation,
       };
     case UPDATE_ELEVATION_DATA:
       return updateElevationData(state, action.payload);
     case UPDATE_TRANSPORTATION:
       return {
         ...state,
-        transportationType: action.payload
+        transportationType: action.payload,
       };
     case UPDATE_VIEWPORT:
       return {
         ...state,
-        viewport: action.payload
+        viewport: action.payload,
       };
     default:
       return state;

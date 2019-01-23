@@ -1,5 +1,5 @@
-import axios from "axios";
-import { call, put } from "redux-saga/effects";
+import axios from 'axios';
+import { call, put } from 'redux-saga/effects';
 import {
   ADD_LOCATION,
   ADD_LINE,
@@ -11,66 +11,50 @@ import {
   CHANGE_TO_CLIP_PATH,
   SHOW_ELEVATION,
   UPDATE_TRANSPORTATION,
-  UPDATE_VIEWPORT
-} from "./types";
+  UPDATE_VIEWPORT,
+} from './types';
 
-import { getDistanceFromLatLonInMi, roundTo } from "../utils";
+import { getDistanceFromLatLonInMi, roundTo } from '../utils';
 
-export const addLocation = newPoint => {
-  return {
-    type: ADD_LOCATION,
-    payload: newPoint
-  };
-};
+export const addLocation = newPoint => ({
+  type: ADD_LOCATION,
+  payload: newPoint,
+});
 
-export const removeLatestPoint = () => {
-  return {
-    type: REMOVE_LATEST_POINT
-  };
-};
+export const removeLatestPoint = () => ({
+  type: REMOVE_LATEST_POINT,
+});
 
-export const clearRoute = () => {
-  return {
-    type: CLEAR_ROUTE
-  };
-};
+export const clearRoute = () => ({
+  type: CLEAR_ROUTE,
+});
 
-export const closeRoute = () => {
-  return {
-    type: CLOSE_ROUTE
-  };
-};
+export const closeRoute = () => ({
+  type: CLOSE_ROUTE,
+});
 
-export const changeToClipPath = status => {
-  return {
-    type: CHANGE_TO_CLIP_PATH,
-    payload: status
-  };
-};
+export const changeToClipPath = status => ({
+  type: CHANGE_TO_CLIP_PATH,
+  payload: status,
+});
 
-export const showElevation = () => {
-  return {
-    type: SHOW_ELEVATION
-  };
-};
+export const showElevation = () => ({
+  type: SHOW_ELEVATION,
+});
 
-export const updateTransportation = transportationType => {
-  return {
-    type: UPDATE_TRANSPORTATION,
-    payload: transportationType
-  };
-};
+export const updateTransportation = transportationType => ({
+  type: UPDATE_TRANSPORTATION,
+  payload: transportationType,
+});
 
-export const updateViewport = viewport => {
-  return {
-    type: UPDATE_VIEWPORT,
-    payload: viewport
-  };
-};
+export const updateViewport = viewport => ({
+  type: UPDATE_VIEWPORT,
+  payload: viewport,
+});
 
-//////////////////////////////////////
+// ////////////////////////////////////
 // SAGA ACTIONS
-//////////////////////////////////////
+// ////////////////////////////////////
 
 // makes fetch request to the url passed into
 const apiPost = (url, body) => axios.post(url, body);
@@ -83,7 +67,7 @@ export function* fetchPathData(action, ...args) {
     newLat,
     newLong,
     transportationType,
-    clipPath
+    clipPath,
   } = action.data;
 
   // If points exist inside the store
@@ -98,24 +82,22 @@ export function* fetchPathData(action, ...args) {
         // Path data contains the result from the api call
         const pathData = yield call(
           apiPost,
-          `https://pacific-crag-45485.herokuapp.com/locations`,
+          'https://pacific-crag-45485.herokuapp.com/locations',
           {
             startLat,
             startLong,
             newLat,
             newLong,
-            transportationType
-          }
+            transportationType,
+          },
         );
         // put acts like dispatch from redux/redux-thunk
         // this is "dispatching" the ADD_LINE action to the reducer
         numberOfPoints = pathData.data.paths[0].points.coordinates.length.toString();
 
         pointString = pathData.data.paths[0].points.coordinates
-          .map(coordinate => {
-            return [coordinate[1], coordinate[0]];
-          })
-          .join("|");
+          .map(coordinate => [coordinate[1], coordinate[0]])
+          .join('|');
 
         distance = roundTo(pathData.data.paths[0].distance * 0.000621371, 2);
 
@@ -124,26 +106,26 @@ export function* fetchPathData(action, ...args) {
           payload: {
             newPoint,
             newLine: {
-              type: "Feature",
+              type: 'Feature',
               properties: {
-                color: "#0991D3"
+                color: '#0991D3',
               },
               geometry: {
-                type: "LineString",
-                coordinates: pathData.data.paths[0].points.coordinates
-              }
+                type: 'LineString',
+                coordinates: pathData.data.paths[0].points.coordinates,
+              },
             },
-            distance
-          }
+            distance,
+          },
         });
       } else {
-        numberOfPoints = "2";
+        numberOfPoints = '2';
 
         pointString = `${startLat},${startLong}|${newLat},${newLong}`;
 
         distance = roundTo(
           getDistanceFromLatLonInMi(startLat, startLong, newLat, newLong),
-          2
+          2,
         );
 
         yield put({
@@ -151,17 +133,17 @@ export function* fetchPathData(action, ...args) {
           payload: {
             newPoint,
             newLine: {
-              type: "Feature",
+              type: 'Feature',
               properties: {
-                color: "#0991D3"
+                color: '#0991D3',
               },
               geometry: {
-                type: "LineString",
-                coordinates: [[startLong, startLat], [newLong, newLat]]
-              }
+                type: 'LineString',
+                coordinates: [[startLong, startLat], [newLong, newLat]],
+              },
             },
-            distance
-          }
+            distance,
+          },
         });
       }
 
@@ -169,8 +151,8 @@ export function* fetchPathData(action, ...args) {
         type: API_CALL_ELEVATION,
         data: {
           pointString,
-          numberOfPoints
-        }
+          numberOfPoints,
+        },
       });
     } catch (err) {
       console.log(err);
@@ -178,7 +160,7 @@ export function* fetchPathData(action, ...args) {
   } else {
     yield put({
       type: ADD_LOCATION,
-      payload: action.data.newPoint
+      payload: action.data.newPoint,
     });
   }
 }
@@ -188,15 +170,15 @@ export function* fetchElevationData(data) {
 
   const elevationData = yield call(
     apiPost,
-    "https://pacific-crag-45485.herokuapp.com/elevation",
+    'https://pacific-crag-45485.herokuapp.com/elevation',
     {
       pointString,
-      numberOfPoints
-    }
+      numberOfPoints,
+    },
   );
 
   yield put({
     type: UPDATE_ELEVATION_DATA,
-    payload: elevationData.data
+    payload: elevationData.data,
   });
 }
