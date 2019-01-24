@@ -32,3 +32,9 @@ code {
   right: auto;
   top: 122px;
 }
+
+@media only screen and (max-width: 800px) {
+  .mapboxgl-ctrl-top-right {
+    top: 192px;
+  }
+}

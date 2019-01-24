@@ -44,7 +44,7 @@ class ElevationProfile extends Component {
                 <Area type='monotone' dataKey='elevation' stroke='#82ca9d' fillOpacity={1} fill="url(#colorUv)" />
               </AreaChart>
             </ResponsiveContainer>
-        )}
+          )}
       </div>
     );
   }
