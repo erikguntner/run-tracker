@@ -50,11 +50,6 @@ class Controls extends Component {
             <FontAwesomeIcon icon={faUndoAlt} />
           </div>
         </button>
-        {/* <button className={styles.button} onClick={closeRoute}>
-          <div className={styles.innerButton}>
-            <FontAwesomeIcon icon={faDungeon} />
-          </div>
-        </button> */}
         <button className={styles.button} onClick={showElevation}>
           <div
             className={
@@ -120,5 +115,5 @@ Controls.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Controls);

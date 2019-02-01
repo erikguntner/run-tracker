@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import ReactMapGL, {
   NavigationControl,
   LinearInterpolator,
+  Marker,
 } from 'react-map-gl';
 import { GeolocateControl } from 'mapbox-gl';
-import DeckGL, { GeoJsonLayer } from 'deck.gl';
+import DeckGL, { GeoJsonLayer, TextLayer } from 'deck.gl';
 // import explode from '@turf/explode';
 
 import Controls from './Controls';
@@ -33,18 +34,14 @@ class Map extends Component {
           enableHighAccuracy: true,
         },
         trackUserLocation: true,
-      }),
+      })
     );
   }
 
-  explode = () => {
-
-  };
+  renderStart = () => {};
 
   renderTooltip = () => {
-    const {
-      hoveredObject, hoveredCoordinates, x, y,
-    } = this.state;
+    const { hoveredObject, hoveredCoordinates, x, y } = this.state;
 
     if (!hoveredObject) {
       return null;
@@ -57,7 +54,7 @@ class Map extends Component {
       startingLong,
       startingLat,
       endingLong,
-      endingLat,
+      endingLat
     )
       .toString()
       .split('')
@@ -67,9 +64,7 @@ class Map extends Component {
     return <Tooltip distance={distance} x={x} y={y} />;
   };
 
-  handleHover = ({
-    x, y, object, coordinate,
-  }) => {
+  handleHover = ({ x, y, object, coordinate }) => {
     this.setState({
       x,
       y,
@@ -78,9 +73,9 @@ class Map extends Component {
     });
   };
 
-  handleClick = (event) => {
+  handleClick = event => {
     if (event.target.classList.contains('mapboxgl-ctrl-icon')) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(position => {
         this.props.updateViewport({
           ...this.props.viewport,
           longitude: position.coords.longitude,
@@ -91,17 +86,20 @@ class Map extends Component {
     }
 
     const [newLong, newLat] = event.lngLat;
-    const [startLong, startLat] = this.props.geoJSONPoints.features.length !== 0
-      ? this.props.geoJSONPoints.features[
-        this.props.geoJSONPoints.features.length - 1
-      ].geometry.coordinates
-      : [null, null];
+    const [startLong, startLat] =
+      this.props.geoJSONPoints.features.length !== 0
+        ? this.props.geoJSONPoints.features[
+            this.props.geoJSONPoints.features.length - 1
+          ].geometry.coordinates
+        : [null, null];
 
     const newPoint = {
       type: 'Feature',
       properties: {
         color:
-          this.props.geoJSONPoints.features.length !== 0 ? '#0991D3' : '#4FA03F',
+          this.props.geoJSONPoints.features.length !== 0
+            ? '#0991D3'
+            : '#4FA03F',
       },
       geometry: {
         type: 'Point',
@@ -116,7 +114,7 @@ class Map extends Component {
       newLat,
       newLong,
       this.props.transportationType,
-      this.props.clipPath,
+      this.props.clipPath
     );
 
     this.setState(prevState => ({
@@ -135,6 +133,7 @@ class Map extends Component {
       distance,
       viewport,
       updateViewport,
+      startPoint,
     } = this.props;
 
     return (
@@ -149,7 +148,7 @@ class Map extends Component {
           onViewportChange={viewport => updateViewport(viewport)}
           width={'100%'}
           style={{ display: 'flex', flex: '1' }}
-          ref={(reactMap) => {
+          ref={reactMap => {
             this.reactMap = reactMap;
           }}
           onClick={this.handleClick}
@@ -159,6 +158,14 @@ class Map extends Component {
             new LinearInterpolator(['latitude', 'longitude'])
           }
         >
+          <Marker
+            latitude={startPoint.length > 0 ? startPoint[1] : 1}
+            longitude={startPoint.length > 0 ? startPoint[0] : 1}
+            offsetLeft={-38}
+            offsetTop={15}
+          >
+            <div className={styles.startPoint}>Start</div>
+          </Marker>
           <DeckGL {...viewport} controller={true}>
             <GeoJsonLayer
               id="geojson-lines-layer"
@@ -173,7 +180,6 @@ class Map extends Component {
               getRadius={100}
               getLineWidth={1}
               getElevation={30}
-              onHover={this.handleHover}
             />
             <GeoJsonLayer
               id="geojson-points-layer"
@@ -190,6 +196,25 @@ class Map extends Component {
               getElevation={30}
               onHover={this.handleHover}
             />
+            {/* <TextLayer
+              id={'text-layer'}
+              data={[
+                {
+                  name: 'Start',
+                  coordinates: [startPoint[0], startPoint[1]],
+                },
+              ]}
+              pickable={true}
+              getPosition={d => {
+                console.log(d);
+                return d.coordinates;
+              }}
+              getText={d => d.name}
+              getSize={32}
+              getAngle={0}
+              getTextAnchor={'middle'}
+              getAlignmentBaseline={'center'}
+            /> */}
             {this.renderTooltip}
           </DeckGL>
           <div style={{ position: 'absolute', left: 40, top: 40 }}>
@@ -226,19 +251,20 @@ const mapDispatchToProps = dispatch => ({
     newLat,
     newLong,
     transportationType,
-    clipPath,
-  ) => dispatch({
-    type: 'API_CALL_PATHS',
-    data: {
-      newPoint,
-      startLat,
-      startLong,
-      newLat,
-      newLong,
-      transportationType,
-      clipPath,
-    },
-  }),
+    clipPath
+  ) =>
+    dispatch({
+      type: 'API_CALL_PATHS',
+      data: {
+        newPoint,
+        startLat,
+        startLong,
+        newLat,
+        newLong,
+        transportationType,
+        clipPath,
+      },
+    }),
   updateViewport: viewport => dispatch(updateViewport(viewport)),
 });
 
@@ -254,8 +280,7 @@ Map.propTypes = {
   addLocation: PropTypes.func,
 };
 
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Map);
