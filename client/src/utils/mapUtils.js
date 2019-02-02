@@ -3,20 +3,23 @@ import { getDistanceFromLatLonInMi, roundTo } from './utils';
 export const updateElevationData = (state, elevationData) => {
   let distance = +state.distance[state.distance.length - 2].toFixed(2);
 
-  const points = state.geoJSONLines.features[state.geoJSONLines.features.length - 1].geometry
-    .coordinates[0];
+  const points =
+    state.geoJSONLines.features[state.geoJSONLines.features.length - 1].geometry
+      .coordinates[0];
 
   const elevationDataArr = elevationData.results.map((location, i) => {
     const endingLong = location.location.lng;
     const endingLat = location.location.lat;
-    const startingLong = i === 0 ? points[0] : elevationData.results[i - 1].location.lng;
-    const startingLat = i === 0 ? points[1] : elevationData.results[i - 1].location.lat;
+    const startingLong =
+      i === 0 ? points[0] : elevationData.results[i - 1].location.lng;
+    const startingLat =
+      i === 0 ? points[1] : elevationData.results[i - 1].location.lat;
 
     const distanceBetweenPoints = getDistanceFromLatLonInMi(
       startingLat,
       startingLong,
       endingLat,
-      endingLong,
+      endingLong
     );
     distance += distanceBetweenPoints;
 
@@ -42,16 +45,18 @@ export const updateElevationData = (state, elevationData) => {
   };
 };
 
-export const removeLastPoint = (state) => {
-  const endPoint = state.geoJSONPoints.features.length > 1
-    ? state.geoJSONPoints.features[state.geoJSONPoints.features.length - 2]
-      .geometry.coordinates
-    : [];
+export const removeLastPoint = state => {
+  const endPoint =
+    state.geoJSONPoints.features.length > 1
+      ? state.geoJSONPoints.features[state.geoJSONPoints.features.length - 2]
+          .geometry.coordinates
+      : [];
 
   if (state.geoJSONLines.features.length === 0) {
     return {
       ...state,
       endPoint,
+      startPoint: [],
       elevationData: [...state.elevationData.slice(0, -1)],
       geoJSONPoints: {
         type: 'FeatureCollection',
@@ -93,23 +98,27 @@ const calculateMinAndMaxElevation = (elevationData, state) => {
   let minElevation;
 
   const sortedElevationData = elevationData[elevationData.length - 1].sort(
-    (a, b) => a.elevation + b.elevation,
+    (a, b) => a.elevation + b.elevation
   );
 
   if (
-    sortedElevationData[sortedElevationData.length - 1].elevation
-    > state.maxElevation
-    && sortedElevationData[0].elevation < state.minElevation
+    sortedElevationData[sortedElevationData.length - 1].elevation >
+      state.maxElevation &&
+    sortedElevationData[0].elevation < state.minElevation
   ) {
-    maxElevation = sortedElevationData[sortedElevationData.length - 1].elevation;
+    maxElevation =
+      sortedElevationData[sortedElevationData.length - 1].elevation;
     minElevation = sortedElevationData[0].elevation;
-  } if (
-    sortedElevationData[sortedElevationData.length - 1].elevation
-    > state.maxElevation
+  }
+  if (
+    sortedElevationData[sortedElevationData.length - 1].elevation >
+    state.maxElevation
   ) {
-    maxElevation = sortedElevationData[sortedElevationData.length - 1].elevation;
+    maxElevation =
+      sortedElevationData[sortedElevationData.length - 1].elevation;
     minElevation = state.minElevation;
-  } if (sortedElevationData[0].elevation < state.minElevation) {
+  }
+  if (sortedElevationData[0].elevation < state.minElevation) {
     maxElevation = state.maxElevation;
     minElevation = sortedElevationData[0].elevation;
   }

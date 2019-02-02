@@ -17,7 +17,7 @@ import TransportationSelect from './TransportationSelect';
 import { updateViewport } from '../actions';
 
 import styles from '../stylesheets/Map.module.scss';
-import { hexToRGBA, getDistanceFromLatLonInMi } from '../utils';
+import { hexToRGBA, getDistanceFromLatLonInMi } from '../utils/utils';
 
 class Map extends Component {
   state = {
@@ -161,7 +161,7 @@ class Map extends Component {
           <Marker
             latitude={startPoint.length > 0 ? startPoint[1] : 1}
             longitude={startPoint.length > 0 ? startPoint[0] : 1}
-            offsetLeft={-38}
+            offsetLeft={-39}
             offsetTop={15}
           >
             <div className={styles.startPoint}>Start</div>
@@ -196,25 +196,6 @@ class Map extends Component {
               getElevation={30}
               onHover={this.handleHover}
             />
-            {/* <TextLayer
-              id={'text-layer'}
-              data={[
-                {
-                  name: 'Start',
-                  coordinates: [startPoint[0], startPoint[1]],
-                },
-              ]}
-              pickable={true}
-              getPosition={d => {
-                console.log(d);
-                return d.coordinates;
-              }}
-              getText={d => d.name}
-              getSize={32}
-              getAngle={0}
-              getTextAnchor={'middle'}
-              getAlignmentBaseline={'center'}
-            /> */}
             {this.renderTooltip}
           </DeckGL>
           <div style={{ position: 'absolute', left: 40, top: 40 }}>

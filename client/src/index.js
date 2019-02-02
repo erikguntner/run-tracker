@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './components/App';
 import Root from './Root';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -9,7 +9,7 @@ ReactDOM.render(
   <Root>
     <App />
   </Root>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

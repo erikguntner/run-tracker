@@ -11,7 +11,7 @@ import {
   UPDATE_TRANSPORTATION,
   UPDATE_VIEWPORT,
 } from '../actions/types';
-import { updateElevationData, removeLastPoint } from '../mapUtils';
+import { updateElevationData, removeLastPoint } from '../utils/mapUtils';
 
 const initialState = {
   clipPath: true,
@@ -47,8 +47,7 @@ const initialState = {
   distance: [0],
 };
 
-
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_LOCATION:
       return {

@@ -14,7 +14,7 @@ import {
   UPDATE_VIEWPORT,
 } from './types';
 
-import { getDistanceFromLatLonInMi, roundTo } from '../utils';
+import { getDistanceFromLatLonInMi, roundTo } from '../utils/utils';
 
 export const addLocation = newPoint => ({
   type: ADD_LOCATION,
