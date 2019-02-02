@@ -17,6 +17,10 @@ $light-grey-4: #9aa5b1;
   background-color: #fff;
   overflow: hidden;
 
+  @media screen and (max-width: 800px) {
+    top: 64px;
+  }
+
   &:hover ul {
     display: block;
   }

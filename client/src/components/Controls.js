@@ -1,21 +1,22 @@
-import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUndoAlt,
   faTimes,
   faMountain,
   faRoute,
-  faDrawPolygon
-} from "@fortawesome/free-solid-svg-icons";
-import { connect } from "react-redux";
+  faDrawPolygon,
+} from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
 import {
   removeLatestPoint,
   clearRoute,
   closeRoute,
   changeToClipPath,
-  showElevation
-} from "../actions";
-import styles from "../stylesheets/Controls.module.scss";
+  showElevation,
+} from '../actions';
+import styles from '../stylesheets/Controls.module.scss';
 
 class Controls extends Component {
   render() {
@@ -26,7 +27,7 @@ class Controls extends Component {
       clipPath,
       changeToClipPath,
       showElevation,
-      elevation
+      elevation,
     } = this.props;
 
     return (
@@ -49,11 +50,6 @@ class Controls extends Component {
             <FontAwesomeIcon icon={faUndoAlt} />
           </div>
         </button>
-        {/* <button className={styles.button} onClick={closeRoute}>
-          <div className={styles.innerButton}>
-            <FontAwesomeIcon icon={faDungeon} />
-          </div>
-        </button> */}
         <button className={styles.button} onClick={showElevation}>
           <div
             className={
@@ -90,23 +86,31 @@ class Controls extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    removeLatestPoint: () => dispatch(removeLatestPoint()),
-    clearRoute: () => dispatch(clearRoute()),
-    closeRoute: () => dispatch(closeRoute()),
-    changeToClipPath: status => dispatch(changeToClipPath(status)),
-    showElevation: () => dispatch(showElevation())
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  removeLatestPoint: () => dispatch(removeLatestPoint()),
+  clearRoute: () => dispatch(clearRoute()),
+  closeRoute: () => dispatch(closeRoute()),
+  changeToClipPath: status => dispatch(changeToClipPath(status)),
+  showElevation: () => dispatch(showElevation()),
+});
 
-const mapStateToProps = store => {
-  return {
-    geoJSONPoints: store.map.geoJSONPoints,
-    geoJSONLines: store.map.geoJSONLines,
-    clipPath: store.map.clipPath,
-    elevation: store.map.elevation
-  };
+const mapStateToProps = store => ({
+  geoJSONPoints: store.map.geoJSONPoints,
+  geoJSONLines: store.map.geoJSONLines,
+  clipPath: store.map.clipPath,
+  elevation: store.map.elevation,
+});
+
+Controls.propTypes = {
+  geoJSONPoints: PropTypes.object,
+  geoJSONLines: PropTypes.object,
+  clipPath: PropTypes.bool,
+  elevation: PropTypes.bool,
+  removeLatestPoint: PropTypes.func,
+  clearRoute: PropTypes.func,
+  closeRoute: PropTypes.func,
+  changeToClipPath: PropTypes.func,
+  showElevation: PropTypes.func,
 };
 
 export default connect(

@@ -1,27 +1,29 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ReactMapGL, {
   NavigationControl,
-  LinearInterpolator
-} from "react-map-gl";
-import { GeolocateControl } from "mapbox-gl";
-import DeckGL, { GeoJsonLayer } from "deck.gl";
-import explode from "@turf/explode";
+  LinearInterpolator,
+  Marker,
+} from 'react-map-gl';
+import { GeolocateControl } from 'mapbox-gl';
+import DeckGL, { GeoJsonLayer, TextLayer } from 'deck.gl';
+// import explode from '@turf/explode';
 
-import Controls from "./Controls";
-import Tooltip from "./Tooltip";
-import ElevationProfile from "./ElevationProfile";
-import TransportationSelect from "./TransportationSelect";
-import { updateViewport } from "../actions";
+import Controls from './Controls';
+import Tooltip from './Tooltip';
+import ElevationProfile from './ElevationProfile';
+import TransportationSelect from './TransportationSelect';
+import { updateViewport } from '../actions';
 
-import styles from "../stylesheets/Map.module.scss";
-import { hexToRGBA, getDistanceFromLatLonInMi } from "../utils";
+import styles from '../stylesheets/Map.module.scss';
+import { hexToRGBA, getDistanceFromLatLonInMi } from '../utils/utils';
 
 class Map extends Component {
   state = {
     distanceFromStart: 0,
     hoveredObject: null,
-    hoveredCoordinates: []
+    hoveredCoordinates: [],
   };
 
   componentDidMount() {
@@ -29,19 +31,14 @@ class Map extends Component {
     map.addControl(
       new GeolocateControl({
         positionOptions: {
-          enableHighAccuracy: true
+          enableHighAccuracy: true,
         },
-        trackUserLocation: true
+        trackUserLocation: true,
       })
     );
   }
 
-  explode = () => {
-    console.log("explode");
-    console.log(this.state.geoJSONLines);
-    const BOOM = explode(this.state.geoJSONLines);
-    console.log(BOOM);
-  };
+  renderStart = () => {};
 
   renderTooltip = () => {
     const { hoveredObject, hoveredCoordinates, x, y } = this.state;
@@ -60,30 +57,29 @@ class Map extends Component {
       endingLat
     )
       .toString()
-      .split("")
+      .split('')
       .slice(0, 4)
-      .join("");
+      .join('');
 
     return <Tooltip distance={distance} x={x} y={y} />;
   };
 
   handleHover = ({ x, y, object, coordinate }) => {
-    console.log(coordinate);
     this.setState({
       x,
       y,
       hoveredObject: object,
-      hoveredCoordinates: coordinate
+      hoveredCoordinates: coordinate,
     });
   };
 
   handleClick = event => {
-    if (event.target.classList.contains("mapboxgl-ctrl-icon")) {
+    if (event.target.classList.contains('mapboxgl-ctrl-icon')) {
       navigator.geolocation.getCurrentPosition(position => {
         this.props.updateViewport({
           ...this.props.viewport,
           longitude: position.coords.longitude,
-          latitude: position.coords.latitude
+          latitude: position.coords.latitude,
         });
       });
       return;
@@ -98,15 +94,17 @@ class Map extends Component {
         : [null, null];
 
     const newPoint = {
-      type: "Feature",
+      type: 'Feature',
       properties: {
         color:
-          this.props.geoJSONPoints.features.length !== 0 ? "#0991D3" : "#4FA03F"
+          this.props.geoJSONPoints.features.length !== 0
+            ? '#0991D3'
+            : '#4FA03F',
       },
       geometry: {
-        type: "Point",
-        coordinates: [newLong, newLat]
-      }
+        type: 'Point',
+        coordinates: [newLong, newLat],
+      },
     };
 
     this.props.addLocation(
@@ -123,8 +121,8 @@ class Map extends Component {
       viewport: {
         ...prevState.viewport,
         longitude: newLong,
-        latitude: newLat
-      }
+        latitude: newLat,
+      },
     }));
   };
 
@@ -134,7 +132,8 @@ class Map extends Component {
       geoJSONLines,
       distance,
       viewport,
-      updateViewport
+      updateViewport,
+      startPoint,
     } = this.props;
 
     return (
@@ -144,11 +143,11 @@ class Map extends Component {
         <ReactMapGL
           {...viewport}
           mapboxApiAccessToken={
-            "pk.eyJ1IjoiZXJpa2d1bnRuZXIiLCJhIjoiY2oyNW5zZ2o1MDAydjMybTV0ZTEwaWJuaSJ9.VXWevkFfyJd_0SnGKa1PSw"
+            'pk.eyJ1IjoiZXJpa2d1bnRuZXIiLCJhIjoiY2oyNW5zZ2o1MDAydjMybTV0ZTEwaWJuaSJ9.VXWevkFfyJd_0SnGKa1PSw'
           }
           onViewportChange={viewport => updateViewport(viewport)}
-          width={"100%"}
-          style={{ display: "flex", flex: "1" }}
+          width={'100%'}
+          style={{ display: 'flex', flex: '1' }}
           ref={reactMap => {
             this.reactMap = reactMap;
           }}
@@ -156,9 +155,17 @@ class Map extends Component {
           mapStyle="mapbox://styles/mapbox/outdoors-v10"
           transitionDuration={300}
           transitionInterpolator={
-            new LinearInterpolator(["latitude", "longitude"])
+            new LinearInterpolator(['latitude', 'longitude'])
           }
         >
+          <Marker
+            latitude={startPoint.length > 0 ? startPoint[1] : 1}
+            longitude={startPoint.length > 0 ? startPoint[0] : 1}
+            offsetLeft={-39}
+            offsetTop={15}
+          >
+            <div className={styles.startPoint}>Start</div>
+          </Marker>
           <DeckGL {...viewport} controller={true}>
             <GeoJsonLayer
               id="geojson-lines-layer"
@@ -173,7 +180,6 @@ class Map extends Component {
               getRadius={100}
               getLineWidth={1}
               getElevation={30}
-              onHover={this.handleHover}
             />
             <GeoJsonLayer
               id="geojson-points-layer"
@@ -192,14 +198,14 @@ class Map extends Component {
             />
             {this.renderTooltip}
           </DeckGL>
-          <div style={{ position: "absolute", left: 40, top: 40 }}>
+          <div style={{ position: 'absolute', left: 40, top: 40 }}>
             <NavigationControl
               onViewportChange={viewport => updateViewport(viewport)}
             />
           </div>
           <div className={styles.distance}>
-            Distance:{" "}
-            {distance.length === 0 ? "0" : distance[distance.length - 1]} miles
+            Distance:{' '}
+            {distance.length === 0 ? '0' : distance[distance.length - 1]} miles
           </div>
         </ReactMapGL>
         <ElevationProfile />
@@ -208,43 +214,51 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = store => {
-  return {
-    geoJSONPoints: store.map.geoJSONPoints,
-    geoJSONLines: store.map.geoJSONLines,
-    distance: store.map.distance,
-    startPoint: store.map.startPoint,
-    transportationType: store.map.transportationType,
-    clipPath: store.map.clipPath,
-    viewport: store.map.viewport
-  };
-};
+const mapStateToProps = store => ({
+  geoJSONPoints: store.map.geoJSONPoints,
+  geoJSONLines: store.map.geoJSONLines,
+  distance: store.map.distance,
+  startPoint: store.map.startPoint,
+  transportationType: store.map.transportationType,
+  clipPath: store.map.clipPath,
+  viewport: store.map.viewport,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addLocation: (
-      newPoint,
-      startLat,
-      startLong,
-      newLat,
-      newLong,
-      transportationType,
-      clipPath
-    ) =>
-      dispatch({
-        type: "API_CALL_PATHS",
-        data: {
-          newPoint,
-          startLat,
-          startLong,
-          newLat,
-          newLong,
-          transportationType,
-          clipPath
-        }
-      }),
-    updateViewport: viewport => dispatch(updateViewport(viewport))
-  };
+const mapDispatchToProps = dispatch => ({
+  addLocation: (
+    newPoint,
+    startLat,
+    startLong,
+    newLat,
+    newLong,
+    transportationType,
+    clipPath
+  ) =>
+    dispatch({
+      type: 'API_CALL_PATHS',
+      data: {
+        newPoint,
+        startLat,
+        startLong,
+        newLat,
+        newLong,
+        transportationType,
+        clipPath,
+      },
+    }),
+  updateViewport: viewport => dispatch(updateViewport(viewport)),
+});
+
+Map.propTypes = {
+  geoJSONPoints: PropTypes.object,
+  geoJSONLines: PropTypes.object,
+  distance: PropTypes.array,
+  startPoint: PropTypes.array,
+  transportationType: PropTypes.string,
+  clipPath: PropTypes.bool,
+  viewport: PropTypes.object,
+  updateViewport: PropTypes.func,
+  addLocation: PropTypes.func,
 };
 
 export default connect(

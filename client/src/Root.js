@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: "off" , react/display-name: "off" */
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
@@ -6,17 +8,25 @@ import reducers from './reducers';
 import watcherSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+let reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-// We can now use this provider tag to power our application, but also wrap our render testing components as well.
+if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
+  reduxDevTools = a => a;
+}
+
+// We can now use this provider tag to power our application,
+// but also wrap our render testing components as well.
 export default ({ children, initialState = {} }) => {
-  const store = createStore(reducers, initialState, compose(applyMiddleware(sagaMiddleware), reduxDevTools))
+  const store = createStore(
+    reducers,
+    initialState,
+    compose(
+      applyMiddleware(sagaMiddleware),
+      reduxDevTools,
+    ),
+  );
 
   sagaMiddleware.run(watcherSaga);
 
-  return (
-    <Provider store={store}>
-      {children}
-    </Provider>
-  )
-}
+  return <Provider store={store}>{children}</Provider>;
+};
