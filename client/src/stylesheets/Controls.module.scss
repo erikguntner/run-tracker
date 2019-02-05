@@ -27,14 +27,6 @@ $light-grey-4: #9aa5b1;
   padding: 0;
   background-color: $light-grey-2;
 
-  // &:nth-of-type(1) {
-  //   border-radius: 5px 0 0 5px;
-  // }
-
-  // &:last-of-type {
-  //   border-radius: 0 5px 5px 0;
-  // }
-
   &:not(:last-child) {
     border-right: 1px solid $light-grey-2;
   }
@@ -47,11 +39,6 @@ $light-grey-4: #9aa5b1;
     cursor: pointer;
     transform: translate3d(0, -8px, 0);
   }
-
-  // &:active .innerButton {
-  //   cursor: pointer;
-  //   transform: translate3d(0, 0, 0);
-  // }
 
   &:disabled .innerButton:hover {
     cursor: not-allowed;
@@ -100,21 +87,4 @@ $light-grey-4: #9aa5b1;
   &:not(:last-child) {
     border-right: 1px solid $light-grey-2;
   }
-
-  // &:nth-of-type(1) {
-  //   border-radius: 5px 0 0 5px;
-  // }
 }
-
-// .button::after {
-//   content: "";
-//   height: 40px;
-//   width: 8px;
-//   position: absolute;
-//   top: 8px;
-//   left: 125px;
-//   background-color: var(--button-shadow-light);
-//   z-index: -2;
-//   border-radius: 0 3px 3px 0;
-//   transition: .2s all ease;
-// }

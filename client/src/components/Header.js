@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import Toggle from './Toggle';
-import Portal from './Portal';
-import Modal from './Modal';
+import { Toggle, Portal, Modal } from './Utilities';
 import styles from '../stylesheets/Header.module.scss';
 
 class Header extends Component {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Portal from './Portal';
-import styles from '../stylesheets/Modal.module.scss';
+import Icon from './Icon';
+import styles from '../../stylesheets/Modal.module.scss';
 
 class Modal extends Component {
   render() {
@@ -13,7 +14,7 @@ class Modal extends Component {
             <div className={styles.background} onClick={toggle} />
             <div className={styles.modalCard}>
               <button className={styles.close} onClick={toggle}>
-                Close
+                <Icon name="close" />
               </button>
               <div>{children}</div>
             </div>
