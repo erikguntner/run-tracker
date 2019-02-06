@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactMapGL, {
@@ -7,8 +7,10 @@ import ReactMapGL, {
   Marker,
 } from 'react-map-gl';
 import { GeolocateControl } from 'mapbox-gl';
-import DeckGL, { GeoJsonLayer, TextLayer } from 'deck.gl';
-// import explode from '@turf/explode';
+import DeckGL, { GeoJsonLayer } from 'deck.gl';
+
+import lineString from '@turf/helpers';
+import bbox from '@turf/bbox';
 
 import Controls from './Controls';
 import Tooltip from './Tooltip';
@@ -37,8 +39,6 @@ class Map extends Component {
       })
     );
   }
-
-  renderStart = () => {};
 
   renderTooltip = () => {
     const { hoveredObject, hoveredCoordinates, x, y } = this.state;
@@ -116,14 +116,13 @@ class Map extends Component {
       this.props.transportationType,
       this.props.clipPath
     );
+  };
 
-    this.setState(prevState => ({
-      viewport: {
-        ...prevState.viewport,
-        longitude: newLong,
-        latitude: newLat,
-      },
-    }));
+  fit = () => {
+    const map = this.reactMap.getMap();
+    const bBox = bbox(this.props.geoJSONPoints);
+    const boundaries = map.fitBounds(bBox);
+    console.log(boundaries);
   };
 
   render() {
@@ -138,7 +137,7 @@ class Map extends Component {
 
     return (
       <div className={styles.mapContainer}>
-        <Controls />
+        <Controls fit={this.fit} />
         <TransportationSelect />
         <ReactMapGL
           {...viewport}

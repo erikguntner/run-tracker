@@ -28,6 +28,7 @@ class Controls extends Component {
       changeToClipPath,
       showElevation,
       elevation,
+      fit,
     } = this.props;
 
     return (
@@ -79,6 +80,15 @@ class Controls extends Component {
             }
           >
             <FontAwesomeIcon icon={faDrawPolygon} />
+          </div>
+        </button>
+        <button className={styles.button} onClick={fit}>
+          <div
+            className={
+              !clipPath ? styles.innerButtonActive : styles.innerButton
+            }
+          >
+            Fit
           </div>
         </button>
       </div>

@@ -12,6 +12,7 @@ import {
   SHOW_ELEVATION,
   UPDATE_TRANSPORTATION,
   UPDATE_VIEWPORT,
+  AUTH_USER,
 } from './types';
 
 import { getDistanceFromLatLonInMi, roundTo } from '../utils/utils';
@@ -197,3 +198,12 @@ export function* fetchElevationData(data) {
     payload: elevationData.data,
   });
 }
+
+///////////////////////////////////////
+// Authentication
+///////////////////////////////////////
+
+export const authenticateUser = token => ({
+  type: AUTH_USER,
+  payload: token,
+});
