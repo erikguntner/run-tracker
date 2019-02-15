@@ -1,0 +1,29 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      margin-bottom: 30px;
+      border-radius: 20px;
+      outline: none;
+      border: 2px solid black;
+      padding: 8px 10px;
+      font-size: 15px;
+    }
+  }
+}
+
+.formError {
+  color: red;
+  margin-top: -25px;
+  margin-bottom: 5px;
+  font-size: 15px;
+}

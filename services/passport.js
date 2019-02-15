@@ -1,12 +1,12 @@
-const passport = require("passport");
-const User = require("../models/user");
-const JwtStrategy = require("passport-jwt").Strategy;
-const ExtractJwt = require("passport-jwt").ExtractJwt;
-const LocalStrategy = require("passport-local");
-require("dotenv").config();
+const passport = require('passport');
+const User = require('../models/user');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const LocalStrategy = require('passport-local');
+require('dotenv').config();
 
 // Create local strategy
-const localOptions = { usernameField: "username" };
+const localOptions = { usernameField: 'username' };
 const localLogin = new LocalStrategy(
   localOptions,
   (username, password, done) => {
@@ -30,8 +30,8 @@ const localLogin = new LocalStrategy(
 
 // setup options for JWT strategy
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromHeader("authorization"),
-  secretOrKey: process.env.SECRET
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  secretOrKey: process.env.SECRET,
 };
 
 // Create JWT strategy
@@ -39,6 +39,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   // See if the user ID in the payload exists in out database
   // If it does, call 'done' with that other
   // otherwise, call done without a user
+  console.log('jwt', payload);
   User.findById(payload.sub, (err, user) => {
     if (err) return done(err, false);
 

@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import styles from '../../stylesheets/Forms.module.scss';
 
-const SignupForm = () => (
-  <div>
+const SignupForm = props => (
+  <div className={styles.formContainer}>
     <h1>Sign Up</h1>
     <Formik
       initialValues={{ username: '', password: '' }}
@@ -17,18 +19,23 @@ const SignupForm = () => (
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        console.log(values);
+        console.log(props);
+        props.signup(values);
+        console.log('passed signup');
+        setSubmitting(false);
       }}
     >
       {({ isSubmitting }) => (
         <Form>
           <Field type="text" name="username" />
-          <ErrorMessage name="username" component="div" />
+          <ErrorMessage name="username">
+            {msg => <div className={styles.formError}>{msg}</div>}
+          </ErrorMessage>
           <Field type="password" name="password" />
-          <ErrorMessage name="password" component="div" />
+          <ErrorMessage name="password">
+            {msg => <div className={styles.formError}>{msg}</div>}
+          </ErrorMessage>
           <button type="submit" disabled={isSubmitting}>
             Sign Up
           </button>
@@ -38,4 +45,15 @@ const SignupForm = () => (
   </div>
 );
 
-export default SignupForm;
+const mapDispatchToProps = dispatch => ({
+  signup: values =>
+    dispatch({
+      type: 'SIGN_UP_USER',
+      payload: values,
+    }),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignupForm);
