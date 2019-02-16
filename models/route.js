@@ -22,24 +22,32 @@ const routeSchema = new Schema({
   },
   pointFeatures: [
     {
-      type: String,
+      type: {
+        type: { type: String },
+      },
       properties: {
         color: String,
       },
       geometry: {
-        type: String,
+        type: {
+          type: { type: String },
+        },
         coordinates: [Number],
       },
     },
   ],
   lineFeatures: [
     {
-      type: String,
+      type: {
+        type: { type: String },
+      },
       properties: {
         color: String,
       },
       geometry: {
-        type: String,
+        type: {
+          type: { type: String },
+        },
         coordinates: [[Number]],
       },
     },
@@ -47,6 +55,6 @@ const routeSchema = new Schema({
   distance: [Number],
 });
 
-const Route = mongoose.model('Route', routeSchema);
+// const Route = mongoose.model('Route', routeSchema);
 
-module.exports = Route;
+module.exports = routeSchema;

@@ -1,16 +1,18 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const routeSchema = require('./route');
 const Schema = mongoose.Schema;
-const bcyrpt = require("bcrypt-nodejs");
+const bcyrpt = require('bcrypt-nodejs');
 
 // Define out model
 const userSchema = new Schema({
   username: { type: String, unique: true, lowercase: true },
-  password: String
+  password: String,
+  routes: [routeSchema],
 });
 
 //On save hook, encrypt password
 // Run before saving a a model to the datbase
-userSchema.pre("save", function(next) {
+userSchema.pre('save', function(next) {
   const user = this;
 
   bcyrpt.genSalt(10, (err, salt) => {
@@ -35,7 +37,7 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
 };
 
 // Create the model class
-const ModelClass = mongoose.model("user", userSchema);
+const ModelClass = mongoose.model('user', userSchema);
 
 // Export the model
 module.exports = ModelClass;
