@@ -9,7 +9,9 @@ import ReactMapGL, {
 import { GeolocateControl } from 'mapbox-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 
-import lineString from '@turf/helpers';
+// import lineString from '@turf/helpers';
+import * as turfHelpers from '@turf/helpers';
+
 import bbox from '@turf/bbox';
 
 import Controls from './Controls';
@@ -204,7 +206,10 @@ class Map extends Component {
           </div>
           <div className={styles.distance}>
             Distance:{' '}
-            {distance.length === 0 ? '0' : distance[distance.length - 1]} miles
+            {distance.length === 0
+              ? '0'
+              : turfHelpers.round(distance[distance.length - 1], 2)}{' '}
+            miles
           </div>
         </ReactMapGL>
         <ElevationProfile />

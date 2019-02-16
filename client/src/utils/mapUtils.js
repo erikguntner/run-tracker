@@ -1,13 +1,29 @@
-import { getDistanceFromLatLonInMi, roundTo } from './utils';
+import { roundTo } from './utils';
+import * as turf from '@turf/turf';
 
 export const updateElevationData = (state, elevationData) => {
-  let distance = +state.distance[state.distance.length - 2].toFixed(2);
+  let distance = state.distance[state.distance.length - 2];
+  console.log(distance);
 
   const points =
     state.geoJSONLines.features[state.geoJSONLines.features.length - 1].geometry
       .coordinates[0];
 
-  const elevationDataArr = elevationData.results.map((location, i) => {
+  const elevationDataArr = calculateElevationDataArray(
+    elevationData,
+    points,
+    distance
+  );
+
+  return {
+    ...state,
+    elevationLoading: !state.elevationLoading,
+    elevationData: [...state.elevationData, elevationDataArr],
+  };
+};
+
+const calculateElevationDataArray = (elevationData, points, distance) => {
+  return elevationData.results.map((location, i) => {
     const endingLong = location.location.lng;
     const endingLat = location.location.lat;
     const startingLong =
@@ -15,34 +31,22 @@ export const updateElevationData = (state, elevationData) => {
     const startingLat =
       i === 0 ? points[1] : elevationData.results[i - 1].location.lat;
 
-    const distanceBetweenPoints = getDistanceFromLatLonInMi(
-      startingLat,
-      startingLong,
-      endingLat,
-      endingLong
+    const options = { units: 'miles' };
+    const turfDistance = turf.distance(
+      [startingLong, startingLat],
+      [endingLong, endingLat],
+      options
     );
-    distance += distanceBetweenPoints;
 
-    const roundedDistance = roundTo(distance, 2);
+    const turfroundedDistance = turf.round(turfDistance, 2);
+
+    const updatedDistance = distance + turfroundedDistance;
 
     return {
       elevation: roundTo(location.elevation * 3.28084, 2),
-      distance: roundedDistance,
+      distance: updatedDistance,
     };
   });
-
-  // const { maxElevation, minElevation } = calculateMinAndMaxElevation(
-  //   [...state.elevationData, elevationDataArr],
-  //   state,
-  // );
-
-  // console.log(maxElevation, minElevation);
-
-  return {
-    ...state,
-    elevationLoading: !state.elevationLoading,
-    elevationData: [...state.elevationData, elevationDataArr],
-  };
 };
 
 export const removeLastPoint = state => {
@@ -68,6 +72,7 @@ export const removeLastPoint = state => {
       },
     };
   }
+
   return {
     ...state,
     endPoint,

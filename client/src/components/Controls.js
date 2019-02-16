@@ -7,6 +7,8 @@ import {
   faMountain,
   faRoute,
   faDrawPolygon,
+  faExpand,
+  faSave,
 } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import {
@@ -82,13 +84,30 @@ class Controls extends Component {
             <FontAwesomeIcon icon={faDrawPolygon} />
           </div>
         </button>
-        <button className={styles.button} onClick={fit}>
+        <button
+          disabled={!geoJSONPoints.features.length}
+          className={styles.button}
+          onClick={fit}
+        >
           <div
             className={
               !clipPath ? styles.innerButtonActive : styles.innerButton
             }
           >
-            Fit
+            <FontAwesomeIcon icon={faExpand} />
+          </div>
+        </button>
+        <button
+          disabled={!geoJSONPoints.features.length}
+          className={styles.button}
+          onClick={fit}
+        >
+          <div
+            className={
+              !clipPath ? styles.innerButtonActive : styles.innerButton
+            }
+          >
+            <FontAwesomeIcon icon={faSave} />
           </div>
         </button>
       </div>

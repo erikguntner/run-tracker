@@ -4,7 +4,7 @@ import App from './App';
 import Root from './Root';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Map from './components/Map.js';
-import Profile from './components/Profile';
+import UserProfile from './components/UserProfile';
 import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -13,7 +13,7 @@ ReactDOM.render(
     <BrowserRouter>
       <App>
         <Route path="/" exact component={Map} />
-        <Route path="/profile" component={Profile} />
+        <Route path="/profile" component={UserProfile} />
       </App>
     </BrowserRouter>
   </Root>,
