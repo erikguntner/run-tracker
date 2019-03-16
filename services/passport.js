@@ -15,12 +15,18 @@ const localLogin = new LocalStrategy(
     // otherwise, call done with false
     User.findOne({ username: username }, function(err, user) {
       if (err) return done(err);
-      if (!user) return done(null, false);
+      if (!user) {
+        console.log('could not find username');
+        return done(null, false);
+      }
 
       // compare passwords - is 'password' equal to user.password?
       user.comparePassword(password, (err, isMatch) => {
         if (err) return done(err);
-        if (!isMatch) return done(null, false);
+        if (!isMatch) {
+          console.log('could not find match');
+          return done(null, false);
+        }
 
         return done(null, user);
       });

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import ReactMapGL, {
   NavigationControl,
   LinearInterpolator,
@@ -135,11 +136,12 @@ class Map extends Component {
       viewport,
       updateViewport,
       startPoint,
+      match,
     } = this.props;
 
     return (
       <div className={styles.mapContainer}>
-        <Controls fit={this.fit} />
+        <Controls fit={this.fit} matchParams={match.params} />
         <TransportationSelect />
         <ReactMapGL
           {...viewport}
@@ -265,7 +267,9 @@ Map.propTypes = {
   addLocation: PropTypes.func,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Map);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Map)
+);

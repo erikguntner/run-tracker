@@ -8,7 +8,8 @@ import reducers from './reducers';
 import watcherSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-let reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+let reduxDevTools =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
 if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
   reduxDevTools = a => a;
@@ -19,11 +20,15 @@ if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
 export default ({ children, initialState = {} }) => {
   const store = createStore(
     reducers,
-    initialState,
+    {
+      auth: {
+        authenticated: localStorage.getItem('token'),
+      },
+    },
     compose(
       applyMiddleware(sagaMiddleware),
-      reduxDevTools,
-    ),
+      reduxDevTools
+    )
   );
 
   sagaMiddleware.run(watcherSaga);

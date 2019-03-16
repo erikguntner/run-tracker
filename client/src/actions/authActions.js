@@ -9,44 +9,47 @@ const server =
 
 const apiPost = (url, body) => axios.post(url, body);
 
-export function* signin({ type, payload }) {
+export function* signin({ type, payload: { values, history } }) {
   try {
-    const response = yield call(apiPost, `${server}/signin`, payload);
+    const response = yield call(apiPost, `${server}/signin`, values);
+
+    yield put({
+      type: AUTH_USER,
+      payload: response.data.token,
+    });
+
+    localStorage.setItem('token', response.data.token);
+
+    history.push(`/${response.data.user._id}`);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* signup({ type, payload: { values, history } }) {
+  try {
+    const response = yield call(apiPost, `${server}/signup`, values);
+
+    yield put({
+      type: AUTH_USER,
+      payload: response.data.token,
+    });
 
     console.log(response);
 
-    yield put({
-      type: AUTH_USER,
-      payload: response.data.token,
-    });
     localStorage.setItem('token', response.data.token);
+    history.push(`/${response.data.id}`);
   } catch (err) {
     console.log(err);
   }
 }
 
-export function* signup({ type, payload }) {
-  console.log(payload);
+export const signout = history => {
+  localStorage.removeItem('token');
 
-  try {
-    const response = yield call(apiPost, `${server}/signup`, payload);
-
-    yield put({
-      type: AUTH_USER,
-      payload: response.data.token,
-    });
-
-    localStorage.setItem('token', response.data.token);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-export const signout = () => {
-  localStorage.removeItem("token");
-
+  history.push('/');
   return {
     type: AUTH_USER,
-    payload: ""
+    payload: '',
   };
 };

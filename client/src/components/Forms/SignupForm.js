@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from '../../stylesheets/Forms.module.scss';
 
@@ -19,20 +20,18 @@ const SignupForm = props => (
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values);
-        console.log(props);
-        props.signup(values);
-        console.log('passed signup');
+        props.signup(values, props.history);
+
         setSubmitting(false);
       }}
     >
       {({ isSubmitting }) => (
         <Form>
-          <Field type="text" name="username" />
+          <Field type="text" name="username" placeholder="username" />
           <ErrorMessage name="username">
             {msg => <div className={styles.formError}>{msg}</div>}
           </ErrorMessage>
-          <Field type="password" name="password" />
+          <Field type="password" name="password" placeholder="password" />
           <ErrorMessage name="password">
             {msg => <div className={styles.formError}>{msg}</div>}
           </ErrorMessage>
@@ -46,14 +45,16 @@ const SignupForm = props => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  signup: values =>
+  signup: (values, history) =>
     dispatch({
       type: 'SIGN_UP_USER',
-      payload: values,
+      payload: { values, history },
     }),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignupForm);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(SignupForm)
+);

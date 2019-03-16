@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Root from './Root';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Map from './components/Map.js';
+import Signin from './components/Signin';
 import UserProfile from './components/UserProfile';
 import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
@@ -12,8 +13,13 @@ ReactDOM.render(
   <Root>
     <BrowserRouter>
       <App>
-        <Route path="/" exact component={Map} />
-        <Route path="/profile" component={UserProfile} />
+        <Switch>
+          <Route path="/signup" component={Signin} />
+          <Route path="/signin" component={Signin} />
+          <Route path="/:id/profile" exact component={UserProfile} />
+          <Route path="/:id" component={Map} />
+          <Route path="/" component={Map} />
+        </Switch>
       </App>
     </BrowserRouter>
   </Root>,

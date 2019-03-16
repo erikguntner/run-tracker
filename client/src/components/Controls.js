@@ -26,12 +26,31 @@ class Controls extends Component {
       removeLatestPoint,
       clearRoute,
       geoJSONPoints,
+      geoJSONLines,
       clipPath,
       changeToClipPath,
       showElevation,
+      elevationData,
       elevation,
       fit,
+      saveRoute,
+      startPoint,
+      endPoint,
+      viewport,
+      distance,
+      matchParams,
     } = this.props;
+
+    const routeData = {
+      matchParams,
+      elevationData,
+      startPoint,
+      endPoint,
+      viewport,
+      geoJSONLines,
+      geoJSONPoints,
+      distance,
+    };
 
     return (
       <div className={styles.controls}>
@@ -100,7 +119,7 @@ class Controls extends Component {
         <button
           disabled={!geoJSONPoints.features.length}
           className={styles.button}
-          onClick={fit}
+          onClick={() => saveRoute(routeData)}
         >
           <div
             className={
@@ -121,6 +140,7 @@ const mapDispatchToProps = dispatch => ({
   closeRoute: () => dispatch(closeRoute()),
   changeToClipPath: status => dispatch(changeToClipPath(status)),
   showElevation: () => dispatch(showElevation()),
+  saveRoute: routeData => dispatch({ type: 'SAVE_ROUTE', payload: routeData }),
 });
 
 const mapStateToProps = store => ({
@@ -128,6 +148,11 @@ const mapStateToProps = store => ({
   geoJSONLines: store.map.geoJSONLines,
   clipPath: store.map.clipPath,
   elevation: store.map.elevation,
+  elevationData: store.map.elevationData,
+  startPoint: store.map.startPoint,
+  endPoint: store.map.endPoint,
+  viewport: store.map.viewport,
+  distance: store.map.distance,
 });
 
 Controls.propTypes = {

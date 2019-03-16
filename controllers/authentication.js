@@ -38,7 +38,11 @@ exports.signup = (req, res, next) => {
     user
       .save()
       .then(user =>
-        res.json({ token: tokenForUser(user), username: req.user.username })
+        res.json({
+          token: tokenForUser(user),
+          username: user.username,
+          id: user._id,
+        })
       )
       .catch(err => next(err));
   });

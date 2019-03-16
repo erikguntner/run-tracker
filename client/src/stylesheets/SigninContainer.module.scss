@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.formContainer {
+  border-radius: 5px;
+  padding: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    margin-left: 3px;
+    font-size: 15px;
+    color: #0991d3;
+    background: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}

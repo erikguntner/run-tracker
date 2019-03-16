@@ -2,6 +2,8 @@ const Route = require('../models/route');
 const User = require('../models/user');
 
 exports.addRoute = (req, res, next) => {
+  console.log('we made it!!!!');
+
   const {
     elevationData,
     startPoint,
@@ -23,16 +25,16 @@ exports.addRoute = (req, res, next) => {
     distance,
   };
 
-  User.findById(id, (err, user) => {
-    if (err) return res.error(err);
+  // User.findById(id, (err, user) => {
+  //   if (err) return res.error(err);
 
-    user.routes.push(newRoute);
+  //   user.routes.push(newRoute);
 
-    user
-      .save()
-      .then(user => res.status(200).json(user))
-      .catch(err => res.json({ msg: err }));
-  });
+  //   user
+  //     .save()
+  //     .then(user => res.status(200).json(user))
+  //     .catch(err => res.json({ msg: err }));
+  // });
 
   // res.send({ msg: 'I just created a route' });
 };

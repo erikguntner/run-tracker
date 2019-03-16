@@ -1,69 +1,43 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 import { signout } from '../actions/authActions';
-import { Toggle, Modal } from './Utilities';
+import { Toggle } from './Utilities';
 import { Link } from 'react-router-dom';
-import SignupForm from './Forms/SignupForm';
-import SigninForm from './Forms/SigninForm';
+import SideMenuWrapper from './SideMenuWrapper';
 import styles from '../stylesheets/Header.module.scss';
 
 class Header extends Component {
-  state = {
-    signup: true,
-  };
-
-  changeForm = () => {
-    this.setState(prevState => ({
-      signup: !prevState.signup,
-    }));
-  };
-
-  renderFormChangeMessage = formType => {
-    return formType === true ? (
-      <div className={styles.formChange}>
-        <div>Already have an account?</div>
-        <button onClick={this.changeForm}>
-          {formType ? 'signin' : 'signup'}
-        </button>
-      </div>
-    ) : (
-      <div className={styles.formChange}>
-        <div>Want to Signup for a new account?</div>
-        <button onClick={this.changeForm}>
-          {formType ? 'signin' : 'signup'}
-        </button>
-      </div>
-    );
-  };
-
   render() {
-    const { signup } = this.state;
+    const { location, history } = this.props;
+    const urlParams = location.pathname.split('/');
 
     return (
       <header className={styles.header}>
-        <Link to="/">Home</Link>
+        <Link to={`/${urlParams[1]}`}>Home</Link>
         <div>
           <Toggle>
             {({ open, toggle }) => (
               <Fragment>
                 {this.props.authenticated ? (
-                  <button onClick={this.props.signout}>Sign Out</button>
+                  <>
+                    <button onClick={() => this.props.signout(history)}>
+                      Sign Out
+                    </button>
+                    <button onClick={toggle}>Menu</button>
+                  </>
                 ) : (
-                  <button onClick={toggle}>Login</button>
+                  <button onClick={() => history.push('/signin')}>Login</button>
                 )}
-                <Modal open={open} toggle={toggle}>
-                  {signup ? (
-                    <SignupForm toggle={toggle} />
-                  ) : (
-                    <SigninForm toggle={toggle} />
-                  )}
-                  {this.renderFormChangeMessage(signup)}
-                </Modal>
+                <SideMenuWrapper open={open} toggle={toggle}>
+                  This, is the side menu wrapper
+                </SideMenuWrapper>
               </Fragment>
             )}
           </Toggle>
           {this.props.authenticated && (
-            <Link to="/profile">View User Profile</Link>
+            <Link to={`${urlParams[1]}/profile`}>View User Profile</Link>
           )}
         </div>
       </header>
@@ -79,11 +53,13 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signout: () => dispatch(signout()),
+    signout: history => dispatch(signout(history)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);
