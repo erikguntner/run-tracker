@@ -5,8 +5,10 @@ import {
   SIGN_IN_USER,
   SIGN_UP_USER,
   SAVE_ROUTE,
+  GET_ROUTES,
 } from './actions/types';
-import { fetchPathData, fetchElevationData, saveRoute } from './actions';
+import { fetchPathData, fetchElevationData } from './actions';
+import { saveRoute, getRoutes } from './actions/routeActions';
 import { signin, signup } from './actions/authActions';
 
 function* watcherSaga() {
@@ -16,6 +18,7 @@ function* watcherSaga() {
     takeEvery(SIGN_IN_USER, signin),
     takeEvery(SIGN_UP_USER, signup),
     takeEvery(SAVE_ROUTE, saveRoute),
+    takeEvery(GET_ROUTES, getRoutes),
   ]);
 }
 

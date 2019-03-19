@@ -13,7 +13,7 @@ exports.addRoute = (req, res, next) => {
     lineFeatures,
     distance,
   } = req.body;
-  const { id } = req.params;
+  const { _id } = req.user;
 
   const newRoute = {
     elevationData,
@@ -25,20 +25,21 @@ exports.addRoute = (req, res, next) => {
     distance,
   };
 
-  // User.findById(id, (err, user) => {
-  //   if (err) return res.error(err);
-
-  //   user.routes.push(newRoute);
-
-  //   user
-  //     .save()
-  //     .then(user => res.status(200).json(user))
-  //     .catch(err => res.json({ msg: err }));
-  // });
-
-  // res.send({ msg: 'I just created a route' });
+  User.findOneAndUpdate({ _id: _id }, { $push: { routes: newRoute } }, function(
+    err,
+    doc
+  ) {
+    if (err) return res.status(400).error(err);
+    console.log(doc);
+  });
 };
 
 exports.getAllRoutes = (req, res, next) => {
-  res.send({ msg: 'This is all the routes' });
+  const { _id } = req.user;
+
+  User.findById(_id, (err, user) => {
+    if (err) return res.status(400).error(err);
+
+    res.status(200).json(user.routes);
+  });
 };

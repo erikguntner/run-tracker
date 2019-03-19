@@ -20,6 +20,8 @@ const localLogin = new LocalStrategy(
         return done(null, false);
       }
 
+      console.log(user);
+
       // compare passwords - is 'password' equal to user.password?
       user.comparePassword(password, (err, isMatch) => {
         if (err) return done(err);
@@ -51,6 +53,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
 
     if (user) {
       // searched and found user
+      console.log(user);
       done(null, user);
     } else {
       // search occured but could not find a user

@@ -11,7 +11,7 @@ class SideMenuWrapper extends Component {
         {open && (
           <div className={styles.modalWrapper}>
             <div className={styles.background} onClick={toggle} />
-            <div className={styles.modalCard}>
+            <div className={styles.menuCard}>
               <button className={styles.close} onClick={toggle}>
                 <Icon name="close" />
               </button>

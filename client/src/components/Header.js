@@ -6,16 +6,17 @@ import { signout } from '../actions/authActions';
 import { Toggle } from './Utilities';
 import { Link } from 'react-router-dom';
 import SideMenuWrapper from './SideMenuWrapper';
+import PathList from './PathList';
 import styles from '../stylesheets/Header.module.scss';
 
 class Header extends Component {
   render() {
-    const { location, history } = this.props;
+    const { location, history, authenticated } = this.props;
     const urlParams = location.pathname.split('/');
 
     return (
       <header className={styles.header}>
-        <Link to={`/${urlParams[1]}`}>Home</Link>
+        <Link to={`/${authenticated ? urlParams[1] : ''}`}>Home</Link>
         <div>
           <Toggle>
             {({ open, toggle }) => (
@@ -32,6 +33,7 @@ class Header extends Component {
                 )}
                 <SideMenuWrapper open={open} toggle={toggle}>
                   This, is the side menu wrapper
+                  <PathList />
                 </SideMenuWrapper>
               </Fragment>
             )}

@@ -2,6 +2,7 @@ import { AUTH_USER } from '../actions/types';
 
 const initialState = {
   authenticated: '',
+  username: '',
 };
 
 export default (state = initialState, action) => {

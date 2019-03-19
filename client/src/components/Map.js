@@ -142,7 +142,7 @@ class Map extends Component {
     return (
       <div className={styles.mapContainer}>
         <Controls fit={this.fit} matchParams={match.params} />
-        <TransportationSelect />
+        {/* <TransportationSelect /> */}
         <ReactMapGL
           {...viewport}
           mapboxApiAccessToken={
@@ -201,7 +201,7 @@ class Map extends Component {
             />
             {this.renderTooltip}
           </DeckGL>
-          <div style={{ position: 'absolute', left: 40, top: 40 }}>
+          <div className={styles.zoom}>
             <NavigationControl
               onViewportChange={viewport => updateViewport(viewport)}
             />

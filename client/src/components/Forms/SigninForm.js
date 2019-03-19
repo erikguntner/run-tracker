@@ -36,11 +36,27 @@ class SigninForm extends React.Component {
         >
           {({ isSubmitting }) => (
             <Form>
-              <Field type="text" name="username" placeholder="username" />
+              <div className={styles.formGroup}>
+                <Field
+                  type="text"
+                  name="username"
+                  placeholder="username"
+                  label="username"
+                />
+                <label htmlFor="username">Username</label>
+              </div>
               <ErrorMessage name="username">
                 {msg => <div className={styles.formError}>{msg}</div>}
               </ErrorMessage>
-              <Field type="password" name="password" placeholder="password" />
+              <div className={styles.formGroup}>
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  label="password"
+                />
+                <label htmlFor="pasword">Passsword</label>
+              </div>
               <ErrorMessage name="password">
                 {msg => <div className={styles.formError}>{msg}</div>}
               </ErrorMessage>

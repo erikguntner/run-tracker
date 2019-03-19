@@ -23,5 +23,5 @@ module.exports = app => {
 
   // Routes for adding running routes
   app.post('/routes/:id', requireAuth, Routes.addRoute);
-  app.get('/routes/:id', requireAuth, Routes.getAllRoutes);
+  app.get('/routes', requireAuth, Routes.getAllRoutes);
 };

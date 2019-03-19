@@ -18,3 +18,6 @@ export const AUTH_USER = 'AUTH_USER';
 
 //RUNNING ROUTES
 export const SAVE_ROUTE = 'SAVE_ROUTE';
+export const GET_ROUTES = 'GET_ROUTES';
+export const ADD_ROUTE = 'ADD_ROUTE';
+export const ADD_ALL_ROUTES = 'ADD_ALL_ROUTES';

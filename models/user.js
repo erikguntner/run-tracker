@@ -29,6 +29,7 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods.comparePassword = function(candidatePassword, callback) {
+  console.log(candidatePassword, this.password);
   bcyrpt.compare(candidatePassword, this.password, (err, isMatch) => {
     if (err) return callback(err);
 

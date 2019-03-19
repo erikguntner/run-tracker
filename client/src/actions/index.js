@@ -81,8 +81,6 @@ export const updateViewport = viewport => {
 
 // makes fetch request to the url passed into
 const apiPost = (url, body) => axios.post(url, body);
-const apiPostWithHeaders = (url, body, headers) =>
-  axios.post(url, body, { headers: headers });
 
 export function* fetchPathData(action, ...args) {
   const {
@@ -198,45 +196,4 @@ export function* fetchElevationData(data) {
     type: UPDATE_ELEVATION_DATA,
     payload: elevationData.data,
   });
-}
-
-export function* saveRoute({
-  type,
-  payload: {
-    matchParams,
-    elevationData,
-    startPoint,
-    endPoint,
-    viewport,
-    geoJSONLines,
-    geoJSONPoints,
-    distance,
-  },
-}) {
-  console.log('hi');
-  const body = {
-    elevationData,
-    startPoint,
-    endPoint,
-    viewport,
-    pointFeatures: geoJSONPoints.features,
-    lineFeatures: geoJSONLines.features,
-    distance: distance,
-  };
-
-  const token = localStorage.getItem('token');
-
-  console.log(matchParams.id);
-
-  const postRouteData = yield call(
-    apiPostWithHeaders,
-    `${server}/routes/${matchParams.id}`,
-    body,
-    {
-      'Content-Type': 'application/json',
-      authorization: token,
-    }
-  );
-
-  yield put();
 }
