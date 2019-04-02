@@ -14,10 +14,14 @@ export const UPDATE_VIEWPORT = 'UPDATE_VIEWPORT';
 //Authentication
 export const SIGN_UP_USER = 'SIGN_UP_USER';
 export const SIGN_IN_USER = 'SIGN_IN_USER';
+export const SIGN_OUT_USER = 'SIGN_OUT_USER';
+export const LOAD_USER = 'LOAD_USER';
 export const AUTH_USER = 'AUTH_USER';
+export const SET_USERNAME = 'SET_USERNAME';
 
 //RUNNING ROUTES
 export const SAVE_ROUTE = 'SAVE_ROUTE';
 export const GET_ROUTES = 'GET_ROUTES';
 export const ADD_ROUTE = 'ADD_ROUTE';
 export const ADD_ALL_ROUTES = 'ADD_ALL_ROUTES';
+export const CLEAR_ROUTES = 'CLEAR_ROUTES';

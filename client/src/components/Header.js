@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
-import { signout } from '../actions/authActions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { Toggle } from './Utilities';
 import { Link } from 'react-router-dom';
 import SideMenuWrapper from './SideMenuWrapper';
@@ -11,7 +11,7 @@ import styles from '../stylesheets/Header.module.scss';
 
 class Header extends Component {
   render() {
-    const { location, history, authenticated } = this.props;
+    const { location, history, authenticated, username } = this.props;
     const urlParams = location.pathname.split('/');
 
     return (
@@ -26,20 +26,27 @@ class Header extends Component {
                     <button onClick={() => this.props.signout(history)}>
                       Sign Out
                     </button>
-                    <button onClick={toggle}>Menu</button>
+                    {!urlParams.includes('profile') && (
+                      <button onClick={toggle}>Menu</button>
+                    )}
                   </>
                 ) : (
                   <button onClick={() => history.push('/signin')}>Login</button>
                 )}
-                <SideMenuWrapper open={open} toggle={toggle}>
-                  This, is the side menu wrapper
+                <SideMenuWrapper
+                  open={open}
+                  toggle={toggle}
+                  username={username}
+                >
                   <PathList />
                 </SideMenuWrapper>
               </Fragment>
             )}
           </Toggle>
           {this.props.authenticated && (
-            <Link to={`${urlParams[1]}/profile`}>View User Profile</Link>
+            <Link to={`${urlParams[1]}/profile`}>
+              {username} <FontAwesomeIcon icon={faUserCircle} />
+            </Link>
           )}
         </div>
       </header>
@@ -50,12 +57,17 @@ class Header extends Component {
 const mapStateToProps = store => {
   return {
     authenticated: store.auth.authenticated,
+    username: store.auth.username,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    signout: history => dispatch(signout(history)),
+    signout: history =>
+      dispatch({
+        type: 'SIGN_OUT_USER',
+        payload: history,
+      }),
   };
 };
 

@@ -20,6 +20,7 @@ module.exports = app => {
 
   // User
   app.get('/user/:id', User.getUserById);
+  app.get('/user', requireAuth, User.getUserData);
 
   // Routes for adding running routes
   app.post('/routes/:id', requireAuth, Routes.addRoute);

@@ -1,0 +1,62 @@
+.donutContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.donutchartTrack {
+  fill: transparent;
+  stroke: #dae2e5;
+  stroke-width: 26;
+}
+.donutchartIndicator {
+  fill: transparent;
+  stroke: #009688;
+  stroke-width: 26;
+  stroke-dasharray: 0 10000;
+  transition: stroke-dasharray 0.3s ease-out;
+}
+
+.donutchart {
+  margin: 0 auto;
+  border-radius: 50%;
+  display: block;
+}
+
+.donutchartText {
+  fill: #333;
+}
+
+.donutchartTextGoal {
+  font-size: 22px;
+  transition: fill 0.2s linear;
+
+  &:hover {
+    fill: dodgerblue;
+    cursor: pointer;
+  }
+}
+
+.donutchartTextVal {
+  font-size: 46px;
+}
+.donutchartTextPercent {
+  font-size: 14px;
+}
+.donutchartTextLabel {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+input {
+  // padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  width: 70px;
+  font-size: 46px;
+
+  &:focus {
+    outline: none;
+  }
+}

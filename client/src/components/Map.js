@@ -125,7 +125,6 @@ class Map extends Component {
     const map = this.reactMap.getMap();
     const bBox = bbox(this.props.geoJSONPoints);
     const boundaries = map.fitBounds(bBox);
-    console.log(boundaries);
   };
 
   render() {

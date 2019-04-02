@@ -21,8 +21,6 @@ const server =
     ? 'https://pacific-crag-45485.herokuapp.com'
     : 'http://localhost:3090';
 
-console.log(process.env.NODE_ENV);
-
 export const addLocation = newPoint => {
   return {
     type: ADD_LOCATION,

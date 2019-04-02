@@ -9,3 +9,7 @@ exports.getUserById = (req, res, next) => {
     res.send({ user: user });
   });
 };
+
+exports.getUserData = (req, res, next) => {
+  res.status(200).json({ username: req.user.username });
+};

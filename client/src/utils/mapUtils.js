@@ -3,7 +3,6 @@ import * as turf from '@turf/turf';
 
 export const updateElevationData = (state, elevationData) => {
   let distance = state.distance[state.distance.length - 2];
-  console.log(distance);
 
   const points =
     state.geoJSONLines.features[state.geoJSONLines.features.length - 1].geometry

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Route from './Route';
+import styles from '../stylesheets/Route.module.scss';
 
 class PathList extends Component {
   componentDidMount() {
@@ -10,9 +11,9 @@ class PathList extends Component {
   render() {
     const { routes } = this.props;
     return (
-      <div>
+      <div className={styles.routeList}>
         {routes.map((route, i) => (
-          <Route key={`route-${i}`} distance={route.distance} />
+          <Route key={`route-${i}`} route={route} />
         ))}
       </div>
     );

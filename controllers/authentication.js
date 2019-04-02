@@ -8,7 +8,6 @@ const tokenForUser = user => {
 
 exports.signup = (req, res, next) => {
   const { username, password } = req.body;
-  console.log(username, password);
 
   if (!username || !password) {
     return res
@@ -40,8 +39,7 @@ exports.signup = (req, res, next) => {
       .then(user =>
         res.json({
           token: tokenForUser(user),
-          username: user.username,
-          id: user._id,
+          user: user,
         })
       )
       .catch(err => next(err));
@@ -55,6 +53,5 @@ exports.signin = (req, res, next) => {
 };
 
 exports.getall = (req, res, next) => {
-  console.log('hi');
   User.find().then(items => res.json(items));
 };

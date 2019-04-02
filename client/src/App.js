@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Header from './components/Header';
+import { withRouter } from 'react-router';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.loadUser();
+  }
+
   render() {
     return (
       <div
@@ -20,4 +26,16 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  loadUser: () =>
+    dispatch({
+      type: 'LOAD_USER',
+    }),
+});
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(App)
+);

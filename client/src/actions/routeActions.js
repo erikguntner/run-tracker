@@ -58,7 +58,6 @@ export function* saveRoute({
 }
 
 export function* getRoutes() {
-  console.log('getting Routes !');
   try {
     const token = localStorage.getItem('token');
     const getRoutesData = yield call(apiGetRequest, `${server}/routes`, {

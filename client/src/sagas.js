@@ -4,12 +4,14 @@ import {
   API_CALL_ELEVATION,
   SIGN_IN_USER,
   SIGN_UP_USER,
+  SIGN_OUT_USER,
+  LOAD_USER,
   SAVE_ROUTE,
   GET_ROUTES,
 } from './actions/types';
 import { fetchPathData, fetchElevationData } from './actions';
 import { saveRoute, getRoutes } from './actions/routeActions';
-import { signin, signup } from './actions/authActions';
+import { signin, signup, signout, loadUser } from './actions/authActions';
 
 function* watcherSaga() {
   yield all([
@@ -17,6 +19,8 @@ function* watcherSaga() {
     takeEvery(API_CALL_ELEVATION, fetchElevationData),
     takeEvery(SIGN_IN_USER, signin),
     takeEvery(SIGN_UP_USER, signup),
+    takeEvery(SIGN_OUT_USER, signout),
+    takeEvery(LOAD_USER, loadUser),
     takeEvery(SAVE_ROUTE, saveRoute),
     takeEvery(GET_ROUTES, getRoutes),
   ]);

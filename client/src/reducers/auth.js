@@ -1,4 +1,4 @@
-import { AUTH_USER } from '../actions/types';
+import { AUTH_USER, SET_USERNAME } from '../actions/types';
 
 const initialState = {
   authenticated: '',
@@ -8,10 +8,15 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case AUTH_USER:
-      console.log('auth reducer');
       return {
         ...state,
-        authenticated: action.payload,
+        authenticated: action.payload.token,
+        username: action.payload.username,
+      };
+    case SET_USERNAME:
+      return {
+        ...state,
+        username: action.payload,
       };
     default:
       return state;

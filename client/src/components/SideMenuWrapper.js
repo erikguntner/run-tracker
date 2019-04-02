@@ -5,7 +5,7 @@ import styles from '../stylesheets/SideMenu.module.scss';
 
 class SideMenuWrapper extends Component {
   render() {
-    const { children, toggle, open } = this.props;
+    const { children, toggle, open, username } = this.props;
     return (
       <Portal>
         {open && (
@@ -15,7 +15,9 @@ class SideMenuWrapper extends Component {
               <button className={styles.close} onClick={toggle}>
                 <Icon name="close" />
               </button>
-              <div>{children}</div>
+              <div className={styles.circle} />
+              <h3>{username}</h3>
+              <>{children}</>
             </div>
           </div>
         )}

@@ -2,8 +2,6 @@ const Route = require('../models/route');
 const User = require('../models/user');
 
 exports.addRoute = (req, res, next) => {
-  console.log('we made it!!!!');
-
   const {
     elevationData,
     startPoint,
