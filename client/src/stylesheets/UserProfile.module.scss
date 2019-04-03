@@ -21,3 +21,16 @@
   padding: 50px;
   align-items: center;
 }
+
+.input {
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid #333;
+  transition: all 0.2s ease;
+  width: 30px;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid dodgerblue;
+  }
+}

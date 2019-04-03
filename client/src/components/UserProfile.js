@@ -15,7 +15,16 @@ class UserProfile extends Component {
           </div>
         </div>
         <div className={styles.profileContent}>
-          <DistanceChart />
+          <div>
+            <h2>
+              I ran{' '}
+              <span>
+                <input placeholder="5" className={styles.input} type="text" />
+              </span>{' '}
+              miles Today
+            </h2>
+            <DistanceChart />
+          </div>
           <Donut />
         </div>
       </section>

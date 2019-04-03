@@ -13,8 +13,9 @@ class DonutChart extends Component {
       updateSetGoal,
     } = this.props;
 
-    const percentageOfGoal = (value / goal) * 100;
-    console.log(percentageOfGoal);
+    const distanceRan = value >= goal ? goal : value;
+
+    const percentageOfGoal = (distanceRan / goal) * 100;
 
     const halfsize = size * 0.5;
     const radius = halfsize - strokewidth * 0.5;
@@ -55,7 +56,12 @@ class DonutChart extends Component {
           />
           {setGoal && (
             <foreignObject x={40} y={40} height={60} width={100}>
-              <input onChange={onGoalChange} placeholder={goal} type="number" />
+              <input
+                className={styles.goalInput}
+                onChange={onGoalChange}
+                placeholder={goal}
+                type="number"
+              />
             </foreignObject>
           )}
           {!setGoal && (
