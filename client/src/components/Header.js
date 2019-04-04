@@ -2,12 +2,16 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faUser as farUser } from '@fortawesome/free-regular-svg-icons';
 import { Toggle } from './Utilities';
 import { Link } from 'react-router-dom';
 import SideMenuWrapper from './SideMenuWrapper';
 import PathList from './PathList';
 import styles from '../stylesheets/Header.module.scss';
+
+library.add(farUser);
 
 class Header extends Component {
   render() {
@@ -16,19 +20,18 @@ class Header extends Component {
 
     return (
       <header className={styles.header}>
-        <Link to={`/${authenticated ? urlParams[1] : ''}`}>Home</Link>
+        <Link to={`/${authenticated ? urlParams[1] : ''}`}>
+          <FontAwesomeIcon icon={faHome} />
+        </Link>
         <div className={styles.headerRight}>
           <Toggle>
             {({ open, toggle }) => (
-              <Fragment>
+              <>
                 {this.props.authenticated ? (
                   <>
                     <button onClick={() => this.props.signout(history)}>
                       Sign Out
                     </button>
-                    {!urlParams.includes('profile') && (
-                      <button onClick={toggle}>Menu</button>
-                    )}
                   </>
                 ) : (
                   <button onClick={() => history.push('/signin')}>Login</button>
@@ -40,14 +43,25 @@ class Header extends Component {
                 >
                   <PathList />
                 </SideMenuWrapper>
-              </Fragment>
+                {this.props.authenticated && (
+                  <Link to={`${urlParams[1]}/profile`}>
+                    {username}{' '}
+                    <span className={styles.userIcon}>
+                      <FontAwesomeIcon icon={farUser} />
+                    </span>
+                  </Link>
+                )}
+
+                {!urlParams.includes('profile') && (
+                  <div className={styles.menuButton} onClick={toggle}>
+                    <div className={styles.bar1} />
+                    <div className={styles.bar2} />
+                    <div className={styles.bar3} />
+                  </div>
+                )}
+              </>
             )}
           </Toggle>
-          {this.props.authenticated && (
-            <Link to={`${urlParams[1]}/profile`}>
-              {username} <FontAwesomeIcon icon={faUserCircle} />
-            </Link>
-          )}
         </div>
       </header>
     );

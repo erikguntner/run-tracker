@@ -7,12 +7,12 @@ import 'react-day-picker/lib/style.css';
 
 import requireAuth from './requireAuth';
 import styles from '../stylesheets/UserProfile.module.scss';
-
 import pickerStyles from '../stylesheets/DayPicker.module.scss';
 
 class UserProfile extends Component {
   state = {
     milesRan: 0,
+    date: null,
   };
 
   updateMilesRan = e => {
@@ -25,6 +25,10 @@ class UserProfile extends Component {
         milesRan: e.target.value,
       });
     }
+  };
+
+  handleDayChange = day => {
+    console.log(day);
   };
 
   render() {
@@ -52,12 +56,13 @@ class UserProfile extends Component {
                   type="text"
                 />
               </span>{' '}
-              miles
+              miles on
               <span className={styles.inputContainer}>
                 <DayPickerInput
                   component={props => (
                     <input className={pickerStyles.container} {...props} />
                   )}
+                  onDayChange={this.handleDayChange}
                   dayPickerProps={{
                     disabledDays: {
                       after: new Date(),
