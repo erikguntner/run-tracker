@@ -8,7 +8,6 @@
   padding: 0 20px;
 
   a {
-    padding-bottom: 4px;
     background: transparent;
     border: none;
     border-bottom: 1px solid transparent;
@@ -24,12 +23,11 @@
   }
 
   button {
-    padding-bottom: 4px;
     background: transparent;
     border: none;
     border-bottom: 1px solid transparent;
-    text-transform: uppercase;
     font-weight: bold;
+    font-size: 16px;
     margin-right: 10px;
     transition: all 0.2s ease;
 
@@ -40,40 +38,57 @@
   }
 }
 
+.home {
+  font-size: 25px;
+}
+
 .userIcon {
-  position: relative;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 
-  &::before {
-    content: '';
-    background-color: dodgerblue;
-    position: absolute;
-    top: -1px;
-    right: -3px;
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    animation: scale-dot 1s infinite;
-  }
+  span {
+    position: relative;
+    font-size: 20px;
 
-  &::after {
-    content: '';
-    background-color: dodgerblue;
-    position: absolute;
-    top: -1px;
-    right: -3px;
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
+    svg {
+      margin-bottom: 3px;
+      margin-left: 5px;
+    }
+
+    &::before {
+      content: '';
+      background-color: dodgerblue;
+      position: absolute;
+      top: -1px;
+      right: -3px;
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      animation: scale-dot 1s infinite;
+    }
+
+    &::after {
+      content: '';
+      background-color: dodgerblue;
+      position: absolute;
+      top: -1px;
+      right: -3px;
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+    }
   }
 }
 
 .menuButton {
+  margin-top: -3px;
   cursor: pointer;
   display: inline-flex;
   flex-direction: column;
   height: 100%;
 
+  &:hover .bar1,
   &:hover .bar2 {
     width: 25px;
   }
@@ -83,20 +98,29 @@
     width: 25px;
     height: 3px;
     background-color: #333;
-    margin: 3px 0;
-    transition: 0.4s;
+    transition: 0.3s;
+  }
+
+  .bar1 {
+    margin-bottom: 5px;
+    width: 20px;
+    transition: 0.3s;
   }
 
   .bar2 {
-    width: 15px;
+    margin-bottom: 5px;
+    width: 18px;
     height: 3px;
     background-color: #333;
-    margin: 3px 0;
     transition: 0.4s;
   }
 }
 
 .headerRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   & + button,
   & + a {
     margin-right: 10px;

@@ -10,6 +10,7 @@ class DonutChart extends Component {
       goal,
       setGoal,
       onGoalChange,
+      updateGoal,
       updateSetGoal,
     } = this.props;
 
@@ -54,35 +55,14 @@ class DonutChart extends Component {
             style={indicatorstyle}
             className={styles.donutchartIndicator}
           />
-          {setGoal && (
-            <foreignObject x={40} y={40} height={60} width={100}>
-              <input
-                className={styles.goalInput}
-                onChange={onGoalChange}
-                placeholder={goal}
-                type="number"
-              />
-            </foreignObject>
-          )}
-          {!setGoal && (
-            <text
-              className={styles.donutchartText}
-              x={halfsize}
-              y={halfsize}
-              style={{ textAnchor: 'middle' }}
-            >
-              {goal ? (
-                <DonutText value={value} halfsize={halfsize} goal={goal} />
-              ) : (
-                <tspan
-                  onClick={updateSetGoal}
-                  className={styles.donutchartTextGoal}
-                >
-                  Set Goal
-                </tspan>
-              )}
-            </text>
-          )}
+          <text
+            className={styles.donutchartText}
+            x={halfsize}
+            y={halfsize}
+            style={{ textAnchor: 'middle' }}
+          >
+            <DonutText value={value} halfsize={halfsize} goal={goal} />
+          </text>
         </svg>
       </div>
     );

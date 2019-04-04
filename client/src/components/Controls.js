@@ -113,7 +113,7 @@ class Controls extends Component {
           </div>
         </button>
         <button
-          disabled={!geoJSONPoints.features.length}
+          disabled={!geoJSONLines.features.length}
           className={styles.button}
           onClick={() => saveRoute(routeData)}
         >

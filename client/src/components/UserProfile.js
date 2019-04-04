@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import DistanceChart from './DistanceChart';
 import Donut from './Donut';
 import PathList from './PathList';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import 'react-day-picker/lib/style.css';
+import RunLogger from './RunLogger';
 
 import requireAuth from './requireAuth';
 import styles from '../stylesheets/UserProfile.module.scss';
-import pickerStyles from '../stylesheets/DayPicker.module.scss';
 
 class UserProfile extends Component {
   state = {
@@ -41,41 +39,18 @@ class UserProfile extends Component {
           </div>
         </div>
         <div className={styles.profileContent}>
+          <div className={styles.row}>
+            <div className={styles.userCircle}>S</div>
+            <Donut />
+          </div>
           <div>
-            <h2>
-              I ran{' '}
-              <span
-                style={{ width: `${milesRan.toString().length * 23}px` }}
-                className={styles.inputContainer}
-              >
-                <input
-                  style={{ width: `${milesRan.toString().length * 23}px` }}
-                  onChange={this.updateMilesRan}
-                  placeholder="5"
-                  className={styles.input}
-                  type="text"
-                />
-              </span>{' '}
-              miles on
-              <span className={styles.inputContainer}>
-                <DayPickerInput
-                  component={props => (
-                    <input className={pickerStyles.container} {...props} />
-                  )}
-                  onDayChange={this.handleDayChange}
-                  dayPickerProps={{
-                    disabledDays: {
-                      after: new Date(),
-                    },
-                    fromMonth: new Date(2019, 0),
-                    toMonth: new Date(),
-                  }}
-                />
-              </span>
-            </h2>
+            <RunLogger
+              milesRan={milesRan}
+              handleDayChange={this.handleDayChange}
+              updateMilesRan={this.updateMilesRan}
+            />
             <DistanceChart />
           </div>
-          <Donut />
         </div>
       </section>
     );

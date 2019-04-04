@@ -15,7 +15,7 @@
   stroke: #009688;
   stroke-width: 26;
   stroke-dasharray: 0 10000;
-  transition: stroke-dasharray 0.3s ease-out;
+  transition: stroke-dasharray 0.3s ease-out 0.4s;
 }
 
 .donutchart {
@@ -58,5 +58,52 @@
 
   &:focus {
     outline: none;
+  }
+}
+
+.setGoal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 3px solid #009688;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  &Inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    div:first-of-type {
+      font-size: 20px;
+    }
+
+    svg {
+      font-size: 24px;
+    }
+  }
+
+  &Input {
+    border: none;
+    position: relative;
+    font-size: 36px;
+
+    &:focus {
+      outline: none;
+    }
   }
 }

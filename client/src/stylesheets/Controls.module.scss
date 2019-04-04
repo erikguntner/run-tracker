@@ -55,6 +55,10 @@ $light-grey-4: #9aa5b1;
   &:focus {
     outline: none;
   }
+
+  &:visited {
+    transform: translate3d(0, 3px, 0);
+  }
 }
 
 .innerButton {

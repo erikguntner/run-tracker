@@ -20,7 +20,10 @@ class Header extends Component {
 
     return (
       <header className={styles.header}>
-        <Link to={`/${authenticated ? urlParams[1] : ''}`}>
+        <Link
+          className={styles.home}
+          to={`/${authenticated ? urlParams[1] : ''}`}
+        >
           <FontAwesomeIcon icon={faHome} />
         </Link>
         <div className={styles.headerRight}>
@@ -30,7 +33,7 @@ class Header extends Component {
                 {this.props.authenticated ? (
                   <>
                     <button onClick={() => this.props.signout(history)}>
-                      Sign Out
+                      sign out
                     </button>
                   </>
                 ) : (
@@ -44,15 +47,18 @@ class Header extends Component {
                   <PathList />
                 </SideMenuWrapper>
                 {this.props.authenticated && (
-                  <Link to={`${urlParams[1]}/profile`}>
+                  <Link
+                    className={styles.userIcon}
+                    to={`${urlParams[1]}/profile`}
+                  >
                     {username}{' '}
-                    <span className={styles.userIcon}>
+                    <span>
                       <FontAwesomeIcon icon={farUser} />
                     </span>
                   </Link>
                 )}
 
-                {!urlParams.includes('profile') && (
+                {!urlParams.includes('profile') && this.props.authenticated && (
                   <div className={styles.menuButton} onClick={toggle}>
                     <div className={styles.bar1} />
                     <div className={styles.bar2} />
