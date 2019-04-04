@@ -108,11 +108,7 @@ class Controls extends Component {
           className={styles.button}
           onClick={fit}
         >
-          <div
-            className={
-              !clipPath ? styles.innerButtonActive : styles.innerButton
-            }
-          >
+          <div className={styles.innerButton}>
             <FontAwesomeIcon icon={faExpand} />
           </div>
         </button>
@@ -121,11 +117,7 @@ class Controls extends Component {
           className={styles.button}
           onClick={() => saveRoute(routeData)}
         >
-          <div
-            className={
-              !clipPath ? styles.innerButtonActive : styles.innerButton
-            }
-          >
+          <div className={styles.innerButton}>
             <FontAwesomeIcon icon={faSave} />
           </div>
         </button>

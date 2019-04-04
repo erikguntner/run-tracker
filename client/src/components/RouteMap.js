@@ -17,7 +17,6 @@ class RouteMap extends Component {
 
     const line = turfHelpers.lineString(this.props.points);
     var bBox = bbox(line);
-    console.log(bBox);
 
     const viewport = new WebMercatorViewport({
       width: 200,

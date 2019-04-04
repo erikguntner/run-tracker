@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: calc(100vh - 70px);
+  background-color: #fcfcfc;
 }
 
 .profileSidebar {
@@ -20,17 +21,38 @@
   grid-template-columns: 3fr 1fr;
   padding: 50px;
   align-items: center;
+
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+  }
+}
+.inputContainer {
+  position: relative;
+  margin: 0px 7px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    background-color: dodgerblue;
+    width: 100%;
+    height: 7px;
+  }
 }
 
 .input {
-  font-size: 18px;
   border: none;
-  border-bottom: 1px solid #333;
-  transition: all 0.2s ease;
-  width: 30px;
+  background-color: transparent;
+  font-size: 36px;
+  transition: border-bottom 0.2s ease;
+  padding: 0;
 
   &:focus {
     outline: none;
-    border-bottom: 1px solid dodgerblue;
   }
 }

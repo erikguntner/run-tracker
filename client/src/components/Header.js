@@ -17,7 +17,7 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <Link to={`/${authenticated ? urlParams[1] : ''}`}>Home</Link>
-        <div>
+        <div className={styles.headerRight}>
           <Toggle>
             {({ open, toggle }) => (
               <Fragment>
