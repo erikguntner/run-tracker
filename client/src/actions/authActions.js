@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { call, put } from 'redux-saga/effects';
-import { AUTH_USER, CLEAR_ROUTES, SET_USERNAME } from './types';
+import { AUTH_USER, CLEAR_ROUTES, SET_USERNAME, LOADING_USER } from './types';
 
 const server =
   process.env.NODE_ENV === 'production'
@@ -14,8 +14,6 @@ export function* signin({ type, payload: { values, history } }) {
   try {
     const response = yield call(apiPost, `${server}/signin`, values);
 
-    console.log(response);
-
     yield put({
       type: AUTH_USER,
       payload: {
@@ -26,13 +24,15 @@ export function* signin({ type, payload: { values, history } }) {
 
     localStorage.setItem('token', response.data.token);
 
-    history.push(`/${response.data.user._id}`);
+    history.push('/');
   } catch (err) {
     console.log(err);
   }
 }
 
 export function* loadUser() {
+  yield put(loadingUser(true));
+
   const token = localStorage.getItem('token');
 
   if (token === null) return;
@@ -52,8 +52,6 @@ export function* signup({ type, payload: { values, history } }) {
   try {
     const response = yield call(apiPost, `${server}/signup`, values);
 
-    console.log(response);
-
     yield put({
       type: AUTH_USER,
       payload: {
@@ -63,7 +61,8 @@ export function* signup({ type, payload: { values, history } }) {
     });
 
     localStorage.setItem('token', response.data.token);
-    history.push(`/${response.data.user._id}`);
+
+    history.push('/');
   } catch (err) {
     console.log(err);
   }
@@ -83,3 +82,8 @@ export function* signout({ payload }) {
 
   payload.push('/');
 }
+
+const loadingUser = status => ({
+  type: LOADING_USER,
+  payload: status,
+});

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DonutChart from './DonutChart';
 import SetGoal from './SetGoal';
-import styles from '../stylesheets/Donut.module.scss';
+import styles from '../../stylesheets/Donut.module.scss';
 
 class Donut extends Component {
   state = {

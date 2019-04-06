@@ -16,13 +16,13 @@ import * as turfHelpers from '@turf/helpers';
 import bbox from '@turf/bbox';
 
 import Controls from './Controls';
-import Tooltip from './Tooltip';
+import Tooltip from '../Tooltip';
 import ElevationProfile from './ElevationProfile';
 import TransportationSelect from './TransportationSelect';
-import { updateViewport } from '../actions';
+import { updateViewport } from '../../actions';
 
-import styles from '../stylesheets/Map.module.scss';
-import { hexToRGBA, getDistanceFromLatLonInMi } from '../utils/utils';
+import styles from '../../stylesheets/Map.module.scss';
+import { hexToRGBA, getDistanceFromLatLonInMi } from '../../utils/utils';
 
 class Map extends Component {
   state = {

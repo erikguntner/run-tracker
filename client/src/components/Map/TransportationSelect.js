@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCar, faBicycle, faWalking, faAngleRight,
+  faCar,
+  faBicycle,
+  faWalking,
+  faAngleRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { updateTransportation } from '../actions/index';
-import styles from '../stylesheets/TransportationSelect.module.scss';
-
+import { updateTransportation } from '../../actions/index';
+import styles from '../../stylesheets/TransportationSelect.module.scss';
 
 class TransportationSelect extends Component {
   render() {
@@ -30,9 +32,15 @@ class TransportationSelect extends Component {
           </div>
         </div>
         <ul>
-          <li onClick={() => updateTransportation('foot')}><FontAwesomeIcon icon={faWalking} /></li>
-          <li onClick={() => updateTransportation('bike')}><FontAwesomeIcon icon={faBicycle} /></li>
-          <li onClick={() => updateTransportation('car')}><FontAwesomeIcon icon={faCar} /></li>
+          <li onClick={() => updateTransportation('foot')}>
+            <FontAwesomeIcon icon={faWalking} />
+          </li>
+          <li onClick={() => updateTransportation('bike')}>
+            <FontAwesomeIcon icon={faBicycle} />
+          </li>
+          <li onClick={() => updateTransportation('car')}>
+            <FontAwesomeIcon icon={faCar} />
+          </li>
         </ul>
       </div>
     );
@@ -40,7 +48,8 @@ class TransportationSelect extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateTransportation: transportation => dispatch(updateTransportation(transportation)),
+  updateTransportation: transportation =>
+    dispatch(updateTransportation(transportation)),
 });
 
 const mapStateToProps = store => ({
@@ -52,4 +61,7 @@ TransportationSelect.propTypes = {
   transportationType: PropTypes.string,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransportationSelect);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TransportationSelect);

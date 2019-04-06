@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { call, put } from 'redux-saga/effects';
-import { ADD_ROUTE, ADD_ALL_ROUTES } from './types';
+import { ADD_ROUTE, ADD_ALL_ROUTES, LOADING_ROUTES } from './types';
 
 const server =
   process.env.NODE_ENV === 'production'
@@ -58,6 +58,8 @@ export function* saveRoute({
 }
 
 export function* getRoutes() {
+  yield put(setLoadingRoutes(true));
+
   try {
     const token = localStorage.getItem('token');
     const getRoutesData = yield call(apiGetRequest, `${server}/routes`, {
@@ -73,3 +75,8 @@ export function* getRoutes() {
     console.log('there was an error');
   }
 }
+
+const setLoadingRoutes = status => ({
+  type: LOADING_ROUTES,
+  payload: status,
+});

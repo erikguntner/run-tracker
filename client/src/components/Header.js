@@ -15,15 +15,18 @@ library.add(farUser);
 
 class Header extends Component {
   render() {
-    const { location, history, authenticated, username } = this.props;
+    const {
+      location,
+      history,
+      authenticated,
+      username,
+      loadingUser,
+    } = this.props;
     const urlParams = location.pathname.split('/');
 
     return (
       <header className={styles.header}>
-        <Link
-          className={styles.home}
-          to={`/${authenticated ? urlParams[1] : ''}`}
-        >
+        <Link className={styles.home} to="/">
           <FontAwesomeIcon icon={faHome} />
         </Link>
         <div className={styles.headerRight}>
@@ -47,11 +50,8 @@ class Header extends Component {
                   <PathList />
                 </SideMenuWrapper>
                 {this.props.authenticated && (
-                  <Link
-                    className={styles.userIcon}
-                    to={`${urlParams[1]}/profile`}
-                  >
-                    {username}{' '}
+                  <Link className={styles.userIcon} to="/profile">
+                    {loadingUser ? '...Loading' : username}{' '}
                     <span>
                       <FontAwesomeIcon icon={farUser} />
                     </span>
@@ -78,6 +78,7 @@ const mapStateToProps = store => {
   return {
     authenticated: store.auth.authenticated,
     username: store.auth.username,
+    loadingUser: store.auth.loadingUser,
   };
 };
 

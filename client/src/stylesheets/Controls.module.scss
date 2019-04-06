@@ -52,6 +52,10 @@ $light-grey-4: #9aa5b1;
     transform: translate3d(0, -3px, 0);
   }
 
+  &:active .innerButton {
+    transform: translate3d(0, -3px, 0);
+  }
+
   &:focus {
     outline: none;
   }

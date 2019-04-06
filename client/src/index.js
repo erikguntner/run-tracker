@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Root from './Root';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Map from './components/Map.js';
+import Map from './components/Map/Map';
 import Signin from './components/Signin';
-import UserProfile from './components/UserProfile';
+import Dashboard from './components/Dashboard/Dashboard';
 import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -16,8 +16,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/signup" component={Signin} />
           <Route path="/signin" component={Signin} />
-          <Route path="/:id/profile" exact component={UserProfile} />
-          <Route path="/:id" component={Map} />
+          <Route path="/profile" exact component={Dashboard} />
           <Route path="/" component={Map} />
         </Switch>
       </App>

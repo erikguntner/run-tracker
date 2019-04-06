@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../stylesheets/Donut.module.scss';
+import styles from '../../stylesheets/Donut.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 

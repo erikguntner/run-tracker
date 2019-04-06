@@ -1,8 +1,8 @@
 import React from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import styles from '../stylesheets/UserProfile.module.scss';
-import pickerStyles from '../stylesheets/DayPicker.module.scss';
+import styles from '../../stylesheets/UserProfile.module.scss';
+import pickerStyles from '../../stylesheets/DayPicker.module.scss';
 
 const RunLogger = ({ milesRan, updateMilesRan, handleDayChange }) => {
   return (

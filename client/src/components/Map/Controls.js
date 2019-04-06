@@ -17,8 +17,8 @@ import {
   closeRoute,
   changeToClipPath,
   showElevation,
-} from '../actions';
-import styles from '../stylesheets/Controls.module.scss';
+} from '../../actions';
+import styles from '../../stylesheets/Controls.module.scss';
 
 class Controls extends Component {
   render() {
@@ -112,10 +112,18 @@ class Controls extends Component {
             <FontAwesomeIcon icon={faExpand} />
           </div>
         </button>
-        <button
+        {/* <button
           disabled={!geoJSONLines.features.length}
           className={styles.button}
           onClick={() => saveRoute(routeData)}
+        >
+          <div className={styles.innerButton}>
+            <FontAwesomeIcon icon={faSave} />
+          </div>
+        </button> */}
+        <button
+          disabled={!geoJSONLines.features.length}
+          className={styles.button}
         >
           <div className={styles.innerButton}>
             <FontAwesomeIcon icon={faSave} />

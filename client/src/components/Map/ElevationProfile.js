@@ -13,7 +13,7 @@ import {
   stop,
 } from 'recharts';
 import flatten from 'lodash/flatten';
-import styles from '../stylesheets/ElevationProfile.module.scss';
+import styles from '../../stylesheets/ElevationProfile.module.scss';
 
 class ElevationProfile extends Component {
   handleMouseEnter = event => {

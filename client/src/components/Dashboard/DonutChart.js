@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../stylesheets/Donut.module.scss';
+import styles from '../../stylesheets/Donut.module.scss';
 
 class DonutChart extends Component {
   render() {

@@ -9,9 +9,10 @@ class PathList extends Component {
   }
 
   render() {
-    const { routes } = this.props;
+    const { routes, loadingRoutes } = this.props;
     return (
       <div className={styles.routeList}>
+        {loadingRoutes && routes.length === 0 && <div>...Loading</div>}
         {routes.map((route, i) => (
           <Route key={`route-${i}`} route={route} />
         ))}
@@ -22,6 +23,7 @@ class PathList extends Component {
 
 const mapStateToProps = store => ({
   routes: store.routes.routes,
+  loadingRoutes: store.routes.loadingRoutes,
 });
 
 const mapDispatchToProps = dispatch => ({

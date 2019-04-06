@@ -1,6 +1,7 @@
-import { AUTH_USER, SET_USERNAME } from '../actions/types';
+import { AUTH_USER, SET_USERNAME, LOADING_USER } from '../actions/types';
 
 const initialState = {
+  loadingUser: false,
   authenticated: '',
   username: '',
 };
@@ -16,7 +17,13 @@ export default (state = initialState, action) => {
     case SET_USERNAME:
       return {
         ...state,
+        loadingUser: false,
         username: action.payload,
+      };
+    case LOADING_USER:
+      return {
+        ...state,
+        loadingUser: action.payload,
       };
     default:
       return state;
