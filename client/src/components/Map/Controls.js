@@ -112,18 +112,10 @@ class Controls extends Component {
             <FontAwesomeIcon icon={faExpand} />
           </div>
         </button>
-        {/* <button
-          disabled={!geoJSONLines.features.length}
-          className={styles.button}
-          onClick={() => saveRoute(routeData)}
-        >
-          <div className={styles.innerButton}>
-            <FontAwesomeIcon icon={faSave} />
-          </div>
-        </button> */}
         <button
           disabled={!geoJSONLines.features.length}
           className={styles.button}
+          onClick={() => saveRoute(routeData)}
         >
           <div className={styles.innerButton}>
             <FontAwesomeIcon icon={faSave} />

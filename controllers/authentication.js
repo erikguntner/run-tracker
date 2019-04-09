@@ -6,7 +6,7 @@ const tokenForUser = user => {
   return jwt.encode({ sub: user.id, iat: timestamp }, process.env.SECRET);
 };
 
-exports.signup = (req, res, next) => {
+exports.signup = async (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -15,25 +15,19 @@ exports.signup = (req, res, next) => {
       .send({ error: 'You must provide and username and password' });
   }
 
-  // See if a user with the given username exists
-  User.findOne({ username: username }, (err, existingUser) => {
-    if (err) {
-      return next(err);
-    }
+  try {
+    const existingUser = await User.findOne({ username: username });
 
-    // If a user with username does exist, return an error
     if (existingUser) {
       console.log('existing user');
       return res.status(422).json({ error: 'Username is in use' });
     }
 
-    //If a user with username does NOT exist, create and save user record
     const user = new User({
       username,
       password,
     });
 
-    // Respond to request indicatin the user was created
     user
       .save()
       .then(user =>
@@ -42,8 +36,10 @@ exports.signup = (req, res, next) => {
           user: user,
         })
       )
-      .catch(err => next(err));
-  });
+      .catch(err => res.status(400).send(err));
+  } catch (err) {
+    return res.status(400).send(err);
+  }
 };
 
 exports.signin = (req, res, next) => {
@@ -52,6 +48,11 @@ exports.signin = (req, res, next) => {
   res.send({ token: tokenForUser(req.user), user: req.user });
 };
 
-exports.getall = (req, res, next) => {
-  User.find().then(items => res.json(items));
+exports.getall = async (req, res, next) => {
+  try {
+    const allUsers = await User.find();
+    return res.status(200).json(allUsers);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
 };

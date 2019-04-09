@@ -1,6 +1,6 @@
 const User = require('../models/user');
 
-exports.addRoute = (req, res, next) => {
+exports.addRoute = async (req, res, next) => {
   const {
     elevationData,
     startPoint,
@@ -22,21 +22,26 @@ exports.addRoute = (req, res, next) => {
     distance,
   };
 
-  User.findOneAndUpdate({ _id: _id }, { $push: { routes: newRoute } }, function(
-    err,
-    doc
-  ) {
-    if (err) return res.status(400).error(err);
-    console.log(doc);
-  });
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: _id },
+      { $push: { routes: newRoute } }
+    );
+
+    res.status(200).send(updatedUser);
+  } catch (err) {
+    return res.status(400).error(err);
+  }
 };
 
-exports.getAllRoutes = (req, res, next) => {
+exports.getAllRoutes = async (req, res, next) => {
   const { _id } = req.user;
 
-  User.findById(_id, (err, user) => {
-    if (err) return res.status(400).error(err);
+  try {
+    const user = await User.findById(_id);
 
-    res.status(200).json(user.routes);
-  });
+    return res.status(200).json(user.routes);
+  } catch (err) {
+    return res.status(400).error(err);
+  }
 };

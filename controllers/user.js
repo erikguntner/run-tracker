@@ -1,13 +1,14 @@
 const User = require('../models/user');
 
-exports.getUserById = (req, res, next) => {
+exports.getUserById = async (req, res, next) => {
   const { id } = req.params;
 
-  User.findById(id, (err, user) => {
-    if (err) return res.error(err);
-
-    res.send({ user: user });
-  });
+  try {
+    const user = await User.findById(id);
+    return res.status(200).json({ user: user });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
 };
 
 exports.getUserData = (req, res, next) => {

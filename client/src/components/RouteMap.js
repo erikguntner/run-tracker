@@ -15,8 +15,6 @@ class RouteMap extends Component {
     // const features = turfHelpers.featureCollection(pointFeatures);
     // const centerPoint = center(features);
 
-    console.log(this.props.points);
-
     const line = turfHelpers.lineString(this.props.points);
     var bBox = bbox(line);
 

@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 
 exports.getLocations = (req, res) => {
   const { startLat, startLong, newLat, newLong, transportationType } = req.body;
@@ -10,7 +10,7 @@ exports.getLocations = (req, res) => {
       }&type=json&points_encoded=false`
     )
     .then(response => res.send(response.data))
-    .catch(err => console.log(err));
+    .catch(err => res.status(400).send(err));
 };
 
 exports.getElevation = (req, res) => {
@@ -21,8 +21,8 @@ exports.getElevation = (req, res) => {
       `https://maps.googleapis.com/maps/api/elevation/json?path=${pointString}&samples=${numberOfPoints}&key=${
         process.env.GOOGLE_MAPS_ELEVATION_KEY
       }`,
-      { headers: { "X-Requested-With": "XMLHttpRequest" } }
+      { headers: { 'X-Requested-With': 'XMLHttpRequest' } }
     )
     .then(response => res.send(response.data))
-    .catch(err => res.send(err));
+    .catch(err => res.status(400).send(err));
 };
