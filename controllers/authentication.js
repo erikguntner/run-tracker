@@ -28,6 +28,7 @@ exports.signup = async (req, res, next) => {
   });
 
   await user.save();
+  
   return res.json({
     token: tokenForUser(user),
     user: user,
