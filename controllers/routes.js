@@ -22,26 +22,17 @@ exports.addRoute = async (req, res, next) => {
     distance,
   };
 
-  try {
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: _id },
-      { $push: { routes: newRoute } }
-    );
+  const updatedUser = await User.findOneAndUpdate(
+    { _id: _id },
+    { $push: { routes: newRoute } }
+  );
 
-    res.status(200).send(updatedUser);
-  } catch (err) {
-    return res.status(400).error(err);
-  }
+  res.status(200).send(updatedUser);
 };
 
 exports.getAllRoutes = async (req, res, next) => {
   const { _id } = req.user;
+  const user = await User.findById(_id);
 
-  try {
-    const user = await User.findById(_id);
-
-    return res.status(200).json(user.routes);
-  } catch (err) {
-    return res.status(400).error(err);
-  }
+  return res.status(200).json(user.routes);
 };

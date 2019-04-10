@@ -5,6 +5,8 @@ const User = require('./controllers/user');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
+const { catchErrors } = require('./handlers/errorHandlers');
+
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignin = passport.authenticate('local', { session: false });
 
@@ -14,8 +16,8 @@ module.exports = app => {
   app.post('/elevation', ThirdPartyApis.getElevation);
 
   // Authentication routes
-  app.post('/signin', requireSignin, Authentication.signin);
-  app.post('/signup', Authentication.signup);
+  app.post('/signin', requireSignin, catchErrors(Authentication.signin));
+  app.post('/signup', catchErrors(Authentication.signup));
   app.get('/users', Authentication.getall);
 
   // User
@@ -23,6 +25,6 @@ module.exports = app => {
   app.get('/user', requireAuth, User.getUserData);
 
   // Routes for adding running routes
-  app.post('/routes/:id', requireAuth, Routes.addRoute);
-  app.get('/routes', requireAuth, Routes.getAllRoutes);
+  app.post('/routes/:id', requireAuth, catchErrors(Routes.addRoute));
+  app.get('/routes', requireAuth, catchErrors(Routes.getAllRoutes));
 };

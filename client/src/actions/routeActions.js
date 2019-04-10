@@ -27,7 +27,9 @@ export function* saveRoute({
 }) {
   const body = {
     elevationData,
-    startPoint,
+    startPoint: {
+      coordinates: startPoint,
+    },
     endPoint,
     viewport,
     pointFeatures: geoJSONPoints.features,
@@ -67,9 +69,13 @@ export function* getRoutes() {
       authorization: token,
     });
 
+    const routes = getRoutesData.data.map(route => {
+      return { ...route, startPoint: route.startPoint.coordinates };
+    });
+
     yield put({
       type: ADD_ALL_ROUTES,
-      payload: getRoutesData.data,
+      payload: routes,
     });
   } catch {
     console.log('there was an error');

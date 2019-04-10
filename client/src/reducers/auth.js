@@ -11,6 +11,7 @@ export default (state = initialState, action) => {
     case AUTH_USER:
       return {
         ...state,
+        loadingUser: action.payload.loadingUser,
         authenticated: action.payload.token,
         username: action.payload.username,
       };

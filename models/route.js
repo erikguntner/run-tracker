@@ -11,7 +11,13 @@ const routeSchema = new Schema({
       },
     ],
   ],
-  startPoint: [Number],
+  startPoint: {
+    type: {
+      type: String,
+      default: 'Point',
+    },
+    coordinates: [Number],
+  },
   endPoint: [Number],
   viewport: {
     latitude: Number,

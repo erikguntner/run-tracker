@@ -168,6 +168,18 @@ class Map extends Component {
           >
             <div className={styles.startPoint}>Start</div>
           </Marker>
+          {/* <Marker
+            latitude={34.105999576}
+            longitude={-117.718497126}
+            offsetLeft={-20}
+            offsetTop={-10}
+          >
+            <div
+              style={{ backgroundColor: 'blue', height: '40px', width: '40px' }}
+            >
+              You are here
+            </div>
+          </Marker> */}
           <DeckGL {...viewport} controller={true}>
             <GeoJsonLayer
               id="geojson-lines-layer"

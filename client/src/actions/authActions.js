@@ -55,6 +55,7 @@ export function* signup({ type, payload: { values, history } }) {
     yield put({
       type: AUTH_USER,
       payload: {
+        loadingUser: false,
         token: response.data.token,
         username: response.data.user.username,
       },

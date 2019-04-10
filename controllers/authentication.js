@@ -15,31 +15,23 @@ exports.signup = async (req, res, next) => {
       .send({ error: 'You must provide and username and password' });
   }
 
-  try {
-    const existingUser = await User.findOne({ username: username });
+  const existingUser = await User.findOne({ username: username });
 
-    if (existingUser) {
-      console.log('existing user');
-      return res.status(422).json({ error: 'Username is in use' });
-    }
-
-    const user = new User({
-      username,
-      password,
-    });
-
-    user
-      .save()
-      .then(user =>
-        res.json({
-          token: tokenForUser(user),
-          user: user,
-        })
-      )
-      .catch(err => res.status(400).send(err));
-  } catch (err) {
-    return res.status(400).send(err);
+  if (existingUser) {
+    console.log('existing user');
+    return res.status(422).json({ error: 'Username is in use' });
   }
+
+  const user = new User({
+    username,
+    password,
+  });
+
+  await user.save();
+  return res.json({
+    token: tokenForUser(user),
+    user: user,
+  });
 };
 
 exports.signin = (req, res, next) => {
