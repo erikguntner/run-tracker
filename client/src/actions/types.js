@@ -25,6 +25,13 @@ export const LOADING_USER = 'LOADING_USER';
 export const SAVE_ROUTE = 'SAVE_ROUTE';
 export const GET_ROUTES = 'GET_ROUTES';
 export const ADD_ROUTE = 'ADD_ROUTE';
+export const DELETE_ROUTE = 'DELETE_ROUTE';
+export const DELETE_ROUTE_SUCCESS = 'DELETE_ROUTE_SUCCESS';
 export const ADD_ALL_ROUTES = 'ADD_ALL_ROUTES';
 export const CLEAR_ROUTES = 'CLEAR_ROUTES';
 export const LOADING_ROUTES = 'LOADING_ROUTES';
+
+//POPUP
+export const NOTIFY_SUCCESS = 'NOTIFY_SUCCESS';
+export const NOTIFY_FAILURE = 'NOTIFY_FAILURE';
+export const CLOSE_POPUP = 'CLOSE_POPUP';

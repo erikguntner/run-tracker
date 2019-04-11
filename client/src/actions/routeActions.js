@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { call, put } from 'redux-saga/effects';
-import { ADD_ROUTE, ADD_ALL_ROUTES, LOADING_ROUTES } from './types';
+import {
+  ADD_ROUTE,
+  ADD_ALL_ROUTES,
+  LOADING_ROUTES,
+  NOTIFY_SUCCESS,
+  NOTIFY_FAILURE,
+  DELETE_ROUTE_SUCCESS,
+} from './types';
 
 const server =
   process.env.NODE_ENV === 'production'
@@ -9,6 +16,8 @@ const server =
 
 const apiPostWithHeaders = (url, body, headers) =>
   axios.post(url, body, { headers: headers });
+
+const callDeleteRoute = (url, body) => axios.delete(url, body);
 
 const apiGetRequest = (url, headers) => axios.get(url, { headers: headers });
 
@@ -54,8 +63,24 @@ export function* saveRoute({
       type: ADD_ROUTE,
       payload: postRouteData.data,
     });
+
+    yield put({
+      type: NOTIFY_SUCCESS,
+      payload: {
+        open: true,
+        message: 'Your route was added successfully',
+        status: 'success',
+      },
+    });
   } catch {
-    console.log('there was an error');
+    yield put({
+      type: NOTIFY_FAILURE,
+      payload: {
+        open: true,
+        message: 'Your route was not added successfully',
+        status: 'failures',
+      },
+    });
   }
 }
 
@@ -79,6 +104,32 @@ export function* getRoutes() {
     });
   } catch {
     console.log('there was an error');
+  }
+}
+
+export function* deleteRoute({ id }) {
+  try {
+    console.log('deleting');
+    const token = localStorage.getItem('token');
+    const deleteRouteById = yield call(
+      callDeleteRoute,
+      `${server}/routes/delete`,
+      {
+        params: { id },
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: token,
+        },
+      }
+    );
+
+    console.log('went to router');
+    yield put({
+      type: DELETE_ROUTE_SUCCESS,
+      payload: 'success',
+    });
+  } catch (err) {
+    console.log(err);
   }
 }
 

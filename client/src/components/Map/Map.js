@@ -17,6 +17,7 @@ import bbox from '@turf/bbox';
 
 import Controls from './Controls';
 import Tooltip from '../Tooltip';
+import Popup from '../Utilities/Popup';
 import ElevationProfile from './ElevationProfile';
 import TransportationSelect from './TransportationSelect';
 import { updateViewport } from '../../actions';
@@ -226,6 +227,7 @@ class Map extends Component {
           </div>
         </ReactMapGL>
         <ElevationProfile />
+        <Popup />
       </div>
     );
   }

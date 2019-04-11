@@ -9,13 +9,20 @@ class PathList extends Component {
   }
 
   render() {
-    const { routes, loadingRoutes } = this.props;
+    const { routes, loadingRoutes, deleteRoute } = this.props;
     return (
       <div className={styles.routeList}>
         {loadingRoutes && routes.length === 0 && <div>...Loading</div>}
-        {routes.map((route, i) => (
-          <Route key={`route-${i}`} route={route} />
-        ))}
+        {routes.map((route, i) => {
+          return (
+            <Route
+              deleteRoute={deleteRoute}
+              id={route._id}
+              key={`route-${i}`}
+              route={route}
+            />
+          );
+        })}
       </div>
     );
   }
@@ -30,6 +37,11 @@ const mapDispatchToProps = dispatch => ({
   getRoutes: () =>
     dispatch({
       type: 'GET_ROUTES',
+    }),
+  deleteRoute: id =>
+    dispatch({
+      type: 'DELETE_ROUTE',
+      id,
     }),
 });
 

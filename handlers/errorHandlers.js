@@ -19,15 +19,15 @@ exports.developmentErrors = (err, req, res, next) => {
       '<mark>$&</mark>'
     ),
   };
+  console.log(errorDetails);
   res.status(err.status || 500);
   res.json(errorDetails);
 };
-
 
 exports.productionErrors = (err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: {}
+    error: {},
   });
 };

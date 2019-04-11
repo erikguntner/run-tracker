@@ -36,3 +36,12 @@ exports.getAllRoutes = async (req, res, next) => {
 
   return res.status(200).json(user.routes);
 };
+
+exports.deleteRoute = async (req, res, next) => {
+  const { id } = req.query;
+
+  const removedRoute = await User.updateOne(
+    { _id: req.user._id },
+    { $pull: { routes: { _id: id } } }
+  );
+};

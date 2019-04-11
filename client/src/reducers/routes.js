@@ -3,6 +3,7 @@ import {
   ADD_ALL_ROUTES,
   CLEAR_ROUTES,
   LOADING_ROUTES,
+  DELETE_ROUTE_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -29,6 +30,11 @@ export default (state = initialState, action) => {
     case CLEAR_ROUTES:
       return {
         routes: [],
+      };
+    case DELETE_ROUTE_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
       };
     default:
       return state;

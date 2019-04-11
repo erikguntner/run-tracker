@@ -2,7 +2,7 @@ import React from 'react';
 import RouteMap from './RouteMap';
 import styles from '../stylesheets/Route.module.scss';
 
-const Route = ({ route }) => {
+const Route = ({ route, id, deleteRoute }) => {
   const points = route.lineFeatures
     .map(line => {
       return line.geometry.coordinates;
@@ -11,6 +11,7 @@ const Route = ({ route }) => {
 
   return (
     <div className={styles.routeContainer}>
+      <button onClick={() => deleteRoute(id)}>Delete</button>
       <RouteMap points={points} />
       <div>{route.distance[route.distance.length - 1]} miles</div>
     </div>

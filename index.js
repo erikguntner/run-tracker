@@ -17,11 +17,9 @@ app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 app.use(cookieParser());
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(errorHandlers.developmentErrors);
-}
+app.use(errorHandlers.developmentErrors);
 
-app.use(errorHandlers.productionErrors);
+// app.use(errorHandlers.productionErrors);
 
 // Connect to Mongo
 const db = process.env.MONGO_URI;

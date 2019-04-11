@@ -25,6 +25,7 @@ module.exports = app => {
   app.get('/user', requireAuth, User.getUserData);
 
   // Routes for adding running routes
+  app.delete('/routes/delete', requireAuth, catchErrors(Routes.deleteRoute));
   app.post('/routes/:id', requireAuth, catchErrors(Routes.addRoute));
   app.get('/routes', requireAuth, catchErrors(Routes.getAllRoutes));
 };
