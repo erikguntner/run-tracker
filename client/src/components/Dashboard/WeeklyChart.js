@@ -1,42 +1,34 @@
 import React from 'react';
-import {
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  Legend,
-} from 'recharts';
+import { XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts';
 
 const data = [
   {
     day: 'S',
-    temperature: 5,
+    distance: 0,
   },
   {
     day: 'M',
-    temperature: 10,
+    distance: 0,
   },
   {
     day: 'T',
-    temperature: 15,
+    distance: 0,
   },
   {
     day: 'W',
-    temperature: 12,
+    distance: 0,
   },
   {
     day: 'T',
-    temperature: 12,
+    distance: 0,
   },
   {
     day: 'F',
-    temperature: 16,
+    distance: 0,
   },
   {
     day: 'S',
-    temperature: 3,
+    distance: 0,
   },
 ];
 
@@ -55,7 +47,7 @@ const DistanceChart = props => {
     >
       <XAxis dataKey="day" />
       <YAxis />
-      <Area dataKey="temperature" stroke="#8884d8" fill="#8884d8" />
+      <Area dataKey="distance" stroke="#8884d8" fill="#8884d8" />
       <Tooltip />
     </AreaChart>
   );

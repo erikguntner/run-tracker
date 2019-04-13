@@ -46,9 +46,7 @@ class Header extends Component {
                   open={open}
                   toggle={toggle}
                   username={username}
-                >
-                  <PathList />
-                </SideMenuWrapper>
+                />
                 {this.props.authenticated && (
                   <Link className={styles.userIcon} to="/profile">
                     {loadingUser ? '...Loading' : username}{' '}

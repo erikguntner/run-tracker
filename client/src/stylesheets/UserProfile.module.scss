@@ -99,21 +99,24 @@
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
-
-  button {
+  a {
     width: 90%;
-    padding: 8px 20px;
     margin-top: 10px;
-    background-color: #0991d3;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    transition: all 0.1s ease;
 
-    &:hover {
-      cursor: pointer;
-      background-color: lighten(#0991d3, 2%);
+    button {
+      width: 100%;
+      padding: 8px 20px;
+      background-color: #0991d3;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      transition: all 0.1s ease;
+
+      &:hover {
+        cursor: pointer;
+        background-color: lighten(#0991d3, 2%);
+      }
     }
   }
 
@@ -183,4 +186,9 @@
 
 .chart {
   margin-top: 50px;
+}
+
+.runLogger {
+  font-size: 36px;
+  font-weight: 900;
 }

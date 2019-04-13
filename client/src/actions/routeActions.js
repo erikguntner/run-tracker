@@ -123,10 +123,9 @@ export function* deleteRoute({ id }) {
       }
     );
 
-    console.log('went to router');
     yield put({
       type: DELETE_ROUTE_SUCCESS,
-      payload: 'success',
+      payload: id,
     });
   } catch (err) {
     console.log(err);

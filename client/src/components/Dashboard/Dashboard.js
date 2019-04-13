@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PathList from '../PathList';
 import StatsContainer from './StatsContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,24 +10,7 @@ import styles from '../../stylesheets/UserProfile.module.scss';
 class Dashboard extends Component {
   state = {
     milesRan: 0,
-    date: null,
     tab: 'dashboard',
-  };
-
-  updateMilesRan = e => {
-    if (e.target.value === '') {
-      this.setState({
-        milesRan: 0,
-      });
-    } else {
-      this.setState({
-        milesRan: e.target.value,
-      });
-    }
-  };
-
-  handleDayChange = day => {
-    console.log(day);
   };
 
   handleChangeTab = tabTitle => {

@@ -16,9 +16,9 @@ class PathList extends Component {
         {routes.map((route, i) => {
           return (
             <Route
+              key={`route-${i}`}
               deleteRoute={deleteRoute}
               id={route._id}
-              key={`route-${i}`}
               route={route}
             />
           );

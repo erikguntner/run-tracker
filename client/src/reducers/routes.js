@@ -32,11 +32,13 @@ export default (state = initialState, action) => {
         routes: [],
       };
     case DELETE_ROUTE_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
+        routes: state.routes.filter(route => route._id !== action.payload),
       };
     default:
       return state;
   }
 };
+
+const removeRoute = (id, routes) => {};

@@ -1,25 +1,30 @@
 import React from 'react';
 import styles from '../../stylesheets/UserProfile.module.scss';
+import { Link } from 'react-router-dom';
 
-export default function Stats() {
+const Stats = ({ weeklyData: { hrs, mins, secs, days, distance } }) => {
   return (
     <div className={styles.userProgress}>
       <div className={styles.userProgressCircle}>S</div>
       <ul className={styles.userProgressTable}>
         <li className={styles.userProgressCol}>
           <div>Time</div>
-          <div>2hr4min</div>
+          <div>{`${hrs.toString()}hr${mins.toString()}min`}</div>
         </li>
         <li className={styles.userProgressCol}>
           <div>Distance</div>
-          <div>30</div>
+          <div>{distance}</div>
         </li>
         <li className={styles.userProgressCol}>
           <div>Days</div>
-          <div>4</div>
+          <div>{days}</div>
         </li>
       </ul>
-      <button>Log a run</button>
+      <Link to="/log">
+        <button>Log a run</button>
+      </Link>
     </div>
   );
-}
+};
+
+export default Stats;

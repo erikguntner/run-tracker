@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Map from './components/Map/Map';
 import Signin from './components/Signin';
 import Dashboard from './components/Dashboard/Dashboard';
+import RunForm from './components/Forms/RunForm';
 import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -17,6 +18,7 @@ ReactDOM.render(
           <Route path="/signup" component={Signin} />
           <Route path="/signin" component={Signin} />
           <Route path="/profile" exact component={Dashboard} />
+          <Route path="/log" component={RunForm} />
           <Route path="/" component={Map} />
         </Switch>
       </App>
