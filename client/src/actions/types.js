@@ -38,6 +38,7 @@ export const CLOSE_POPUP = 'CLOSE_POPUP';
 
 //RUNLOGS
 export const LOG_RUN = 'LOG_RUN';
+export const POPULATE_RUNLOG = 'POPULATE_RUNLOG';
 export const GET_RUNS_BY_DATE = 'GET_RUNS_BY_DATE';
 export const GET_RUNS_BY_DATE_SUCCESS = 'GET_RUNS_BY_DATE_SUCCESS';
 export const GET_WEEKLY_RUNS = 'GET_WEEKLY_RUNS';

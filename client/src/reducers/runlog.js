@@ -1,4 +1,8 @@
-import { LOG_RUN_SUCCESS, GET_WEEKLY_RUNS_SUCCESS } from '../actions/types';
+import {
+  LOG_RUN_SUCCESS,
+  GET_WEEKLY_RUNS_SUCCESS,
+  POPULATE_RUNLOG,
+} from '../actions/types';
 
 const initialState = {
   thisWeeksRuns: [],
@@ -17,6 +21,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         thisWeeksRuns: [...action.payload],
+      };
+    case POPULATE_RUNLOG:
+      return {
+        ...state,
+        runs: [...action.payload],
       };
     default:
       return {

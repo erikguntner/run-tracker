@@ -48,7 +48,7 @@ class Header extends Component {
                   username={username}
                 />
                 {this.props.authenticated && (
-                  <Link className={styles.userIcon} to="/profile">
+                  <Link className={styles.userIcon} to="/profile/stats">
                     {loadingUser ? '...Loading' : username}{' '}
                     <span>
                       <FontAwesomeIcon icon={farUser} />

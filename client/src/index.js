@@ -17,6 +17,9 @@ ReactDOM.render(
         <Switch>
           <Route path="/signup" component={Signin} />
           <Route path="/signin" component={Signin} />
+          <Route path="/profile/stats" exact component={Dashboard} />
+          <Route path="/profile/log" exact component={Dashboard} />
+          <Route path="/profile/routes" exact component={Dashboard} />
           <Route path="/profile" exact component={Dashboard} />
           <Route path="/log" component={RunForm} />
           <Route path="/" component={Map} />

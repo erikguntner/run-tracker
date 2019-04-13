@@ -12,7 +12,7 @@ class Popup extends Component {
         console.log('closing');
         this.props.close();
       }.bind(this),
-      4000
+      2000
     );
   }
 

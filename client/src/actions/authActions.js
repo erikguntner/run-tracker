@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { call, put } from 'redux-saga/effects';
-import { AUTH_USER, CLEAR_ROUTES, SET_USERNAME, LOADING_USER } from './types';
+import {
+  AUTH_USER,
+  CLEAR_ROUTES,
+  SET_USERNAME,
+  LOADING_USER,
+  POPULATE_RUNLOG,
+} from './types';
 
 const server =
   process.env.NODE_ENV === 'production'
@@ -45,6 +51,11 @@ export function* loadUser() {
   yield put({
     type: SET_USERNAME,
     payload: getUserData.data.username,
+  });
+
+  yield put({
+    type: POPULATE_RUNLOG,
+    payload: getUserData.data.runlog,
   });
 }
 

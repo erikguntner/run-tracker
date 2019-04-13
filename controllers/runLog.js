@@ -35,9 +35,11 @@ exports.getRunsByDate = async (req, res, next) => {
     },
   ]);
 
+  console.log(aggregatedData);
+
   const runs = aggregatedData[0].runlog;
 
-  return res.status(200).json({ runs: runs.runlog });
+  return res.status(200).json({ runs: runs });
 };
 
 exports.getThisWeeksRuns = async (req, res, next) => {

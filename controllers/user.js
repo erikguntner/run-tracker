@@ -12,5 +12,7 @@ exports.getUserById = async (req, res, next) => {
 };
 
 exports.getUserData = (req, res, next) => {
-  res.status(200).json({ username: req.user.username });
+  res
+    .status(200)
+    .json({ username: req.user.username, runlog: req.user.runlog });
 };
