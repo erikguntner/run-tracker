@@ -5,11 +5,13 @@
   align-items: center;
 
   article {
-    width: 80%;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
     margin-bottom: 30px;
     padding: 20px 30px;
+    width: 80%;
+    background-color: #fff;
+    border: none;
+    border-left: 3px solid coral;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease;
 
     &:hover {

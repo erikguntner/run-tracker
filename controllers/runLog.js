@@ -34,9 +34,6 @@ exports.getRunsByDate = async (req, res, next) => {
       },
     },
   ]);
-
-  console.log(aggregatedData);
-
   const runs = aggregatedData[0].runlog;
 
   return res.status(200).json({ runs: runs });
@@ -44,8 +41,7 @@ exports.getRunsByDate = async (req, res, next) => {
 
 exports.getThisWeeksRuns = async (req, res, next) => {
   const { _id } = req.user;
-
-  console.log(_id);
+  
   const aggregatedData = await User.aggregate([
     { $match: { _id: _id } },
     {

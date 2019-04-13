@@ -27,15 +27,14 @@ export const getWeeklyRuns = () => ({
   type: GET_WEEKLY_RUNS,
 });
 
-export const logRun = (values, setSubmitting) => {
+export const logRun = (values, setSubmitting, history) => {
   return {
     type: LOG_RUN,
-    payload: { values, setSubmitting },
+    payload: { values, setSubmitting, history },
   };
 };
 
 export function* getThisWeeksRuns() {
-  console.log('im getting them runs!');
   try {
     const token = localStorage.getItem('token');
     const thisWeeksRuns = yield call(apiGet, `${server}/runs/week`, {
@@ -46,7 +45,6 @@ export function* getThisWeeksRuns() {
     });
 
     const { runs } = thisWeeksRuns.data;
-    console.log(runs);
 
     yield put({
       type: GET_WEEKLY_RUNS_SUCCESS,
@@ -61,7 +59,7 @@ export function* getRunsByDate() {
   try {
     const token = localStorage.getItem('token');
 
-    const getRuns = yield call(apiGet, `${server}/runs`, {
+    yield call(apiGet, `${server}/runs`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,
@@ -72,7 +70,7 @@ export function* getRunsByDate() {
   }
 }
 
-export function* postRun({ payload: { values, setSubmitting } }) {
+export function* postRun({ payload: { values, setSubmitting, history } }) {
   try {
     const token = localStorage.getItem('token');
 
@@ -83,13 +81,13 @@ export function* postRun({ payload: { values, setSubmitting } }) {
       },
     });
 
-    console.log(postedRun);
-
     put({
       type: LOG_RUN_SUCCESS,
     });
 
     setSubmitting(false);
+
+    // history.push('/profile/stats');
   } catch (err) {
     console.log(err);
     setSubmitting(false);

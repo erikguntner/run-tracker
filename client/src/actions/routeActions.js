@@ -109,9 +109,8 @@ export function* getRoutes() {
 
 export function* deleteRoute({ id }) {
   try {
-    console.log('deleting');
     const token = localStorage.getItem('token');
-    const deleteRouteById = yield call(
+    yield call(
       callDeleteRoute,
       `${server}/routes/delete`,
       {

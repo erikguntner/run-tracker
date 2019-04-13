@@ -9,7 +9,6 @@ class Popup extends Component {
   componentDidUpdate() {
     setTimeout(
       function() {
-        console.log('closing');
         this.props.close();
       }.bind(this),
       2000
@@ -17,7 +16,6 @@ class Popup extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { open, message, status } = this.props;
 
     return (

@@ -3,6 +3,7 @@ const Authentication = require('./controllers/authentication');
 const RunLog = require('./controllers/runLog');
 const Routes = require('./controllers/routes');
 const User = require('./controllers/user');
+const Goal = require('./controllers/goal');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -34,4 +35,7 @@ module.exports = app => {
   app.post('/runs', requireAuth, catchErrors(RunLog.postRun));
   app.get('/runs', requireAuth, catchErrors(RunLog.getRunsByDate));
   app.get('/runs/week', requireAuth, catchErrors(RunLog.getThisWeeksRuns));
+
+  // ROUTES FOR GOALS
+  app.post('/goal', requireAuth, catchErrors(Goal.setGoal));
 };

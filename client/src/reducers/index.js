@@ -4,6 +4,7 @@ import auth from './auth';
 import routes from './routes';
 import popup from './popup';
 import runLog from './runlog';
+import goal from './goal';
 
 export default combineReducers({
   map: mapReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   routes,
   popup,
   runLog,
+  goal,
 });

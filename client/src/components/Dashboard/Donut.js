@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import DonutChart from './DonutChart';
 import SetGoal from './SetGoal';
+import { setGoal } from '../../actions/goal';
 import styles from '../../stylesheets/Donut.module.scss';
 
 class Donut extends Component {
@@ -24,6 +26,9 @@ class Donut extends Component {
   };
 
   updateGoal = () => {
+    console.log('new Goal', this.state.newGoal);
+    this.props.setGoal(this.state.newGoal);
+
     this.setState(prevState => ({
       goal: this.state.newGoal,
       newGoal: null,
@@ -42,7 +47,8 @@ class Donut extends Component {
   };
 
   render() {
-    const { goal, donutVal, setGoal, newGoal } = this.state;
+    const { donutVal, setGoal, newGoal } = this.state;
+    const { goal } = this.props;
 
     return (
       <div className={styles.donutContainer}>
@@ -69,10 +75,20 @@ class Donut extends Component {
         {goal && !setGoal && (
           <button onClick={this.updateSetGoal}>Change Goal</button>
         )}
-        {setGoal && <button onClick={this.updateGoal}>Update Goal</button>}
       </div>
     );
   }
 }
 
-export default Donut;
+const mapDispatchToProps = dispatch => ({
+  setGoal: goal => dispatch(setGoal(goal)),
+});
+
+const mapStateToProps = store => ({
+  goal: store.goal.goal,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Donut);

@@ -1,5 +1,4 @@
 import React from 'react';
-import reducers from '../../reducers';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
@@ -45,7 +44,7 @@ class RunForm extends React.Component {
             values.week = week;
             values.month = month;
 
-            this.props.logRun(values, setSubmitting);
+            this.props.logRun(values, setSubmitting, history);
           }}
         >
           {({ isSubmitting }) => (

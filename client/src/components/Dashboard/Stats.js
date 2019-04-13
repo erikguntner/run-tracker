@@ -13,7 +13,7 @@ const Stats = ({ weeklyData: { hrs, mins, secs, days, distance } }) => {
         </li>
         <li className={styles.userProgressCol}>
           <div>Distance</div>
-          <div>{distance}</div>
+          <div>{distance} miles</div>
         </li>
         <li className={styles.userProgressCol}>
           <div>Days</div>

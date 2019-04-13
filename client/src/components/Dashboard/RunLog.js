@@ -10,8 +10,8 @@ class RunLog extends Component {
         {runs.map((run, i) => {
           return (
             <article key={`run-${i}`}>
-              <h3>date</h3>
-              <h4>distance</h4>
+              <h3>{new Date(run.date).toLocaleDateString()}</h3>
+              <h4>{run.distance} miles</h4>
             </article>
           );
         })}

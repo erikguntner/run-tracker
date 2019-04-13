@@ -38,7 +38,6 @@ class StatsContainer extends Component {
 const reduceWeeklyData = data => {
   return data.reduce(
     (accum, curr) => {
-      console.log(curr);
       accum.hrs = accum.hrs += parseInt(curr.hrs);
       accum.mins = accum.mins += parseInt(curr.mins);
       accum.secs = accum.secs += parseInt(curr.secs);

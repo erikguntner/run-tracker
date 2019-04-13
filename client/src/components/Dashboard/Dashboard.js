@@ -16,11 +16,10 @@ class Dashboard extends Component {
   render() {
     const { location } = this.props;
     const path = location.pathname.split('/');
-    const { milesRan } = this.state;
 
     return (
       <section className={styles.profileGrid}>
-        <div className={styles.profileSidebar}>
+        <nav className={styles.profileSidebar}>
           <ul>
             <li>
               <DashboardLink
@@ -44,7 +43,7 @@ class Dashboard extends Component {
               />
             </li>
           </ul>
-        </div>
+        </nav>
         <div className={styles.profileContent}>
           {path[2] === 'stats' && <StatsContainer />}
           {path[2] === 'routes' && (

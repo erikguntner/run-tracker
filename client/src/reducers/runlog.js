@@ -17,7 +17,6 @@ export default function(state = initialState, action) {
         ...state,
       };
     case GET_WEEKLY_RUNS_SUCCESS:
-      console.log('the reducer');
       return {
         ...state,
         thisWeeksRuns: [...action.payload],
