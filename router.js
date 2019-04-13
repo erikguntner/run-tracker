@@ -1,5 +1,6 @@
 const ThirdPartyApis = require('./controllers/thirdPartyApis');
 const Authentication = require('./controllers/authentication');
+const RunLog = require('./controllers/runLog');
 const Routes = require('./controllers/routes');
 const User = require('./controllers/user');
 const passportService = require('./services/passport');
@@ -28,4 +29,9 @@ module.exports = app => {
   app.delete('/routes/delete', requireAuth, catchErrors(Routes.deleteRoute));
   app.post('/routes/:id', requireAuth, catchErrors(Routes.addRoute));
   app.get('/routes', requireAuth, catchErrors(Routes.getAllRoutes));
+
+  //ROutes for logging runs
+  app.post('/runs', requireAuth, catchErrors(RunLog.postRun));
+  app.get('/runs', requireAuth, catchErrors(RunLog.getRunsByDate));
+  app.get('/runs/week', requireAuth, catchErrors(RunLog.getThisWeeksRuns));
 };

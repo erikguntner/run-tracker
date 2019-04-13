@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const routeSchema = require('./route');
+const runSchema = require('./run');
 const Schema = mongoose.Schema;
 const bcyrpt = require('bcrypt-nodejs');
 
@@ -8,6 +9,8 @@ const userSchema = new Schema({
   username: { type: String, unique: true, lowercase: true },
   password: String,
   routes: [routeSchema],
+  runlog: [runSchema],
+  goal: { type: Number, default: 0 },
 });
 
 //On save hook, encrypt password

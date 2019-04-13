@@ -44,4 +44,6 @@ exports.deleteRoute = async (req, res, next) => {
     { _id: req.user._id },
     { $pull: { routes: { _id: id } } }
   );
+
+  res.status(200).json({ route: removedRoute });
 };
