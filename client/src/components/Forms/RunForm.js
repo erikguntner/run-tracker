@@ -40,11 +40,14 @@ class RunForm extends React.Component {
             const week = dateFns.getISOWeek(new Date(this.state.date));
             const month = dateFns.getMonth(new Date(this.state.date));
             //set date, month, and week values in values object
+
             values.date = formattedDate;
             values.week = week;
             values.month = month;
 
-            this.props.logRun(values, setSubmitting, history);
+            const updatedValues = parseValues(values);
+
+            this.props.logRun(updatedValues, setSubmitting, history);
           }}
         >
           {({ isSubmitting }) => (
@@ -115,6 +118,14 @@ const formatDate = dateArr => {
   }, '');
 
   return formattedDate;
+};
+
+const parseValues = values => {
+  values.distance = parseFloat(parseFloat(values.distance).toFixed(2));
+  values.hrs = parseInt(values.hrs);
+  values.mins = parseInt(values.mins);
+  values.secs = parseInt(values.secs);
+  return values;
 };
 
 const UnderlinedInput = ({ field, id }) => {

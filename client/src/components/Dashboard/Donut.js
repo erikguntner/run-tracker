@@ -7,8 +7,6 @@ import styles from '../../stylesheets/Donut.module.scss';
 
 class Donut extends Component {
   state = {
-    donutVal: parseInt(10),
-    goal: null,
     newGoal: 0,
     setGoal: false,
   };
@@ -30,7 +28,6 @@ class Donut extends Component {
     this.props.setGoal(this.state.newGoal);
 
     this.setState(prevState => ({
-      goal: this.state.newGoal,
       newGoal: null,
       setGoal: !prevState.setGoal,
     }));
@@ -42,13 +39,12 @@ class Donut extends Component {
     }));
   };
 
-  updateVal = e => {
-    this.setState({ donutVal: parseInt(e.target.value) });
-  };
-
   render() {
-    const { donutVal, setGoal, newGoal } = this.state;
-    const { goal } = this.props;
+    const { setGoal, newGoal } = this.state;
+    const {
+      goal,
+      weeklyTotals: { totalDistance },
+    } = this.props;
 
     return (
       <div className={styles.donutContainer}>
@@ -56,7 +52,7 @@ class Donut extends Component {
         {goal ? (
           <DonutChart
             goal={goal}
-            value={donutVal}
+            value={totalDistance}
             setGoal={setGoal}
             onGoalChange={this.onGoalChange}
             updateSetGoal={this.updateSetGoal}
@@ -72,7 +68,7 @@ class Donut extends Component {
           />
         )}
         <br />
-        {goal && !setGoal && (
+        {!setGoal && goal && (
           <button onClick={this.updateSetGoal}>Change Goal</button>
         )}
       </div>
@@ -86,6 +82,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = store => ({
   goal: store.goal.goal,
+  weeklyTotals: store.runLog.weeklyTotals,
 });
 
 export default connect(

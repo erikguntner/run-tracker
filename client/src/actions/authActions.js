@@ -6,6 +6,7 @@ import {
   SET_USERNAME,
   LOADING_USER,
   POPULATE_RUNLOG,
+  POPULATE_GOAL,
 } from './types';
 
 const server =
@@ -56,6 +57,10 @@ export function* loadUser() {
   yield put({
     type: POPULATE_RUNLOG,
     payload: getUserData.data.runlog,
+  });
+  yield put({
+    type: POPULATE_GOAL,
+    payload: getUserData.data.goal,
   });
 }
 

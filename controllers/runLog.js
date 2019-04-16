@@ -41,7 +41,6 @@ exports.getRunsByDate = async (req, res, next) => {
 
 exports.getThisWeeksRuns = async (req, res, next) => {
   const { _id } = req.user;
-  
   const aggregatedData = await User.aggregate([
     { $match: { _id: _id } },
     {
@@ -53,11 +52,17 @@ exports.getThisWeeksRuns = async (req, res, next) => {
             cond: { $eq: ['$$runlog.week', { $isoWeek: new Date() }] },
           },
         },
+        totals: {
+          totalDistance: { $sum: '$runlog.distance' },
+          totalHrs: { $sum: '$runlog.hrs' },
+          totalMins: { $sum: '$runlog.hrs' },
+        },
       },
     },
   ]);
 
-  const thisWeeksRuns = aggregatedData[0].runlog;
-
-  return res.status(200).json({ runs: thisWeeksRuns });
+  return res.status(200).json({
+    runlog: aggregatedData[0].runlog,
+    totals: aggregatedData[0].totals,
+  });
 };

@@ -19,7 +19,7 @@ class RouteMap extends Component {
     var bBox = bbox(line);
 
     const viewport = new WebMercatorViewport({
-      width: 200,
+      width: 290,
       height: 150,
     }).fitBounds([[bBox[0], bBox[1]], [bBox[2], bBox[3]]], {
       padding: 5,

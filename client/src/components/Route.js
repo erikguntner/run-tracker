@@ -11,9 +11,11 @@ const Route = ({ route, id, deleteRoute }) => {
 
   return (
     <div className={styles.routeContainer}>
-      <button onClick={() => deleteRoute(id)}>Delete</button>
-      <RouteMap points={points} />
+      <div className={styles.mapContainer}>
+        <RouteMap points={points} />
+      </div>
       <div>{route.distance[route.distance.length - 1]} miles</div>
+      <button onClick={() => deleteRoute(id)}>Delete</button>
     </div>
   );
 };

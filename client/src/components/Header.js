@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { faUser as farUser } from '@fortawesome/free-regular-svg-icons';
 import { Toggle } from './Utilities';
 import { Link } from 'react-router-dom';
@@ -27,7 +27,7 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <Link className={styles.home} to="/">
-          <FontAwesomeIcon icon={faHome} />
+          <FontAwesomeIcon icon={faMapMarkedAlt} />
         </Link>
         <div className={styles.headerRight}>
           <Toggle>

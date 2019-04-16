@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'formik';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import styles from '../../stylesheets/UserProfile.module.scss';
+import styles from '../../stylesheets/Dashboard.module.scss';
 import pickerStyles from '../../stylesheets/DayPicker.module.scss';
 
 const RunLogger = ({
@@ -25,9 +25,6 @@ const RunLogger = ({
           )}
           onDayChange={handleDayChange}
           dayPickerProps={{
-            disabledDays: {
-              after: new Date(),
-            },
             fromMonth: new Date(2019, 0),
             toMonth: new Date(),
           }}

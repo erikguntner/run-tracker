@@ -48,3 +48,4 @@ export const LOG_RUN_SUCCESS = 'LOG_RUN_SUCCESS';
 // GOAL
 export const SET_GOAL = 'SET_GOAL';
 export const SET_GOAL_SUCCESS = 'SET_GOAL_SUCCESS';
+export const POPULATE_GOAL = 'POPULATE_GOAL';

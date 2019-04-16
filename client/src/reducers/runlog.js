@@ -5,6 +5,11 @@ import {
 } from '../actions/types';
 
 const initialState = {
+  weeklyTotals: {
+    totalDistance: 0,
+    totalHrs: 0,
+    totalMins: 0,
+  },
   thisWeeksRuns: [],
   runs: [],
   loadingRuns: false,
@@ -19,7 +24,10 @@ export default function(state = initialState, action) {
     case GET_WEEKLY_RUNS_SUCCESS:
       return {
         ...state,
-        thisWeeksRuns: [...action.payload],
+        thisWeeksRuns: [...action.payload.runlog],
+        weeklyTotals: {
+          ...action.payload.totals,
+        },
       };
     case POPULATE_RUNLOG:
       return {

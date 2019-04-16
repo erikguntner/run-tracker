@@ -4,9 +4,13 @@ import PathList from '../PathList';
 import StatsContainer from './StatsContainer';
 import RunLog from './RunLog';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRoute, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import {
+  faRoute,
+  faChartLine,
+  faWalking,
+} from '@fortawesome/free-solid-svg-icons';
 import requireAuth from '../requireAuth';
-import styles from '../../stylesheets/UserProfile.module.scss';
+import styles from '../../stylesheets/Dashboard.module.scss';
 
 class Dashboard extends Component {
   state = {
@@ -23,23 +27,29 @@ class Dashboard extends Component {
           <ul>
             <li>
               <DashboardLink
+                id={'stats'}
                 title={'stats'}
                 icon={faChartLine}
                 link={'/profile/stats'}
+                path={path}
               />
             </li>
             <li>
               <DashboardLink
+                id={'routes'}
                 title={'routes'}
                 icon={faRoute}
                 link={'/profile/routes'}
+                path={path}
               />
             </li>
             <li>
               <DashboardLink
+                id={'log'}
                 title={'run log'}
-                icon={faRoute}
+                icon={faWalking}
                 link={'/profile/log'}
+                path={path}
               />
             </li>
           </ul>
@@ -58,9 +68,11 @@ class Dashboard extends Component {
   }
 }
 
-const DashboardLink = ({ title, icon, link }) => (
+const DashboardLink = ({ title, icon, link, id, path }) => (
   <Link to={link}>
-    <button>
+    <button
+      className={`${styles.navBtn} ${id === path[2] ? styles.activeBtn : ''}`}
+    >
       <FontAwesomeIcon icon={icon} />
       <b>{title}</b>
     </button>

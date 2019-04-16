@@ -44,11 +44,11 @@ export function* getThisWeeksRuns() {
       },
     });
 
-    const { runs } = thisWeeksRuns.data;
+    const { runlog, totals } = thisWeeksRuns.data;
 
     yield put({
       type: GET_WEEKLY_RUNS_SUCCESS,
-      payload: runs,
+      payload: { runlog, totals },
     });
   } catch (err) {
     console.log(err);
