@@ -23,9 +23,6 @@ const Stats = ({
           <div>{days}</div>
         </li>
       </ul>
-      <Link to="/log">
-        <button>Log a run</button>
-      </Link>
     </div>
   );
 };

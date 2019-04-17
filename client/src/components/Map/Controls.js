@@ -62,6 +62,7 @@ class Controls extends Component {
           <div className={styles.innerButton}>
             <FontAwesomeIcon icon={faTimes} />
           </div>
+          <div className={styles.tooltip}>Clear Route</div>
         </button>
         <button
           disabled={!geoJSONPoints.features.length}
@@ -71,6 +72,7 @@ class Controls extends Component {
           <div className={styles.innerButton}>
             <FontAwesomeIcon icon={faUndoAlt} />
           </div>
+          <div className={styles.tooltip}>undo last</div>
         </button>
         <button className={styles.button} onClick={showElevation}>
           <div
@@ -80,6 +82,7 @@ class Controls extends Component {
           >
             <FontAwesomeIcon icon={faMountain} />
           </div>
+          <div className={styles.tooltip}>elevation</div>
         </button>
         <button
           className={styles.button}
@@ -90,6 +93,7 @@ class Controls extends Component {
           >
             <FontAwesomeIcon icon={faRoute} />
           </div>
+          <div className={styles.tooltip}>clip path</div>
         </button>
         <button
           className={styles.button}
@@ -102,6 +106,7 @@ class Controls extends Component {
           >
             <FontAwesomeIcon icon={faDrawPolygon} />
           </div>
+          <div className={styles.tooltip}>linear</div>
         </button>
         <button
           disabled={!geoJSONPoints.features.length}
@@ -120,6 +125,7 @@ class Controls extends Component {
           <div className={styles.innerButton}>
             <FontAwesomeIcon icon={faSave} />
           </div>
+          <div className={styles.tooltip}>save route</div>
         </button>
       </div>
     );

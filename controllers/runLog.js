@@ -52,11 +52,16 @@ exports.getThisWeeksRuns = async (req, res, next) => {
             cond: { $eq: ['$$runlog.week', { $isoWeek: new Date() }] },
           },
         },
+      },
+    },
+    {
+      $project: {
         totals: {
           totalDistance: { $sum: '$runlog.distance' },
           totalHrs: { $sum: '$runlog.hrs' },
           totalMins: { $sum: '$runlog.hrs' },
         },
+        runlog: '$runlog',
       },
     },
   ]);

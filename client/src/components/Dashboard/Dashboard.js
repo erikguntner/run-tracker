@@ -17,6 +17,10 @@ class Dashboard extends Component {
     milesRan: 0,
   };
 
+  componentDidUpdate() {
+    console.log(this.props.history);
+  }
+
   render() {
     const { location } = this.props;
     const path = location.pathname.split('/');
@@ -37,7 +41,7 @@ class Dashboard extends Component {
             <li>
               <DashboardLink
                 id={'routes'}
-                title={'routes'}
+                title={'my routes'}
                 icon={faRoute}
                 link={'/profile/routes'}
                 path={path}
@@ -46,13 +50,18 @@ class Dashboard extends Component {
             <li>
               <DashboardLink
                 id={'log'}
-                title={'run log'}
+                title={'my runs'}
                 icon={faWalking}
                 link={'/profile/log'}
                 path={path}
               />
             </li>
           </ul>
+          <div className={styles.btn}>
+            <Link to="/log">
+              <button>Log a run</button>
+            </Link>
+          </div>
         </nav>
         <div className={styles.profileContent}>
           {path[2] === 'stats' && <StatsContainer />}

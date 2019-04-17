@@ -81,13 +81,11 @@ export function* postRun({ payload: { values, setSubmitting, history } }) {
       },
     });
 
-    put({
+    yield put({
       type: LOG_RUN_SUCCESS,
     });
 
     setSubmitting(false);
-
-    // history.push('/profile/stats');
   } catch (err) {
     console.log(err);
     setSubmitting(false);
