@@ -1,0 +1,33 @@
+.dropdown {
+  position: absolute;
+  opacity: 0;
+  z-index: 20;
+  display: none;
+  width: 150px;
+
+  &List {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: #fff;
+    transition: opacity 0.2s ease;
+    width: 100%;
+  }
+
+  &Btn {
+    padding: 8px 10px;
+    width: 100%;
+    text-align: center;
+
+    a {
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: #0991d3;
+      color: #fff;
+    }
+  }
+}

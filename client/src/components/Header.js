@@ -8,7 +8,8 @@ import { faUser as farUser } from '@fortawesome/free-regular-svg-icons';
 import { Toggle } from './Utilities';
 import { Link } from 'react-router-dom';
 import SideMenuWrapper from './SideMenuWrapper';
-import PathList from './PathList';
+// import PathList from './PathList';
+import Dropdown from './Dropdown';
 import styles from '../stylesheets/Header.module.scss';
 
 library.add(farUser);
@@ -48,12 +49,15 @@ class Header extends Component {
                   username={username}
                 />
                 {this.props.authenticated && (
-                  <Link className={styles.userIcon} to="/profile/stats">
-                    {loadingUser ? '...Loading' : username}{' '}
-                    <span>
-                      <FontAwesomeIcon icon={farUser} />
-                    </span>
-                  </Link>
+                  <div className={styles.userIcon}>
+                    <Link className={styles.userIconLink} to="/profile/stats">
+                      {loadingUser ? '...Loading' : username}{' '}
+                      <span>
+                        <FontAwesomeIcon icon={farUser} />
+                      </span>
+                    </Link>
+                    <Dropdown />
+                  </div>
                 )}
 
                 {!urlParams.includes('profile') && this.props.authenticated && (

@@ -7,23 +7,6 @@
   justify-content: space-between;
   padding: 0 20px;
 
-  a {
-    height: 100%;
-    padding: 0 8px;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid transparent;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
-    transition: all 0.2s ease;
-
-    &:hover {
-      cursor: pointer;
-      background-color: black;
-    }
-  }
-
   button {
     background: transparent;
     border: none;
@@ -47,48 +30,82 @@
   height: 100%;
   font-size: 25px;
   padding: 0 5px;
+  height: 100%;
+  padding: 0 8px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.2s ease;
 
   &:hover {
+    cursor: pointer;
     background-color: black;
   }
 }
 
 .userIcon {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
+  position: relative;
+  height: 100%;
 
-  span {
-    position: relative;
-    font-size: 20px;
+  &Link {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    height: 100%;
+    padding: 0 8px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.2s ease;
 
-    svg {
-      margin-bottom: 3px;
-      margin-left: 5px;
+    &:hover {
+      cursor: pointer;
+      background-color: black;
     }
 
-    &::before {
-      content: '';
-      background-color: dodgerblue;
-      position: absolute;
-      top: -1px;
-      right: -3px;
-      height: 8px;
-      width: 8px;
-      border-radius: 50%;
-      animation: scale-dot 1s infinite;
-    }
+    span {
+      position: relative;
+      font-size: 20px;
 
-    &::after {
-      content: '';
-      background-color: dodgerblue;
-      position: absolute;
-      top: -1px;
-      right: -3px;
-      height: 8px;
-      width: 8px;
-      border-radius: 50%;
+      svg {
+        margin-bottom: 3px;
+        margin-left: 5px;
+      }
+
+      &::before {
+        content: '';
+        background-color: dodgerblue;
+        position: absolute;
+        top: -1px;
+        right: -3px;
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        animation: scale-dot 1s infinite;
+      }
+
+      &::after {
+        content: '';
+        background-color: dodgerblue;
+        position: absolute;
+        top: -1px;
+        right: -3px;
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+      }
     }
+  }
+
+  &:hover div:nth-of-type(1) {
+    opacity: 1;
+    display: flex;
   }
 }
 
