@@ -23,12 +23,19 @@ class Donut extends Component {
     }
   };
 
+  cancelUpdateGoal = () => {
+    this.setState(prevState => ({
+      newGoal: 0,
+      setGoal: !prevState.setGoal,
+    }));
+  };
+
   updateGoal = () => {
     console.log('new Goal', this.state.newGoal);
     this.props.setGoal(this.state.newGoal);
 
     this.setState(prevState => ({
-      newGoal: null,
+      newGoal: 0,
       setGoal: !prevState.setGoal,
     }));
   };
@@ -49,7 +56,7 @@ class Donut extends Component {
     return (
       <div className={styles.donutContainer}>
         <h4>Weekly Goal</h4>
-        {goal ? (
+        {goal && !setGoal ? (
           <DonutChart
             goal={goal}
             value={totalDistance}
@@ -59,6 +66,9 @@ class Donut extends Component {
             updateGoal={this.updateGoal}
           />
         ) : (
+          ''
+        )}{' '}
+        {(goal && setGoal) || !goal ? (
           <SetGoal
             newGoal={newGoal}
             setGoal={setGoal}
@@ -66,10 +76,18 @@ class Donut extends Component {
             onGoalChange={this.onGoalChange}
             updateGoal={this.updateGoal}
           />
+        ) : (
+          ''
         )}
-        <br />
-        {!setGoal && goal && (
+        {!setGoal && goal ? (
           <button onClick={this.updateSetGoal}>Change Goal</button>
+        ) : (
+          ''
+        )}
+        {setGoal && goal ? (
+          <button onClick={this.cancelUpdateGoal}>cancel</button>
+        ) : (
+          ''
         )}
       </div>
     );

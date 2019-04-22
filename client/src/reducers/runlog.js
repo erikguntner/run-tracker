@@ -9,6 +9,7 @@ const initialState = {
     totalDistance: 0,
     totalHrs: 0,
     totalMins: 0,
+    totalDays: 0,
   },
   thisWeeksRuns: [],
   runs: [],

@@ -3,8 +3,7 @@ import styles from '../../stylesheets/Dashboard.module.scss';
 import { Link } from 'react-router-dom';
 
 const Stats = ({
-  weeklyTotals: { totalDistance, totalHrs, totalMins },
-  days,
+  weeklyTotals: { totalDistance, totalHrs, totalMins, totalDays },
 }) => {
   return (
     <div className={styles.userProgress}>
@@ -20,7 +19,7 @@ const Stats = ({
         </li>
         <li className={styles.userProgressCol}>
           <div>Days</div>
-          <div>{days}</div>
+          <div>{totalDays}</div>
         </li>
       </ul>
     </div>

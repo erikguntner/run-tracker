@@ -1,9 +1,10 @@
 .dropdown {
+  display: none;
   position: absolute;
+  right: 0;
+  width: 150px;
   opacity: 0;
   z-index: 20;
-  display: none;
-  width: 150px;
 
   &List {
     display: flex;

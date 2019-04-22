@@ -59,7 +59,8 @@ exports.getThisWeeksRuns = async (req, res, next) => {
         totals: {
           totalDistance: { $sum: '$runlog.distance' },
           totalHrs: { $sum: '$runlog.hrs' },
-          totalMins: { $sum: '$runlog.hrs' },
+          totalMins: { $sum: '$runlog.mins' },
+          totalDays: { $size: '$runlog' },
         },
         runlog: '$runlog',
       },

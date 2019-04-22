@@ -22,7 +22,7 @@ class SideMenuWrapper extends Component {
               </button>
               <div className={styles.circle} />
               <h3>{username}</h3>
-              <PathList open={open} />
+              <PathList open={open} type={'list'} />
             </div>
           </div>
         )}

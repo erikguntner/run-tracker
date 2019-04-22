@@ -15,12 +15,11 @@ class StatsContainer extends Component {
 
   render() {
     const { thisWeeksRuns, weeklyTotals } = this.props;
-    const totalDays = thisWeeksRuns.length ? thisWeeksRuns.length - 1 : 0;
 
     return (
       <>
         <section className={styles.row}>
-          <Stats weeklyTotals={weeklyTotals} days={totalDays} />
+          <Stats weeklyTotals={weeklyTotals} />
           <div className={styles.row}>
             <WeeklyChart thisWeeksRuns={thisWeeksRuns} />
             <Donut />

@@ -67,7 +67,7 @@ class Dashboard extends Component {
           {path[2] === 'stats' && <StatsContainer />}
           {path[2] === 'routes' && (
             <div className={styles.pathListContainer}>
-              <PathList />
+              <PathList type={'grid'} />
             </div>
           )}
           {path[2] === 'log' && <RunLog />}

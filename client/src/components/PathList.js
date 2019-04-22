@@ -9,9 +9,13 @@ class PathList extends Component {
   }
 
   render() {
-    const { routes, loadingRoutes, deleteRoute } = this.props;
+    const listStyles = {
+      grid: styles.grid,
+      list: styles.list,
+    };
+    const { routes, loadingRoutes, deleteRoute, type } = this.props;
     return (
-      <div className={styles.routeList}>
+      <div className={listStyles[type]}>
         {loadingRoutes && routes.length === 0 && <div>...Loading</div>}
         {routes.map((route, i) => {
           return (

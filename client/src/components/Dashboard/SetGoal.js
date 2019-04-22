@@ -10,6 +10,7 @@ const SetGoal = ({
   newGoal,
   updateGoal,
 }) => {
+  console.log(newGoal);
   return (
     <div className={styles.setGoalContainer}>
       <div className={styles.setGoalInner}>
@@ -21,6 +22,7 @@ const SetGoal = ({
                 width: `${23 + newGoal.toString().length * 23}px`,
               }}
               onChange={onGoalChange}
+              min="0"
               type="number"
               placeholder="5"
             />
