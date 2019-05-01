@@ -81,14 +81,14 @@ class DistanceChart extends Component {
       11: 31,
     };
 
-    if (data.length === 0) return;
-
     for (let i = 1; i <= daysInMonth[this.state.month]; i++) {
       runs.push({
         date: i,
         distance: 0,
       });
     }
+    
+    if (data.length === 0) return runs;
 
     data.forEach(run => {
       const dayOfMonth = dateFns.getDate(new Date(run.date));
