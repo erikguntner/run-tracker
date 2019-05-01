@@ -108,7 +108,7 @@ class Controls extends Component {
           </div>
           <div className={styles.tooltip}>linear</div>
         </button>
-        <button
+        {/* <button
           disabled={!geoJSONPoints.features.length}
           className={styles.button}
           onClick={fit}
@@ -116,7 +116,7 @@ class Controls extends Component {
           <div className={styles.innerButton}>
             <FontAwesomeIcon icon={faExpand} />
           </div>
-        </button>
+        </button> */}
         <button
           disabled={!geoJSONLines.features.length}
           className={styles.button}

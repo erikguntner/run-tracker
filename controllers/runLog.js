@@ -39,6 +39,36 @@ exports.getRunsByDate = async (req, res, next) => {
   return res.status(200).json({ runs: runs });
 };
 
+exports.getRunsByMonth = async (req, res, next) => {
+  console.log('get them runs');
+
+  const { _id } = req.user;
+  const { id } = req.params;
+
+  console.log(req.params);
+  console.log();
+  const monthlyRuns = await User.aggregate([
+    { $match: { _id: _id } },
+    {
+      $project: {
+        runlog: {
+          $filter: {
+            input: '$runlog',
+            as: 'runlog',
+            cond: { $eq: ['$$runlog.month', parseInt(id)] },
+          },
+        },
+      },
+    },
+  ]);
+
+  const { runlog } = monthlyRuns[0];
+
+  const sortedRuns = runlog.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  res.json({ runs: sortedRuns });
+};
+
 exports.getThisWeeksRuns = async (req, res, next) => {
   const { _id } = req.user;
   const aggregatedData = await User.aggregate([

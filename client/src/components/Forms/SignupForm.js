@@ -3,22 +3,19 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from '../../stylesheets/Forms.module.scss';
+import * as Yup from 'yup';
+
+const SignupSchema = Yup.object().shape({
+  username: Yup.string().required('username is required'),
+  password: Yup.string().required('password is required'),
+});
 
 const SignupForm = props => (
   <div className={styles.formContainer}>
     <h1>Sign Up</h1>
     <Formik
       initialValues={{ username: '', password: '' }}
-      validate={values => {
-        let errors = {};
-        if (!values.username) {
-          errors.username = 'Username Required';
-        }
-        if (!values.password) {
-          errors.password = 'Password Required';
-        }
-        return errors;
-      }}
+      validationSchema={SignupSchema}
       onSubmit={(values, { setSubmitting }) => {
         props.signup(values, props.history);
 

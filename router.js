@@ -35,6 +35,7 @@ module.exports = app => {
   app.post('/runs', requireAuth, catchErrors(RunLog.postRun));
   app.get('/runs', requireAuth, catchErrors(RunLog.getRunsByDate));
   app.get('/runs/week', requireAuth, catchErrors(RunLog.getThisWeeksRuns));
+  app.get('/runs/month/:id', requireAuth, catchErrors(RunLog.getRunsByMonth));
 
   // ROUTES FOR GOALS
   app.post('/goal', requireAuth, catchErrors(Goal.setGoal));

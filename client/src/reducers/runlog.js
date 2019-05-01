@@ -1,6 +1,7 @@
 import {
   LOG_RUN_SUCCESS,
   GET_WEEKLY_RUNS_SUCCESS,
+  GET_RUNS_BY_MONTH_SUCCESS,
   POPULATE_RUNLOG,
 } from '../actions/types';
 
@@ -12,6 +13,7 @@ const initialState = {
     totalDays: 0,
   },
   thisWeeksRuns: [],
+  chartedRuns: [],
   runs: [],
   loadingRuns: false,
 };
@@ -21,6 +23,7 @@ export default function(state = initialState, action) {
     case LOG_RUN_SUCCESS:
       return {
         ...state,
+        runs: [...state.runs, action.payload],
       };
     case GET_WEEKLY_RUNS_SUCCESS:
       return {
@@ -29,6 +32,11 @@ export default function(state = initialState, action) {
         weeklyTotals: {
           ...action.payload.totals,
         },
+      };
+    case GET_RUNS_BY_MONTH_SUCCESS:
+      return {
+        ...state,
+        chartedRuns: [...action.payload],
       };
     case POPULATE_RUNLOG:
       return {

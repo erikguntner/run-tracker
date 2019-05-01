@@ -67,7 +67,6 @@
   }
 
   &:active {
-    background-color: lighten(#0991d3, 45%);
     outline: none;
   }
 
@@ -100,14 +99,6 @@
   padding: 30px;
   align-items: center;
   overflow: scroll;
-
-  h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-    font-size: 36px;
-  }
 }
 
 .inputContainer {

@@ -5,13 +5,21 @@ import { Link } from 'react-router-dom';
 const Stats = ({
   weeklyTotals: { totalDistance, totalHrs, totalMins, totalDays },
 }) => {
+  let hours = totalHrs;
+  let mins = totalMins;
+
+  if (mins >= 60) {
+    hours += Math.floor(mins / 60);
+    mins = mins % 60;
+  }
+
   return (
     <div className={styles.userProgress}>
       <div className={styles.userProgressCircle}>S</div>
       <ul className={styles.userProgressTable}>
         <li className={styles.userProgressCol}>
           <div>Time</div>
-          <div>{`${totalHrs.toString()}hr${totalMins.toString()}min`}</div>
+          <div>{`${hours.toString()}hr${mins.toString()}min`}</div>
         </li>
         <li className={styles.userProgressCol}>
           <div>Distance</div>

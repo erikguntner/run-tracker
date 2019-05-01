@@ -1,3 +1,9 @@
+.section {
+  width: 100vw;
+  height: 100vh;
+  padding: 100px;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;
@@ -82,12 +88,38 @@
   }
 }
 
+.error {
+  position: relative;
+  margin: 0px 7px;
+
+  input {
+    background-color: lighten(red, 40%);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    background-color: red;
+    width: 100%;
+    height: 7px;
+  }
+}
+
 .input {
   border: none;
   background-color: transparent;
   font-size: 36px;
   transition: border-bottom 0.2s ease;
   padding: 0;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
 
   &:focus {
     outline: none;

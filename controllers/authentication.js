@@ -28,14 +28,14 @@ exports.signup = async (req, res, next) => {
   });
 
   await user.save();
-  
+
   return res.json({
     token: tokenForUser(user),
     user: user,
   });
 };
 
-exports.signin = (req, res, next) => {
+exports.signin = async (req, res, next) => {
   //User has already had their username and password auth'd
   // we just need to give them a token
   res.send({ token: tokenForUser(req.user), user: req.user });

@@ -2,10 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 import RunLogger from './RunLogger';
 import { logRun } from '../../actions/runLog';
 import styles from '../../stylesheets/RunningForm.module.scss';
 import dateFns from 'date-fns';
+import * as Yup from 'yup';
+
+const RunSchema = Yup.object().shape({
+  distance: Yup.string().required(),
+  hrs: Yup.number()
+    .min(0)
+    .required(),
+  mins: Yup.number()
+    .min(0)
+    .required(),
+  secs: Yup.number()
+    .min(0)
+    .required(),
+});
 
 class RunForm extends React.Component {
   state = {
@@ -18,10 +33,8 @@ class RunForm extends React.Component {
     });
   };
   render() {
-    const { history } = this.props;
-
     return (
-      <section style={{ width: '80%' }}>
+      <section className={styles.section}>
         <Formik
           initialValues={{
             distance: '',
@@ -30,7 +43,7 @@ class RunForm extends React.Component {
             mins: '',
             secs: '',
           }}
-          validate={values => {}}
+          validationSchema={RunSchema}
           onSubmit={(values, { setSubmitting }) => {
             //turn string into year/day/month string
             const datesArr = this.state.date.toLocaleDateString().split('/');
@@ -44,10 +57,8 @@ class RunForm extends React.Component {
             values.date = formattedDate;
             values.week = week;
             values.month = month;
-
-            const updatedValues = parseValues(values);
-
-            this.props.logRun(updatedValues, setSubmitting, history);
+            //const updatedValues = parseValues(values);
+            this.props.logRun(values, setSubmitting, this.props.history);
           }}
         >
           {({ isSubmitting }) => (
@@ -55,11 +66,12 @@ class RunForm extends React.Component {
               <Field
                 type="text"
                 name="distance"
-                render={({ field }) => (
+                render={({ field, form }) => (
                   <RunLogger
                     updateMilesRan={this.updateMilesRan}
                     handleDayChange={this.handleDayChange}
                     field={field}
+                    form={form}
                   />
                 )}
               />
@@ -68,24 +80,24 @@ class RunForm extends React.Component {
                 <Field
                   type="text"
                   name="hrs"
-                  render={({ field }) => (
-                    <UnderlinedInput field={field} id="hrs" />
+                  render={({ field, form }) => (
+                    <UnderlinedInput field={field} form={form} id="hrs" />
                   )}
                 />
                 hours
                 <Field
                   type="text"
                   name="mins"
-                  render={({ field }) => (
-                    <UnderlinedInput field={field} id="mins" />
+                  render={({ field, form }) => (
+                    <UnderlinedInput field={field} form={form} id="mins" />
                   )}
                 />
                 minutes
                 <Field
                   type="text"
                   name="secs"
-                  render={({ field }) => (
-                    <UnderlinedInput field={field} id="secs" />
+                  render={({ field, form }) => (
+                    <UnderlinedInput field={field} form={form} id="secs" />
                   )}
                 />
                 seconds
@@ -128,16 +140,22 @@ const parseValues = values => {
   return values;
 };
 
-const UnderlinedInput = ({ field, id }) => {
+const UnderlinedInput = ({ field, form, id }) => {
   const value = field.value;
-  const inputWidth = value ? value.length : value.length + 2;
+  const inputWidth = value
+    ? value.toString().length
+    : value.toString().length + 2;
   return (
     <div
       style={{ width: `${inputWidth * 23}px` }}
-      className={styles.inputContainer}
+      className={`${styles.inputContainer} ${
+        form.touched[field.name] && form.errors[field.name] ? styles.error : ''
+      }`}
     >
       <input
         {...field}
+        type="number"
+        min="0"
         placeholder="00"
         maxLength="2"
         style={{ width: `${inputWidth * 23}px` }}
@@ -148,7 +166,8 @@ const UnderlinedInput = ({ field, id }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  logRun: (values, setSubmitting) => dispatch(logRun(values, setSubmitting)),
+  logRun: (values, setSubmitting, history) =>
+    dispatch(logRun(values, setSubmitting, history)),
 });
 
 export default withRouter(

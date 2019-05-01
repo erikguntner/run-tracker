@@ -1,0 +1,45 @@
+.container {
+  position: relative;
+}
+
+.header {
+  display: flex;
+  position: relative;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #cccc;
+  border-radius: 10px;
+  z-index: 20;
+}
+
+.title {
+  margin-right: 20px;
+}
+
+.dropdown {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+  max-height: 150px;
+  width: 100%;
+  padding-top: 20px;
+  opacity: 0;
+  overflow: scroll;
+  z-index: 10;
+  background-color: #fff;
+  border: 1px solid #cccc;
+  border-radius: 0px 0px 10px 10px;
+  transform: translateY(80%);
+  transition: opacity 0.3s ease;
+}
+
+.open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(calc(100% - 20px));
+}
+
+.selected {
+  background-color: blue;
+}

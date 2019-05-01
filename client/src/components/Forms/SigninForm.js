@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from '../../stylesheets/Forms.module.scss';
+import * as Yup from 'yup';
 
-class SigninForm extends React.Component {
+const SigninSchema = Yup.object().shape({
+  username: Yup.string().required('username is required'),
+  password: Yup.string().required('password is required'),
+});
+
+class SigninForm extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.authentication !== prevProps.authentication) {
     }
@@ -18,16 +24,7 @@ class SigninForm extends React.Component {
         <h1>Welcome Back!</h1>
         <Formik
           initialValues={{ username: '', password: '' }}
-          validate={values => {
-            let errors = {};
-            if (!values.username) {
-              errors.username = 'Username Required';
-            }
-            if (!values.password) {
-              errors.password = 'Password Required';
-            }
-            return errors;
-          }}
+          validationSchema={SigninSchema}
           onSubmit={(values, { setSubmitting }) => {
             this.props.signin(values, history);
             setSubmitting(false);

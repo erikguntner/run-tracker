@@ -12,12 +12,18 @@ import {
   LOG_RUN,
   GET_RUNS_BY_DATE,
   GET_WEEKLY_RUNS,
+  GET_RUNS_BY_MONTH,
   SET_GOAL,
 } from './actions/types';
 import { fetchPathData, fetchElevationData } from './actions';
 import { saveRoute, getRoutes, deleteRoute } from './actions/routeActions';
 import { signin, signup, signout, loadUser } from './actions/authActions';
-import { postRun, getRunsByDate, getThisWeeksRuns } from './actions/runLog';
+import {
+  postRun,
+  getRunsByDate,
+  getThisWeeksRuns,
+  getRunsByMonth,
+} from './actions/runLog';
 import { postNewGoal } from './actions/goal';
 
 function* watcherSaga() {
@@ -34,6 +40,7 @@ function* watcherSaga() {
     takeEvery(LOG_RUN, postRun),
     takeEvery(GET_RUNS_BY_DATE, getRunsByDate),
     takeEvery(GET_WEEKLY_RUNS, getThisWeeksRuns),
+    takeEvery(GET_RUNS_BY_MONTH, getRunsByMonth),
     takeEvery(SET_GOAL, postNewGoal),
   ]);
 }

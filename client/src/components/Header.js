@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMapMarkedAlt,
+  faChevronDown,
+} from '@fortawesome/free-solid-svg-icons';
 import { faUser as farUser } from '@fortawesome/free-regular-svg-icons';
 import { Toggle } from './Utilities';
 import { Link } from 'react-router-dom';
@@ -15,6 +18,17 @@ import styles from '../stylesheets/Header.module.scss';
 library.add(farUser);
 
 class Header extends Component {
+  state = {
+    dropdownOpen: false,
+  };
+
+  handleOpenDropdown = () => {
+    console.log('opening');
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen,
+    }));
+  };
+
   render() {
     const {
       location,
@@ -23,6 +37,8 @@ class Header extends Component {
       username,
       loadingUser,
     } = this.props;
+
+    const { dropdownOpen } = this.state;
     const urlParams = location.pathname.split('/');
 
     return (
@@ -49,14 +65,20 @@ class Header extends Component {
                   username={username}
                 />
                 {this.props.authenticated && (
-                  <div className={styles.userIcon}>
-                    <Link className={styles.userIconLink} to="/profile/stats">
+                  <div
+                    className={styles.userIcon}
+                    onClick={this.handleOpenDropdown}
+                  >
+                    <div className={styles.userIconLink}>
                       {loadingUser ? '...Loading' : username}{' '}
                       <span>
                         <FontAwesomeIcon icon={farUser} />
                       </span>
-                    </Link>
-                    <Dropdown />
+                      <span>
+                        <FontAwesomeIcon icon={faChevronDown} />
+                      </span>
+                    </div>
+                    <Dropdown dropdownOpen={dropdownOpen} />
                   </div>
                 )}
 

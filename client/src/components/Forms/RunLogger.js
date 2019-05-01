@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'formik';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import styles from '../../stylesheets/Dashboard.module.scss';
+import styles from '../../stylesheets/RunningForm.module.scss';
 import pickerStyles from '../../stylesheets/DayPicker.module.scss';
 
 const RunLogger = ({
@@ -10,13 +10,15 @@ const RunLogger = ({
   milesRan,
   updateMilesRan,
   handleDayChange,
+  form,
   formik,
 }) => {
   const inputWidth = formik.values.distance
-    ? formik.values.distance.length
-    : formik.values.distance.length + 1;
+    ? formik.values.distance.toString().length
+    : formik.values.distance.toString().length + 1;
+
   return (
-    <div className={styles.runLogger}>
+    <div className={styles.formGroup}>
       on
       <span className={styles.inputContainer}>
         <DayPickerInput
@@ -33,14 +35,18 @@ const RunLogger = ({
       I ran{' '}
       <span
         style={{ width: `${inputWidth * 23}px` }}
-        className={styles.inputContainer}
+        className={`${styles.inputContainer} ${
+          form.touched[field.name] && form.errors[field.name]
+            ? styles.error
+            : ''
+        }`}
       >
         <input
           {...field}
           style={{ width: `${inputWidth * 23}px` }}
           placeholder="5"
           className={styles.input}
-          type="text"
+          type="number"
         />
       </span>{' '}
       miles

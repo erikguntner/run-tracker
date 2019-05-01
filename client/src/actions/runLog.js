@@ -6,6 +6,8 @@ import {
   GET_RUNS_BY_DATE,
   GET_WEEKLY_RUNS,
   GET_WEEKLY_RUNS_SUCCESS,
+  GET_RUNS_BY_MONTH,
+  GET_RUNS_BY_MONTH_SUCCESS,
 } from './types';
 
 const server =
@@ -26,6 +28,13 @@ export const getRuns = values => {
 export const getWeeklyRuns = () => ({
   type: GET_WEEKLY_RUNS,
 });
+
+export const getMonthlyRuns = month => {
+  return {
+    type: GET_RUNS_BY_MONTH,
+    payload: month,
+  };
+};
 
 export const logRun = (values, setSubmitting, history) => {
   return {
@@ -49,6 +58,27 @@ export function* getThisWeeksRuns() {
     yield put({
       type: GET_WEEKLY_RUNS_SUCCESS,
       payload: { runlog, totals },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* getRunsByMonth({ payload }) {
+  try {
+    const token = localStorage.getItem('token');
+    const monthlyRuns = yield call(apiGet, `${server}/runs/month/${payload}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: token,
+      },
+    });
+
+    const { runs } = monthlyRuns.data;
+
+    yield put({
+      type: GET_RUNS_BY_MONTH_SUCCESS,
+      payload: runs,
     });
   } catch (err) {
     console.log(err);
@@ -83,9 +113,12 @@ export function* postRun({ payload: { values, setSubmitting, history } }) {
 
     yield put({
       type: LOG_RUN_SUCCESS,
+      payload: values,
     });
 
     setSubmitting(false);
+    console.log(history);
+    history.push('/profile/stats');
   } catch (err) {
     console.log(err);
     setSubmitting(false);

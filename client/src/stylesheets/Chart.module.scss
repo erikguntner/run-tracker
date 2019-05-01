@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonList {
+  display: flex;
+  list-style: none;
+
+  li:first-of-type button {
+    border-radius: 5px 0 0 5px;
+  }
+
+  li:last-of-type button {
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+.button {
+  padding: 10px 16px;
+}
+
+.activeBtn {
+  padding: 10px 16px;
+  background-color: #0991d3;
+}
+
+.select {
+  justify-self: right;
+}

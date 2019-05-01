@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../stylesheets/Dropdown.module.scss';
 
-const Dropdown = props => {
+const Dropdown = ({ dropdownOpen }) => {
   return (
-    <div className={styles.dropdown}>
+    <div className={`${styles.dropdown} ${dropdownOpen ? styles.visible : ''}`}>
       <div className={styles.dropdownList}>
         <Link className={styles.dropdownBtn} to="/profile/stats">
           view stats

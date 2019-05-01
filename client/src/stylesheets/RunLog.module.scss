@@ -3,19 +3,49 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
-  article {
-    margin-bottom: 30px;
-    padding: 20px 30px;
-    width: 80%;
-    background-color: #fff;
-    border: none;
-    border-left: 3px solid coral;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease;
+.month {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-size: 32px;
+  color: #aaa;
 
-    &:hover {
-      transform: scale(1.05);
-    }
+  &::after {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 8px;
+    right: 0;
+    top: calc(50% - 5px);
+    background-color: #aaa;
+  }
+
+  .text {
+    position: relative;
+    z-index: 10;
+    background-color: #fcfcfc;
+    padding-right: 10px;
+  }
+}
+
+.container {
+  width: 100%;
+}
+
+.run {
+  margin-bottom: 30px;
+  padding: 20px 30px;
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  border-left: 3px solid coral;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
   }
 }
