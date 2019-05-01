@@ -87,7 +87,7 @@ class DistanceChart extends Component {
         distance: 0,
       });
     }
-    
+
     if (data.length === 0) return runs;
 
     data.forEach(run => {
@@ -95,8 +95,6 @@ class DistanceChart extends Component {
       runs[dayOfMonth].distance =
         parseInt(runs[dayOfMonth].distance) + parseInt(run.distance);
     });
-
-    console.log(runs);
 
     return runs;
   };

@@ -17,9 +17,7 @@ class Dashboard extends Component {
     milesRan: 0,
   };
 
-  componentDidUpdate() {
-    console.log(this.props.history);
-  }
+  componentDidUpdate() {}
 
   render() {
     const { location } = this.props;

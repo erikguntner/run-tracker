@@ -31,7 +31,6 @@ class Donut extends Component {
   };
 
   updateGoal = () => {
-    console.log('new Goal', this.state.newGoal);
     this.props.setGoal(this.state.newGoal);
 
     this.setState(prevState => ({

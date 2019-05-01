@@ -10,7 +10,6 @@ const SetGoal = ({
   newGoal,
   updateGoal,
 }) => {
-  console.log(newGoal);
   return (
     <div className={styles.setGoalContainer}>
       <div className={styles.setGoalInner}>

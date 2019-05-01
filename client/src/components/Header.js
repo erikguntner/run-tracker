@@ -23,7 +23,6 @@ class Header extends Component {
   };
 
   handleOpenDropdown = () => {
-    console.log('opening');
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen,
     }));

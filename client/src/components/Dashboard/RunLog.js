@@ -40,9 +40,9 @@ class RunLog extends Component {
 
     return (
       <section className={styles.list}>
-        {Object.keys(datesbyMonth).map(month => {
+        {Object.keys(datesbyMonth).map((month, i) => {
           return (
-            <>
+            <div key={`month-${i}`} style={{ width: '100%' }}>
               <h2 className={styles.month}>
                 <span className={styles.text}>{month}</span>
               </h2>
@@ -52,9 +52,6 @@ class RunLog extends Component {
                   const dateAdjustedForTZ = jsDate.setTime(
                     jsDate.getTime() + jsDate.getTimezoneOffset() * 60 * 1000
                   );
-
-                  console.log(dateFns.getMonth(new Date(dateAdjustedForTZ)));
-
                   const date = dateFns.format(dateAdjustedForTZ, 'MM/DD/YYYY');
 
                   return (
@@ -65,7 +62,7 @@ class RunLog extends Component {
                   );
                 })}
               </div>
-            </>
+            </div>
           );
         })}
       </section>

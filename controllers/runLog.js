@@ -40,13 +40,9 @@ exports.getRunsByDate = async (req, res, next) => {
 };
 
 exports.getRunsByMonth = async (req, res, next) => {
-  console.log('get them runs');
-
   const { _id } = req.user;
   const { id } = req.params;
 
-  console.log(req.params);
-  console.log();
   const monthlyRuns = await User.aggregate([
     { $match: { _id: _id } },
     {

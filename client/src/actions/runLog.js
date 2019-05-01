@@ -117,7 +117,6 @@ export function* postRun({ payload: { values, setSubmitting, history } }) {
     });
 
     setSubmitting(false);
-    console.log(history);
     history.push('/profile/stats');
   } catch (err) {
     console.log(err);
