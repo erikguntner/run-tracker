@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Portal from './Utilities/Portal';
 import Icon from './Utilities/Icon';
 import styles from '../stylesheets/SideMenu.module.scss';
@@ -30,5 +31,11 @@ class SideMenuWrapper extends Component {
     );
   }
 }
+
+SideMenuWrapper.propTypes = {
+  toggle: PropTypes.func,
+  open: PropTypes.bool,
+  username: PropTypes.string,
+};
 
 export default SideMenuWrapper;

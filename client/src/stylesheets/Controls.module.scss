@@ -37,6 +37,7 @@ $light-grey-4: #9aa5b1;
   }
 
   &:hover .tooltip {
+    visibility: visible;
     opacity: 1;
   }
 
@@ -104,6 +105,7 @@ $light-grey-4: #9aa5b1;
 
 .tooltip {
   display: flex;
+  visibility: hidden;
   justify-content: center;
   align-items: center;
   position: absolute;

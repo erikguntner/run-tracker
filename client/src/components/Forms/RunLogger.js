@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'formik';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
@@ -7,7 +8,6 @@ import pickerStyles from '../../stylesheets/DayPicker.module.scss';
 
 const RunLogger = ({
   field,
-  milesRan,
   updateMilesRan,
   handleDayChange,
   form,
@@ -52,6 +52,14 @@ const RunLogger = ({
       miles
     </div>
   );
+};
+
+RunLogger.propTypes = {
+  field: PropTypes.object,
+  form: PropTypes.object,
+  formik: PropTypes.object,
+  updateMilesRan: PropTypes.func,
+  handleDayChange: PropTypes.func,
 };
 
 export default connect(RunLogger);

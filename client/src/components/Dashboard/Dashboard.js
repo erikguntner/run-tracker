@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PathList from '../PathList';
 import StatsContainer from './StatsContainer';
@@ -85,5 +86,17 @@ const DashboardLink = ({ title, icon, link, id, path }) => (
     </button>
   </Link>
 );
+
+Dashboard.propTypes = {
+  location: PropTypes.object,
+};
+
+DashboardLink.propTypes = {
+  title: PropTypes.string,
+  icon: PropTypes.object,
+  link: PropTypes.string,
+  id: PropTypes.string,
+  path: PropTypes.array,
+};
 
 export default requireAuth(Dashboard);

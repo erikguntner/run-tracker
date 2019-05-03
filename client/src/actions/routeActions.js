@@ -110,17 +110,13 @@ export function* getRoutes() {
 export function* deleteRoute({ id }) {
   try {
     const token = localStorage.getItem('token');
-    yield call(
-      callDeleteRoute,
-      `${server}/routes/delete`,
-      {
-        params: { id },
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: token,
-        },
-      }
-    );
+    yield call(callDeleteRoute, `${server}/routes/delete`, {
+      params: { id },
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: token,
+      },
+    });
 
     yield put({
       type: DELETE_ROUTE_SUCCESS,

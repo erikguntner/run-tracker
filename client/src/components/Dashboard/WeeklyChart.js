@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts';
 import dateFns from 'date-fns';
 
@@ -80,5 +81,9 @@ class DistanceChart extends Component {
     );
   }
 }
+
+DistanceChart.propTypes = {
+  thisWeeksRuns: PropTypes.array,
+};
 
 export default DistanceChart;

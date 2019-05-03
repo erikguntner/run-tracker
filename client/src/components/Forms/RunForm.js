@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -32,6 +33,22 @@ class RunForm extends React.Component {
       date,
     });
   };
+
+  formatDate = dateArr => {
+    const formattedDate = dateArr.reduce((accum, curr, i) => {
+      if (curr.length === 1) curr = `0${curr}`;
+      if (i === 1) {
+        return accum + `-${curr}`;
+      } else if (i === 2) {
+        return `${curr}-` + accum;
+      } else {
+        return accum + `${curr}`;
+      }
+    }, '');
+
+    return formattedDate;
+  };
+
   render() {
     return (
       <section className={styles.section}>
@@ -48,7 +65,7 @@ class RunForm extends React.Component {
             //turn string into year/day/month string
             const datesArr = this.state.date.toLocaleDateString().split('/');
             //reformat date for
-            const formattedDate = formatDate(datesArr);
+            const formattedDate = this.formatDate(datesArr);
             // find isoweek/month values for selected date
             const week = dateFns.getISOWeek(new Date(this.state.date));
             const month = dateFns.getMonth(new Date(this.state.date));
@@ -117,29 +134,6 @@ class RunForm extends React.Component {
   }
 }
 
-const formatDate = dateArr => {
-  const formattedDate = dateArr.reduce((accum, curr, i) => {
-    if (curr.length === 1) curr = `0${curr}`;
-    if (i === 1) {
-      return accum + `-${curr}`;
-    } else if (i === 2) {
-      return `${curr}-` + accum;
-    } else {
-      return accum + `${curr}`;
-    }
-  }, '');
-
-  return formattedDate;
-};
-
-const parseValues = values => {
-  values.distance = parseFloat(parseFloat(values.distance).toFixed(2));
-  values.hrs = parseInt(values.hrs);
-  values.mins = parseInt(values.mins);
-  values.secs = parseInt(values.secs);
-  return values;
-};
-
 const UnderlinedInput = ({ field, form, id }) => {
   const value = field.value;
   const inputWidth = value
@@ -163,6 +157,12 @@ const UnderlinedInput = ({ field, form, id }) => {
       />
     </div>
   );
+};
+
+UnderlinedInput.propTypes = {
+  field: PropTypes.object,
+  form: PropTypes.object,
+  id: PropTypes.string,
 };
 
 const mapDispatchToProps = dispatch => ({

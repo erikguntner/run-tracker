@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Portal from './Portal';
 import styles from '../../stylesheets/Popup.module.scss';
@@ -35,6 +36,11 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   close: () => dispatch(closePopup()),
 });
+
+Popup.propTypes = {
+  open: PropTypes.bool,
+  message: PropTypes.string,
+};
 
 export default connect(
   mapStateToProps,

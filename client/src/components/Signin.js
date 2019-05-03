@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SigninForm from './Forms/SigninForm';
 import SignupForm from './Forms/SignupForm';
 import styles from '../stylesheets/SigninContainer.module.scss';
@@ -30,5 +31,10 @@ class Signin extends Component {
     );
   }
 }
+
+Signin.propTypes = {
+  match: PropTypes.object,
+  history: PropTypes.object,
+};
 
 export default Signin;

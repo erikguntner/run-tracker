@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactMapGL from 'react-map-gl';
 import WebMercatorViewport from 'viewport-mercator-project';
 import PolylineOverlay from './PolylineOverlay';
@@ -8,14 +9,8 @@ import bbox from '@turf/bbox';
 
 class RouteMap extends Component {
   render() {
-    // const pointFeatures = this.props.points.map(point =>
-    //   turfHelpers.point(point)
-    // );
-
-    // const features = turfHelpers.featureCollection(pointFeatures);
-    // const centerPoint = center(features);
-
-    const line = turfHelpers.lineString(this.props.points);
+    const { points } = this.props;
+    const line = turfHelpers.lineString(points);
     var bBox = bbox(line);
 
     const viewport = new WebMercatorViewport({
@@ -34,9 +29,14 @@ class RouteMap extends Component {
         mapStyle="mapbox://styles/mapbox/outdoors-v10"
         {...viewport}
       >
-        <PolylineOverlay points={this.props.points} />
+        <PolylineOverlay points={points} />
       </ReactMapGL>
     );
   }
 }
+
+RouteMap.propTypes = {
+  points: PropTypes.array,
+};
+
 export default RouteMap;

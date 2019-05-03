@@ -3,6 +3,7 @@ const User = require('../models/user');
 exports.postRun = async (req, res, next) => {
   const { _id } = req.user;
 
+  // Find the user by id and push the new run onto the runlog
   const updatedRunLog = await User.findOneAndUpdate(
     { _id: _id },
     { $push: { runlog: req.body } }

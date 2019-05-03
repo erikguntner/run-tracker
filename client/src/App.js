@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Header from './components/Header';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
 class App extends Component {
   componentDidMount() {

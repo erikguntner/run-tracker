@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,6 +36,7 @@ class Header extends Component {
       authenticated,
       username,
       loadingUser,
+      signout,
     } = this.props;
 
     const { dropdownOpen } = this.state;
@@ -49,11 +51,9 @@ class Header extends Component {
           <Toggle>
             {({ open, toggle }) => (
               <>
-                {this.props.authenticated ? (
+                {authenticated ? (
                   <>
-                    <button onClick={() => this.props.signout(history)}>
-                      sign out
-                    </button>
+                    <button onClick={() => signout(history)}>sign out</button>
                   </>
                 ) : (
                   <button onClick={() => history.push('/signin')}>Login</button>
@@ -63,7 +63,7 @@ class Header extends Component {
                   toggle={toggle}
                   username={username}
                 />
-                {this.props.authenticated && (
+                {authenticated && (
                   <div
                     className={styles.userIcon}
                     onClick={this.handleOpenDropdown}
@@ -81,7 +81,7 @@ class Header extends Component {
                   </div>
                 )}
 
-                {!urlParams.includes('profile') && this.props.authenticated && (
+                {!urlParams.includes('profile') && authenticated && (
                   <div className={styles.menuButton} onClick={toggle}>
                     <div className={styles.bar1} />
                     <div className={styles.bar2} />
@@ -113,6 +113,15 @@ const mapDispatchToProps = dispatch => {
         payload: history,
       }),
   };
+};
+
+Header.propTypes = {
+  location: PropTypes.object,
+  history: PropTypes.object,
+  authenticated: PropTypes.string,
+  username: PropTypes.string,
+  loadingUser: PropTypes.bool,
+  signout: PropTypes.func,
 };
 
 export default withRouter(

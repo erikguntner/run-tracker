@@ -9,19 +9,15 @@ import ReactMapGL, {
 } from 'react-map-gl';
 import { GeolocateControl } from 'mapbox-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
-
 // import lineString from '@turf/helpers';
 import * as turfHelpers from '@turf/helpers';
-
 import bbox from '@turf/bbox';
 
 import Controls from './Controls';
 import Tooltip from '../Tooltip';
 import Popup from '../Utilities/Popup';
 import ElevationProfile from './ElevationProfile';
-import TransportationSelect from './TransportationSelect';
 import { updateViewport } from '../../actions';
-
 import styles from '../../stylesheets/Map.module.scss';
 import { hexToRGBA, getDistanceFromLatLonInMi } from '../../utils/utils';
 

@@ -7,7 +7,6 @@ import {
   faMountain,
   faRoute,
   faDrawPolygon,
-  faExpand,
   faSave,
 } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
@@ -32,7 +31,6 @@ class Controls extends Component {
       showElevation,
       elevationData,
       elevation,
-      fit,
       saveRoute,
       startPoint,
       endPoint,
@@ -57,9 +55,8 @@ class Controls extends Component {
         <button
           disabled={!geoJSONPoints.features.length}
           className={styles.button}
-          onClick={clearRoute}
         >
-          <div className={styles.innerButton}>
+          <div className={styles.innerButton} onClick={clearRoute}>
             <FontAwesomeIcon icon={faTimes} />
           </div>
           <div className={styles.tooltip}>Clear Route</div>
@@ -67,42 +64,38 @@ class Controls extends Component {
         <button
           disabled={!geoJSONPoints.features.length}
           className={styles.button}
-          onClick={removeLatestPoint}
         >
-          <div className={styles.innerButton}>
+          <div className={styles.innerButton} onClick={removeLatestPoint}>
             <FontAwesomeIcon icon={faUndoAlt} />
           </div>
           <div className={styles.tooltip}>undo last</div>
         </button>
-        <button className={styles.button} onClick={showElevation}>
+        <button className={styles.button}>
           <div
             className={
               elevation ? styles.innerButtonActive : styles.innerButton
             }
+            onClick={showElevation}
           >
             <FontAwesomeIcon icon={faMountain} />
           </div>
           <div className={styles.tooltip}>elevation</div>
         </button>
-        <button
-          className={styles.button}
-          onClick={() => changeToClipPath(true)}
-        >
+        <button className={styles.button}>
           <div
             className={clipPath ? styles.innerButtonActive : styles.innerButton}
+            onClick={() => changeToClipPath(true)}
           >
             <FontAwesomeIcon icon={faRoute} />
           </div>
           <div className={styles.tooltip}>clip path</div>
         </button>
-        <button
-          className={styles.button}
-          onClick={() => changeToClipPath(false)}
-        >
+        <button className={styles.button}>
           <div
             className={
               !clipPath ? styles.innerButtonActive : styles.innerButton
             }
+            onClick={() => changeToClipPath(false)}
           >
             <FontAwesomeIcon icon={faDrawPolygon} />
           </div>
@@ -120,9 +113,11 @@ class Controls extends Component {
         <button
           disabled={!geoJSONLines.features.length}
           className={styles.button}
-          onClick={() => saveRoute(routeData)}
         >
-          <div className={styles.innerButton}>
+          <div
+            className={styles.innerButton}
+            onClick={() => saveRoute(routeData)}
+          >
             <FontAwesomeIcon icon={faSave} />
           </div>
           <div className={styles.tooltip}>save route</div>

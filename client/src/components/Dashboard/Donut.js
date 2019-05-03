@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import DonutChart from './DonutChart';
 import SetGoal from './SetGoal';
 import { setGoal } from '../../actions/goal';
@@ -101,6 +102,11 @@ const mapStateToProps = store => ({
   goal: store.goal.goal,
   weeklyTotals: store.runLog.weeklyTotals,
 });
+
+Donut.propTypes = {
+  goal: PropTypes.number,
+  weeklyTotals: PropTypes.object,
+};
 
 export default connect(
   mapStateToProps,

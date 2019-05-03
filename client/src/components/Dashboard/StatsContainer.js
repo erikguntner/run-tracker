@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import DistanceChart from './DistanceChart';
 import WeeklyChart from './WeeklyChart';
 import Donut from './Donut';
@@ -41,6 +42,11 @@ const mapStateToProps = store => ({
   thisWeeksRuns: store.runLog.thisWeeksRuns,
   weeklyTotals: store.runLog.weeklyTotals,
 });
+
+StatsContainer.propTypes = {
+  thisWeeksRuns: PropTypes.array,
+  weeklyTotals: PropTypes.object,
+};
 
 export default connect(
   mapStateToProps,

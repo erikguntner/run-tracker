@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -10,14 +11,14 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string().required('password is required'),
 });
 
-const SignupForm = props => (
+const SignupForm = ({ signup, history }) => (
   <div className={styles.formContainer}>
     <h1>Sign Up</h1>
     <Formik
       initialValues={{ username: '', password: '' }}
       validationSchema={SignupSchema}
       onSubmit={(values, { setSubmitting }) => {
-        props.signup(values, props.history);
+        signup(values, history);
 
         setSubmitting(false);
       }}
@@ -64,6 +65,10 @@ const mapDispatchToProps = dispatch => ({
       payload: { values, history },
     }),
 });
+
+SignupForm.propTypes = {
+  signup: PropTypes.func,
+};
 
 export default withRouter(
   connect(

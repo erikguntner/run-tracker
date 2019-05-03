@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from '../../stylesheets/Donut.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
@@ -36,6 +37,14 @@ const SetGoal = ({
       </div>
     </div>
   );
+};
+
+SetGoal.propTypes = {
+  setGoal: PropTypes.bool,
+  updateSetGoal: PropTypes.func,
+  inGoalChange: PropTypes.func,
+  newGoal: PropTypes.number,
+  updateGoal: PropTypes.func,
 };
 
 export default SetGoal;

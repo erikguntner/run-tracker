@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import styles from '../../stylesheets/RunLog.module.scss';
-
-// const months = {
-//   0: 'january',
-//   1: 'february',
-//   2: 'march',
-//   3: 'april',
-//   4: 'may',
-//   5: 'june',
-//   6: 'july',
-
-// }
 
 const reduceDatesByMonth = runs => {
   return runs.reduce((accum, curr) => {
@@ -73,6 +63,10 @@ class RunLog extends Component {
 const mapStateToProps = store => ({
   runs: store.runLog.runs,
 });
+
+RunLog.propTypes = {
+  runs: PropTypes.array,
+};
 
 export default connect(
   mapStateToProps,

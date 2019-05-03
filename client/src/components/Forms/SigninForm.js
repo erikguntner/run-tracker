@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -83,6 +84,13 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = store => ({
   authentication: store.auth.authentication,
 });
+
+SigninForm.propTypes = {
+  history: PropTypes.object,
+  authentication: PropTypes.string,
+  authUser: PropTypes.func,
+  signin: PropTypes.func,
+};
 
 export default withRouter(
   connect(

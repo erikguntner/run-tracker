@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Route from './Route';
 import styles from '../stylesheets/Route.module.scss';
@@ -48,6 +49,13 @@ const mapDispatchToProps = dispatch => ({
       id,
     }),
 });
+
+PathList.propTypes = {
+  routes: PropTypes.array,
+  loadingRoutes: PropTypes.bool,
+  deleteRoute: PropTypes.func,
+  type: PropTypes.string,
+};
 
 export default connect(
   mapStateToProps,

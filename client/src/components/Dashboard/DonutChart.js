@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from '../../stylesheets/Donut.module.scss';
 
 class DonutChart extends Component {
   render() {
-    const {
-      size,
-      strokewidth,
-      value,
-      goal,
-      setGoal,
-      onGoalChange,
-      updateGoal,
-      updateSetGoal,
-    } = this.props;
+    const { size, strokewidth, value, goal } = this.props;
 
     const distanceRan = value >= goal ? goal : value;
 
@@ -72,6 +64,13 @@ class DonutChart extends Component {
 DonutChart.defaultProps = {
   size: 150,
   strokewidth: 15,
+};
+
+DonutChart.propTypes = {
+  size: PropTypes.number,
+  strokewidth: PropTypes.number,
+  value: PropTypes.number,
+  goal: PropTypes.number,
 };
 
 export default DonutChart;

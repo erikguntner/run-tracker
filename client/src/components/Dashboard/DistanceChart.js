@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import CustomSelect from '../Utilities/CustomSelect';
 import {
   XAxis,
@@ -154,6 +155,10 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = store => ({
   chartedRuns: store.runLog.chartedRuns,
 });
+
+DistanceChart.propTypes = {
+  chartedRuns: PropTypes.array,
+};
 
 export default connect(
   mapStateToProps,

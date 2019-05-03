@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from '../../stylesheets/CustomSelect.module.scss';
 
 class CustomSelect extends Component {
@@ -49,5 +50,9 @@ class CustomSelect extends Component {
     );
   }
 }
+
+CustomSelect.propTypes = {
+  options: PropTypes.array,
+};
 
 export default CustomSelect;

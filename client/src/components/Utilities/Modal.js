@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Portal from './Portal';
 import Icon from './Icon';
 import styles from '../../stylesheets/Modal.module.scss';
@@ -24,5 +25,11 @@ class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  children: PropTypes.array,
+  toggle: PropTypes.func,
+  open: PropTypes.bool,
+};
 
 export default Modal;
