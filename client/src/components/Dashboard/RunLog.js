@@ -2,21 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
-import styles from '../../stylesheets/RunLog.module.scss';
 
-const reduceDatesByMonth = runs => {
-  return runs.reduce((accum, curr) => {
-    const month = dateFns.format(new Date(0, curr.month + 1, 0), 'MMMM');
-    if (accum[month]) {
-      accum[month].push(curr);
-      return accum;
-    } else {
-      accum[month] = [];
-      accum[month].push(curr);
-      return accum;
-    }
-  }, {});
-};
+import styles from '../../stylesheets/RunLog.module.scss';
+import { reduceDatesByMonth } from '../../utils/reduceDatesByMonth';
 
 class RunLog extends Component {
   render() {

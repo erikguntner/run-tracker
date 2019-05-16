@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import PathList from '../PathList';
-import StatsContainer from './StatsContainer';
-import RunLog from './RunLog';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 import {
   faRoute,
   faChartLine,
   faWalking,
 } from '@fortawesome/free-solid-svg-icons';
+
+import DashboardLink from './DashboardLink';
+import PathList from '../PathList';
+import StatsContainer from './StatsContainer';
+import RunLog from './RunLog';
 import requireAuth from '../requireAuth';
 import styles from '../../stylesheets/Dashboard.module.scss';
 
@@ -17,8 +18,6 @@ class Dashboard extends Component {
   state = {
     milesRan: 0,
   };
-
-  componentDidUpdate() {}
 
   render() {
     const { location } = this.props;
@@ -76,27 +75,8 @@ class Dashboard extends Component {
   }
 }
 
-const DashboardLink = ({ title, icon, link, id, path }) => (
-  <Link to={link}>
-    <button
-      className={`${styles.navBtn} ${id === path[2] ? styles.activeBtn : ''}`}
-    >
-      <FontAwesomeIcon icon={icon} />
-      <b>{title}</b>
-    </button>
-  </Link>
-);
-
 Dashboard.propTypes = {
   location: PropTypes.object,
-};
-
-DashboardLink.propTypes = {
-  title: PropTypes.string,
-  icon: PropTypes.object,
-  link: PropTypes.string,
-  id: PropTypes.string,
-  path: PropTypes.array,
 };
 
 export default requireAuth(Dashboard);

@@ -27,7 +27,8 @@ class SigninForm extends Component {
           initialValues={{ username: '', password: '' }}
           validationSchema={SigninSchema}
           onSubmit={(values, { setSubmitting }) => {
-            this.props.signin(values, history);
+            const { signin } = this.props;
+            signin(values, history);
             setSubmitting(false);
           }}
         >

@@ -38,19 +38,25 @@ class DistanceChart extends Component {
 
   // When the month is updated, make a call to the database to retrieve new data
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.month !== this.state.month) {
-      this.props.getMonthlyRuns(this.state.month);
+    const { month } = this.state;
+    const { getMonthlyRuns } = this.props;
+    if (prevState.month !== month) {
+      getMonthlyRuns(month);
     }
   }
 
   // Get the data for the current month
   componentDidMount() {
-    this.props.getMonthlyRuns(this.state.month);
-    this.setSelected(this.state.month);
+    const { month } = this.state;
+    const { getMonthlyRuns } = this.props;
+    getMonthlyRuns(month);
+    this.setSelected(month);
   }
 
   setSelected = id => {
-    const arr = [...this.state.months];
+    const { months } = this.state;
+
+    const arr = [...months];
     arr.forEach(month => (month.selected = false));
     arr[id].selected = true;
     this.setState({
@@ -66,6 +72,7 @@ class DistanceChart extends Component {
   };
 
   parseDataForChart = data => {
+    const { month } = this.state;
     const runs = [];
     const daysInMonth = {
       0: 31,
@@ -82,7 +89,7 @@ class DistanceChart extends Component {
       11: 31,
     };
 
-    for (let i = 1; i <= daysInMonth[this.state.month]; i++) {
+    for (let i = 1; i <= daysInMonth[month]; i++) {
       runs.push({
         date: i,
         distance: 0,

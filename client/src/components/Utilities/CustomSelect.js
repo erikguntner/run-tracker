@@ -15,12 +15,13 @@ class CustomSelect extends Component {
   };
 
   selectItem = (title, id) => {
+    const { setSelected } = this.props;
     this.setState(
       prevState => ({
         open: !prevState.open,
         headerTitle: title,
       }),
-      this.props.setSelected(id)
+      setSelected(id)
     );
   };
 

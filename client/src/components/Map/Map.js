@@ -74,10 +74,19 @@ class Map extends Component {
   };
 
   handleClick = event => {
+    const {
+      updateViewport,
+      viewport,
+      geoJSONPoints,
+      addLocation,
+      transportationType,
+      clipPath,
+    } = this.props;
+
     if (event.target.classList.contains('mapboxgl-ctrl-icon')) {
       navigator.geolocation.getCurrentPosition(position => {
-        this.props.updateViewport({
-          ...this.props.viewport,
+        updateViewport({
+          ...viewport,
           longitude: position.coords.longitude,
           latitude: position.coords.latitude,
         });
@@ -87,19 +96,15 @@ class Map extends Component {
 
     const [newLong, newLat] = event.lngLat;
     const [startLong, startLat] =
-      this.props.geoJSONPoints.features.length !== 0
-        ? this.props.geoJSONPoints.features[
-            this.props.geoJSONPoints.features.length - 1
-          ].geometry.coordinates
+      geoJSONPoints.features.length !== 0
+        ? geoJSONPoints.features[geoJSONPoints.features.length - 1].geometry
+            .coordinates
         : [null, null];
 
     const newPoint = {
       type: 'Feature',
       properties: {
-        color:
-          this.props.geoJSONPoints.features.length !== 0
-            ? '#0991D3'
-            : '#4FA03F',
+        color: geoJSONPoints.features.length !== 0 ? '#0991D3' : '#4FA03F',
       },
       geometry: {
         type: 'Point',
@@ -107,14 +112,14 @@ class Map extends Component {
       },
     };
 
-    this.props.addLocation(
+    addLocation(
       newPoint,
       startLat,
       startLong,
       newLat,
       newLong,
-      this.props.transportationType,
-      this.props.clipPath
+      transportationType,
+      clipPath
     );
   };
 

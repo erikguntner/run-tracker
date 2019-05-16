@@ -7,7 +7,10 @@ import styles from '../../stylesheets/Forms.module.scss';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
-  username: Yup.string().required('username is required'),
+  username: Yup.string()
+    .required('username is required')
+    .min(4, 'username must be between 4-16 characters')
+    .max(16, 'username must be between 4-16 characters'),
   password: Yup.string().required('password is required'),
 });
 

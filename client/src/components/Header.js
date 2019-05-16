@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -10,7 +10,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser as farUser } from '@fortawesome/free-regular-svg-icons';
 import { Toggle } from './Utilities';
-import { Link } from 'react-router-dom';
 import SideMenuWrapper from './SideMenuWrapper';
 // import PathList from './PathList';
 import Dropdown from './Dropdown';

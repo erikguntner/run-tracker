@@ -18,6 +18,7 @@ class Signin extends Component {
       </div>
     );
   };
+
   render() {
     const { match, history } = this.props;
 

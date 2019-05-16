@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
+
 import RunLogger from './RunLogger';
+import UnderlinedInput from './UndelinedInput';
+
 import { logRun } from '../../actions/runLog';
 import styles from '../../stylesheets/RunningForm.module.scss';
 import dateFns from 'date-fns';
@@ -62,20 +64,22 @@ class RunForm extends React.Component {
           }}
           validationSchema={RunSchema}
           onSubmit={(values, { setSubmitting }) => {
+            const { date } = this.state;
+            const { history, logRun } = this.props;
             //turn string into year/day/month string
-            const datesArr = this.state.date.toLocaleDateString().split('/');
+            const datesArr = date.toLocaleDateString().split('/');
             //reformat date for
             const formattedDate = this.formatDate(datesArr);
             // find isoweek/month values for selected date
-            const week = dateFns.getISOWeek(new Date(this.state.date));
-            const month = dateFns.getMonth(new Date(this.state.date));
+            const week = dateFns.getISOWeek(new Date(date));
+            const month = dateFns.getMonth(new Date(date));
             //set date, month, and week values in values object
 
             values.date = formattedDate;
             values.week = week;
             values.month = month;
             //const updatedValues = parseValues(values);
-            this.props.logRun(values, setSubmitting, this.props.history);
+            logRun(values, setSubmitting, history);
           }}
         >
           {({ isSubmitting }) => (
@@ -134,35 +138,8 @@ class RunForm extends React.Component {
   }
 }
 
-const UnderlinedInput = ({ field, form, id }) => {
-  const value = field.value;
-  const inputWidth = value
-    ? value.toString().length
-    : value.toString().length + 2;
-  return (
-    <div
-      style={{ width: `${inputWidth * 23}px` }}
-      className={`${styles.inputContainer} ${
-        form.touched[field.name] && form.errors[field.name] ? styles.error : ''
-      }`}
-    >
-      <input
-        {...field}
-        type="number"
-        min="0"
-        placeholder="00"
-        maxLength="2"
-        style={{ width: `${inputWidth * 23}px` }}
-        className={styles.input}
-      />
-    </div>
-  );
-};
-
-UnderlinedInput.propTypes = {
-  field: PropTypes.object,
-  form: PropTypes.object,
-  id: PropTypes.string,
+RunForm.propTypes = {
+  logRun: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
