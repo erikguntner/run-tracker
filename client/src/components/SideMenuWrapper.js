@@ -1,36 +1,43 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { useTransition, animated } from 'react-spring';
+
 import Portal from './Utilities/Portal';
 import Icon from './Utilities/Icon';
 import styles from '../stylesheets/SideMenu.module.scss';
 import PathList from './PathList';
 
-class SideMenuWrapper extends Component {
-  render() {
-    const { children, toggle, open, username } = this.props;
-    return (
-      <Portal>
-        {open && (
-          <div className={styles.modalWrapper}>
-            <div className={styles.background} onClick={toggle} />
-            <div
-              className={
-                `${styles.menuCard} ` + `${open ? styles.openCard : ''}`
-              }
-            >
-              <button className={styles.close} onClick={toggle}>
-                <Icon name="close" />
-              </button>
-              <div className={styles.circle} />
-              <h3>{username}</h3>
-              <PathList open={open} type={'list'} />
-            </div>
-          </div>
-        )}
-      </Portal>
-    );
-  }
-}
+const SideMenuWrapper = ({ children, toggle, open, username }) => {
+  const transition = useTransition(open, null, {
+    from: { transform: 'translate3d(-100%, 0, 0)' },
+    enter: { transform: 'translate3d(0, 0, 0)' },
+    leave: { transform: 'translate3d(-100%, 0, 0)' },
+  });
+
+  const pointerEvents = open ? 'all' : 'none';
+
+  return (
+    <Portal>
+      {open && (
+        <div
+          key={'asdfs'}
+          className={styles.modalWrapper}
+          style={{ pointerEvents }}
+        >
+          <div className={styles.background} onClick={toggle} />
+          <animated.div key={'asdfasdfs'} className={styles.menuCard}>
+            <button className={styles.close} onClick={toggle}>
+              <Icon name="close" />
+            </button>
+            <div className={styles.circle} />
+            <h3>{username}</h3>
+            <PathList open={open} type={'list'} />
+          </animated.div>
+        </div>
+      )}
+    </Portal>
+  );
+};
 
 SideMenuWrapper.propTypes = {
   toggle: PropTypes.func,

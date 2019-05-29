@@ -18,10 +18,10 @@ class PathList extends Component {
     return (
       <div className={listStyles[type]}>
         {loadingRoutes && routes.length === 0 && <div>...Loading</div>}
-        {routes.map((route, i) => {
+        {routes.map(route => {
           return (
             <Route
-              key={`route-${i}`}
+              key={route._id}
               deleteRoute={deleteRoute}
               id={route._id}
               route={route}
