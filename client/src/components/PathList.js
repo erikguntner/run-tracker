@@ -15,6 +15,7 @@ class PathList extends Component {
       list: styles.list,
     };
     const { routes, loadingRoutes, deleteRoute, type } = this.props;
+    
     return (
       <div className={listStyles[type]}>
         {loadingRoutes && routes.length === 0 && <div>...Loading</div>}

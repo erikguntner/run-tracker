@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTransition, animated } from 'react-spring';
 
@@ -18,23 +18,31 @@ const SideMenuWrapper = ({ children, toggle, open, username }) => {
 
   return (
     <Portal>
-      {open && (
-        <div
-          key={'asdfs'}
-          className={styles.modalWrapper}
-          style={{ pointerEvents }}
-        >
-          <div className={styles.background} onClick={toggle} />
-          <animated.div key={'asdfasdfs'} className={styles.menuCard}>
-            <button className={styles.close} onClick={toggle}>
-              <Icon name="close" />
-            </button>
-            <div className={styles.circle} />
-            <h3>{username}</h3>
-            <PathList open={open} type={'list'} />
-          </animated.div>
-        </div>
-      )}
+      {transition.map(({ item, key, props: animation }) => {
+        return (
+          item && (
+            <div key={'gjieorgoie'} className={styles.modalWrapper}>
+              <div
+                className={styles.background}
+                onClick={toggle}
+                style={{ pointerEvents }}
+              />
+              <animated.div
+                key={'324'}
+                style={animation}
+                className={styles.menuCard}
+              >
+                <button className={styles.close} onClick={toggle}>
+                  <Icon name="close" />
+                </button>
+                <div className={styles.circle} />
+                <h3>{username}</h3>
+                <PathList open={open} type={'list'} />
+              </animated.div>
+            </div>
+          )
+        );
+      })}
     </Portal>
   );
 };
