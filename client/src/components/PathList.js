@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Route from './Route';
 import styles from '../stylesheets/Route.module.scss';
 
-class PathList extends Component {
+class PathList extends PureComponent {
   componentDidMount() {
     this.props.getRoutes();
   }
@@ -15,7 +15,7 @@ class PathList extends Component {
       list: styles.list,
     };
     const { routes, loadingRoutes, deleteRoute, type } = this.props;
-    
+
     return (
       <div className={listStyles[type]}>
         {loadingRoutes && routes.length === 0 && <div>...Loading</div>}

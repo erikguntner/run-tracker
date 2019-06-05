@@ -8,8 +8,8 @@ import * as turfHelpers from '@turf/helpers';
 import bbox from '@turf/bbox';
 
 class RouteMap extends PureComponent {
+
   render() {
-    console.log(this.props);
     const { points } = this.props;
     const line = turfHelpers.lineString(points);
     var bBox = bbox(line);

@@ -18,31 +18,23 @@ const SideMenuWrapper = ({ children, toggle, open, username }) => {
 
   return (
     <Portal>
-      {transition.map(({ item, key, props: animation }) => {
-        return (
-          item && (
-            <div key={'gjieorgoie'} className={styles.modalWrapper}>
-              <div
-                className={styles.background}
-                onClick={toggle}
-                style={{ pointerEvents }}
-              />
-              <animated.div
-                key={'324'}
-                style={animation}
-                className={styles.menuCard}
-              >
-                <button className={styles.close} onClick={toggle}>
-                  <Icon name="close" />
-                </button>
-                <div className={styles.circle} />
-                <h3>{username}</h3>
-                <PathList open={open} type={'list'} />
-              </animated.div>
-            </div>
-          )
-        );
-      })}
+      {open && (
+        <div className={styles.modalWrapper}>
+          <div
+            className={styles.background}
+            onClick={toggle}
+            style={{ pointerEvents }}
+          />
+          <div className={styles.menuCard}>
+            <button className={styles.close} onClick={toggle}>
+              <Icon name="close" />
+            </button>
+            <div className={styles.circle} />
+            <h3>{username}</h3>
+            <PathList open={open} type={'list'} />
+          </div>
+        </div>
+      )}
     </Portal>
   );
 };
