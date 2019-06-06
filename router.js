@@ -4,6 +4,7 @@ const RunLog = require('./controllers/runLog');
 const Routes = require('./controllers/routes');
 const User = require('./controllers/user');
 const Goal = require('./controllers/goal');
+const Image = require('./controllers/image');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -39,4 +40,7 @@ module.exports = app => {
 
   // ROUTES FOR GOALS
   app.post('/goal', requireAuth, catchErrors(Goal.setGoal));
+
+  // ROUTE FOR SAVING MAP IMAGES
+  app.get('/image', Image.saveImage);
 };

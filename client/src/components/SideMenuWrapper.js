@@ -6,6 +6,7 @@ import Portal from './Utilities/Portal';
 import Icon from './Utilities/Icon';
 import styles from '../stylesheets/SideMenu.module.scss';
 import PathList from './PathList';
+import Test from './Test';
 
 const SideMenuWrapper = ({ children, toggle, open, username }) => {
   const transition = useTransition(open, null, {
@@ -31,6 +32,7 @@ const SideMenuWrapper = ({ children, toggle, open, username }) => {
             </button>
             <div className={styles.circle} />
             <h3>{username}</h3>
+            <Test />
             <PathList open={open} type={'list'} />
           </div>
         </div>
