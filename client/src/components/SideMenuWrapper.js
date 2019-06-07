@@ -32,7 +32,6 @@ const SideMenuWrapper = ({ children, toggle, open, username }) => {
             </button>
             <div className={styles.circle} />
             <h3>{username}</h3>
-            <Test />
             <PathList open={open} type={'list'} />
           </div>
         </div>

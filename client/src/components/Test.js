@@ -4,9 +4,9 @@ import TestMap from './TestMap';
 
 const Test = () => {
   const fetchImage = () => {
-    fetch(`${window.location.origin}/image`)
+    fetch('https://pacific-crag-45485.herokuapp.com/image')
       .then(res => res.json())
-      .then(data => console.log('completed'))
+      .then(data => console.log(data))
       .catch(err => console.log(err));
   };
 

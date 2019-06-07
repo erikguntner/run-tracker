@@ -24,7 +24,7 @@ ReactDOM.render(
           <Route path="/profile/routes" exact component={Dashboard} />
           <Route path="/profile" exact component={Dashboard} />
           <Route path="/log" component={RunForm} />
-          <Route path="/image" component={Test} />
+          <Route path="/test" component={Test} />
           <Route path="/" component={Map} />
         </Switch>
       </App>

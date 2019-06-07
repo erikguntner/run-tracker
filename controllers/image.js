@@ -67,7 +67,6 @@ const getWebfontCSS = fontpath => {
 };
 
 const render = async (Component, opts = {}) => {
-  console.log(opts);
   const {
     props = {},
     css = '',
@@ -99,7 +98,7 @@ const render = async (Component, opts = {}) => {
 
   const page = await browser.newPage();
 
-  await page.goto('https://pacific-crag-45485.herokuapp.com/', {
+  await page.goto('https://pacific-crag-45485.herokuapp.com/test', {
     waitUntil: 'networkidle0',
   });
 
