@@ -3,7 +3,6 @@ import ReactMapGL from 'react-map-gl';
 import WebMercatorViewport from 'viewport-mercator-project';
 import PolylineOverlay from './PolylineOverlay';
 import * as turfHelpers from '@turf/helpers';
-import 'mapbox-gl/dist/mapbox-gl.css';
 // import center from '@turf/center';
 import bbox from '@turf/bbox';
 
@@ -14,8 +13,8 @@ const TestMap = () => {
   var bBox = bbox(line);
 
   const viewport = new WebMercatorViewport({
-    width: 290,
-    height: 150,
+    width: 400,
+    height: 400,
   }).fitBounds([[bBox[0], bBox[1]], [bBox[2], bBox[3]]], {
     padding: 5,
     offset: [0, -20],

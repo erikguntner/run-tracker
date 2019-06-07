@@ -3,11 +3,18 @@ import RouteMap from './RouteMap';
 import TestMap from './TestMap';
 
 const Test = () => {
+  const fetchImage = () => {
+    fetch(`${window.location.origin}/image`)
+      .then(res => res.json())
+      .then(data => console.log('completed'))
+      .catch(err => console.log(err));
+  };
+
   const points = [[-117.731672, 34.106999], [-117.72708, 34.107004]];
   return (
     <div>
-      <h1>WElcome to react</h1>
       <TestMap />
+      <button onClick={fetchImage}>Save Image</button>
     </div>
   );
 };

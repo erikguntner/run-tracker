@@ -5,10 +5,12 @@ import Root from './Root';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Map from './components/Map/Map';
 import Signin from './components/Signin';
+import Test from './components/Test';
 import Dashboard from './components/Dashboard/Dashboard';
 import RunForm from './components/Forms/RunForm';
 import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
+import TestMap from './components/TestMap';
 
 ReactDOM.render(
   <Root>
@@ -22,6 +24,7 @@ ReactDOM.render(
           <Route path="/profile/routes" exact component={Dashboard} />
           <Route path="/profile" exact component={Dashboard} />
           <Route path="/log" component={RunForm} />
+          <Route path="/image" component={Test} />
           <Route path="/" component={Map} />
         </Switch>
       </App>

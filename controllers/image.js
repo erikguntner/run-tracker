@@ -99,17 +99,16 @@ const render = async (Component, opts = {}) => {
 
   const page = await browser.newPage();
 
-  await page.goto(data);
-
-  // await page.waitFor(() => !!document.querySelector('.mapboxgl-map'), {
-  //   timeout: 30000,
-  // });
+  await page.goto('https://pacific-crag-45485.herokuapp.com/', {
+    waitUntil: 'networkidle0',
+  });
 
   const result = await page.screenshot({
-    type: 'png',
+    type: 'jpeg',
+    quality: 100,
     clip: {
       x: 0,
-      y: 0,
+      y: 70,
       width: parseInt(width),
       height: parseInt(height),
     },
@@ -133,11 +132,13 @@ exports.saveImage = async (req, res, next) => {
   const filepath = absolute(name);
   const myFile = path.join(__dirname, file);
 
+  const homedir = require('os').homedir();
+
   const opts = Object.assign({
-    outDir: '/Users/ErikGuntner/Desktop',
+    outDir: `${homedir}/Desktop`,
     filepath,
-    width: 512,
-    height: 512,
+    width: 400,
+    height: 400,
   });
 
   const Component = require(myFile).default || require(myFile);
@@ -161,14 +162,12 @@ exports.saveImage = async (req, res, next) => {
     try {
       const image = await render(Component, opts);
       const { date, time } = getDateTime();
-      const outFile = `Image-${date}-${time}-${opts.width}x${opts.height}.png`;
+      const outFile = `Image-${date}-${time}-${opts.width}x${opts.height}.jpeg`;
       const outPath = path.join(opts.outDir, outFile);
-      console.log(outPath);
       const file = fs.createWriteStream(outPath);
 
       file.on('finish', () => {
         console.log('finished');
-        process.exit();
       });
 
       file.on('error', err => {
@@ -182,7 +181,7 @@ exports.saveImage = async (req, res, next) => {
       res.send({ message: 'completed writing image' });
     } catch (err) {
       console.log(err);
-      process.exit(1);
+      res.send({ message: 'failed writing image' });
     }
   };
 
