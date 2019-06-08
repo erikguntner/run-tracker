@@ -6,8 +6,8 @@ import * as turfHelpers from '@turf/helpers';
 // import center from '@turf/center';
 import bbox from '@turf/bbox';
 
-const TestMap = () => {
-  const points = [[-117.731672, 34.106999], [-117.72708, 34.107004]];
+const TestMap = ({ points }) => {
+  // const points = [[-117.731672, 34.106999], [-117.72708, 34.107004]];
   // const { points } = this.props;
   const line = turfHelpers.lineString(points);
   var bBox = bbox(line);

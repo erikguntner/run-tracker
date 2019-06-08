@@ -186,3 +186,79 @@ exports.saveImage = async (req, res, next) => {
 
   run();
 };
+
+/// FINAL MIDDLEWARE FOR SAVING IMAGE OF MAP
+
+exports.screenshotMap = async (req, res) => {
+  try {
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
+    const page = await browser.newPage();
+    // Test coordinates to be replaced with the coordinates for the route being saved
+    const coords = [
+      [-117.72059997787743, 34.103463520496675],
+      [-117.72768100967674, 34.107410067717396],
+      [-117.72944053878828, 34.112944590071365],
+      [-117.73699363937939, 34.1173411747159],
+    ];
+    const coordsStr = JSON.stringify(coords);
+    console.log(coordsStr);
+
+    const URL =
+      process.env.NODE_ENV === 'production'
+        ? 'https://pacific-crag-45485.herokuapp.com/test'
+        : 'http://localhost:3000/test';
+
+    await page.goto(`${URL}?coords=${coordsStr}`, {
+      waitUntil: 'networkidle0',
+    });
+
+    const image = await page.screenshot({
+      type: 'jpeg',
+      quality: 100,
+      clip: {
+        x: 0,
+        y: 70,
+        width: 400,
+        height: 400,
+      },
+      omitBackground: true,
+    });
+
+    await browser.close();
+
+    saveToFile(image);
+    // res.send({ data: result });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const saveToFile = image => {
+  try {
+    const homedir = require('os').homedir();
+
+    const outFile = `Map-Image.jpeg`;
+    const outPath = path.join(`${homedir}/Desktop`, outFile);
+    const file = fs.createWriteStream(outPath);
+
+    file.on('finish', () => {
+      console.log('finished');
+    });
+
+    file.on('error', err => {
+      console.log('error writing file');
+      console.log(err);
+    });
+
+    file.write(image);
+    file.end();
+
+    res.send({ message: 'completed writing image' });
+  } catch (err) {
+    console.log(err);
+    res.send({ message: 'failed writing image' });
+  }
+};

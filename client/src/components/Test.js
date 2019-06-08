@@ -2,18 +2,22 @@ import React from 'react';
 import RouteMap from './RouteMap';
 import TestMap from './TestMap';
 
-const Test = () => {
+const Test = props => {
   const fetchImage = () => {
-    fetch('https://pacific-crag-45485.herokuapp.com/image')
+    fetch('http://localhost:3090/image')
       .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => console.log(err));
   };
 
-  const points = [[-117.731672, 34.106999], [-117.72708, 34.107004]];
+  // return an object with methods for retrieving query strings params
+  let params = new URLSearchParams(props.location.search);
+  // Get coordinates string format
+  const coordsStr = params.get('coords');
+
   return (
     <div>
-      <TestMap />
+      <TestMap points={JSON.parse(coordsStr)} />
       <button onClick={fetchImage}>Save Image</button>
     </div>
   );

@@ -42,5 +42,5 @@ module.exports = app => {
   app.post('/goal', requireAuth, catchErrors(Goal.setGoal));
 
   // ROUTE FOR SAVING MAP IMAGES
-  app.get('/image', Image.saveImage);
+  app.get('/image', Image.screenshotMap);
 };
