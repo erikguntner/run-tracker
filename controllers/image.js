@@ -244,7 +244,7 @@ exports.screenshotMap = async (req, res, next) => {
     // writeFileToDesktop(image, res);
     // res.send({ data: base64Image });
   } catch (err) {
-    console.log(err);
+    res.status(400).send(err);
   }
 };
 

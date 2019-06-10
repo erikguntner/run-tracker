@@ -21,7 +21,14 @@ class Popup extends Component {
 
     return (
       <Portal>
-        {open && <div className={styles.container}>{message}</div>}
+        {open && (
+          <div
+            style={{ backgroundColor: status === 'success' ? 'green' : 'red' }}
+            className={styles.container}
+          >
+            {message}
+          </div>
+        )}
       </Portal>
     );
   }

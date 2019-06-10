@@ -78,7 +78,7 @@ export function* saveRoute({
       payload: {
         open: true,
         message: 'Your route was not added successfully',
-        status: 'failures',
+        status: 'fail',
       },
     });
   }
