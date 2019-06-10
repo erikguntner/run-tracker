@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const routeSchema = new Schema({
   userId: String,
+  image: String,
   elevationData: [
     [
       {

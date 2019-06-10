@@ -189,22 +189,29 @@ exports.saveImage = async (req, res, next) => {
 
 /// FINAL MIDDLEWARE FOR SAVING IMAGE OF MAP
 
-exports.screenshotMap = async (req, res) => {
+exports.screenshotMap = async (req, res, next) => {
   try {
+    const { lineFeatures } = req.body;
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
     const page = await browser.newPage();
     // Test coordinates to be replaced with the coordinates for the route being saved
-    const coords = [
-      [-117.72059997787743, 34.103463520496675],
-      [-117.72768100967674, 34.107410067717396],
-      [-117.72944053878828, 34.112944590071365],
-      [-117.73699363937939, 34.1173411747159],
-    ];
-    const coordsStr = JSON.stringify(coords);
-    console.log(coordsStr);
+    // const coords = [
+    //   [-117.72059997787743, 34.103463520496675],
+    //   [-117.72768100967674, 34.107410067717396],
+    //   [-117.72944053878828, 34.112944590071365],
+    //   [-117.73699363937939, 34.1173411747159],
+    // ];
+
+    const coords = lineFeatures.map(line => line.geometry.coordinates);
+
+    const flattenedCoords = coords.reduce((accum, arr) => {
+      return accum.concat(arr);
+    }, []);
+
+    const coordsStr = JSON.stringify(flattenedCoords);
 
     const URL =
       process.env.NODE_ENV === 'production'
@@ -229,14 +236,19 @@ exports.screenshotMap = async (req, res) => {
 
     await browser.close();
 
-    saveToFile(image);
-    // res.send({ data: result });
+    const base64Image = await image.toString('base64');
+
+    req.image = base64Image;
+    next();
+
+    // writeFileToDesktop(image, res);
+    // res.send({ data: base64Image });
   } catch (err) {
     console.log(err);
   }
 };
 
-const saveToFile = image => {
+const writeFileToDesktop = (image, res) => {
   try {
     const homedir = require('os').homedir();
 
@@ -246,6 +258,7 @@ const saveToFile = image => {
 
     file.on('finish', () => {
       console.log('finished');
+      res.send({ message: 'completed writing image' });
     });
 
     file.on('error', err => {
@@ -255,8 +268,6 @@ const saveToFile = image => {
 
     file.write(image);
     file.end();
-
-    res.send({ message: 'completed writing image' });
   } catch (err) {
     console.log(err);
     res.send({ message: 'failed writing image' });

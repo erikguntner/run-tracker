@@ -13,6 +13,7 @@ exports.addRoute = async (req, res, next) => {
   const { _id } = req.user;
 
   const newRoute = {
+    image: req.image,
     elevationData,
     startPoint,
     endPoint,
@@ -22,6 +23,9 @@ exports.addRoute = async (req, res, next) => {
     distance,
   };
 
+  console.log(newRoute);
+
+  res.status(200).send(newRoute);
   const updatedUser = await User.findOneAndUpdate(
     { _id: _id },
     { $push: { routes: newRoute } }

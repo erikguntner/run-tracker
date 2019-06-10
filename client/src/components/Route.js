@@ -4,6 +4,7 @@ import RouteMap from './RouteMap';
 import styles from '../stylesheets/Route.module.scss';
 
 const Route = ({ route, id, deleteRoute }) => {
+  const { image } = route;
   const points = route.lineFeatures
     .map(line => {
       return line.geometry.coordinates;
@@ -13,7 +14,7 @@ const Route = ({ route, id, deleteRoute }) => {
   return (
     <div className={styles.routeContainer}>
       <div className={styles.mapContainer}>
-        <RouteMap points={points} />
+        <img src={`data:image/png;base64, ${image}`} alt="map" />
       </div>
       <div>{route.distance[route.distance.length - 1]} miles</div>
       <button onClick={() => deleteRoute(id)}>Delete</button>

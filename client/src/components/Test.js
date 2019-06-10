@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RouteMap from './RouteMap';
 import TestMap from './TestMap';
 
 const Test = props => {
+  const [image, setImage] = useState('');
+
   const fetchImage = () => {
     fetch('http://localhost:3090/image')
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => setImage(data.data))
       .catch(err => console.log(err));
   };
 
@@ -15,10 +17,13 @@ const Test = props => {
   // Get coordinates string format
   const coordsStr = params.get('coords');
 
+  console.log(image);
+
   return (
     <div>
       <TestMap points={JSON.parse(coordsStr)} />
       <button onClick={fetchImage}>Save Image</button>
+      {image && <img src={`data:image/png;base64, ${image}`} alt="map" />}
     </div>
   );
 };

@@ -29,7 +29,12 @@ module.exports = app => {
 
   // Routes for adding running routes
   app.delete('/routes/delete', requireAuth, catchErrors(Routes.deleteRoute));
-  app.post('/routes/:id', requireAuth, catchErrors(Routes.addRoute));
+  app.post(
+    '/routes/:id',
+    requireAuth,
+    Image.screenshotMap,
+    catchErrors(Routes.addRoute)
+  );
   app.get('/routes', requireAuth, catchErrors(Routes.getAllRoutes));
 
   //ROutes for logging runs
