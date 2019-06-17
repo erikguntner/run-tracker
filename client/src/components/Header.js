@@ -17,7 +17,7 @@ import styles from '../stylesheets/Header.module.scss';
 
 library.add(farUser);
 
-class Header extends Component {
+export class Header extends Component {
   state = {
     dropdownOpen: false,
   };

@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useTransition, animated } from 'react-spring';
 
@@ -6,7 +6,6 @@ import Portal from './Utilities/Portal';
 import Icon from './Utilities/Icon';
 import styles from '../stylesheets/SideMenu.module.scss';
 import PathList from './PathList';
-import Test from './Test';
 
 const SideMenuWrapper = ({ children, toggle, open, username }) => {
   const transition = useTransition(open, null, {
@@ -22,7 +21,7 @@ const SideMenuWrapper = ({ children, toggle, open, username }) => {
       {transition.map(({ item, key, props: animation }) => {
         return (
           item && (
-            <div className={styles.modalWrapper}>
+            <div key={4534534} className={styles.modalWrapper}>
               <div
                 className={styles.background}
                 onClick={toggle}

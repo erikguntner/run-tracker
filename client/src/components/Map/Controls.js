@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -9,7 +10,6 @@ import {
   faDrawPolygon,
   faSave,
 } from '@fortawesome/free-solid-svg-icons';
-import { connect } from 'react-redux';
 import {
   removeLatestPoint,
   clearRoute,
@@ -19,7 +19,27 @@ import {
 } from '../../actions';
 import styles from '../../stylesheets/Controls.module.scss';
 
+import Modal from '../Utilities/Modal';
+import ControlButton from './ControlButton';
+
 class Controls extends Component {
+  state = {
+    open: false,
+  };
+
+  toggleModal = () =>
+    this.setState(prevState => ({
+      open: !prevState.open,
+    }));
+
+  checkForDisabled = (e, callback, data = undefined) => {
+    if (e.target.attributes.disabled || e.target.parentNode.attributes.disabled)
+      return;
+
+    callback(data);
+    return;
+  };
+
   render() {
     const {
       removeLatestPoint,
@@ -52,76 +72,43 @@ class Controls extends Component {
 
     return (
       <div className={styles.controls}>
-        <button
+        <ControlButton
           disabled={!geoJSONPoints.features.length}
-          className={styles.button}
-        >
-          <div className={styles.innerButton} onClick={clearRoute}>
-            <FontAwesomeIcon icon={faTimes} />
-          </div>
-          <div className={styles.tooltip}>Clear Route</div>
-        </button>
-        <button
+          click={e => this.checkForDisabled(e, clearRoute)}
+          icon={faTimes}
+          tooltip={'Clear Route'}
+        />
+        <ControlButton
           disabled={!geoJSONPoints.features.length}
-          className={styles.button}
-        >
-          <div className={styles.innerButton} onClick={removeLatestPoint}>
-            <FontAwesomeIcon icon={faUndoAlt} />
-          </div>
-          <div className={styles.tooltip}>undo last</div>
-        </button>
-        <button className={styles.button}>
-          <div
-            className={
-              elevation ? styles.innerButtonActive : styles.innerButton
-            }
-            onClick={showElevation}
-          >
-            <FontAwesomeIcon icon={faMountain} />
-          </div>
-          <div className={styles.tooltip}>elevation</div>
-        </button>
-        <button className={styles.button}>
-          <div
-            className={clipPath ? styles.innerButtonActive : styles.innerButton}
-            onClick={() => changeToClipPath(true)}
-          >
-            <FontAwesomeIcon icon={faRoute} />
-          </div>
-          <div className={styles.tooltip}>clip path</div>
-        </button>
-        <button className={styles.button}>
-          <div
-            className={
-              !clipPath ? styles.innerButtonActive : styles.innerButton
-            }
-            onClick={() => changeToClipPath(false)}
-          >
-            <FontAwesomeIcon icon={faDrawPolygon} />
-          </div>
-          <div className={styles.tooltip}>linear</div>
-        </button>
-        {/* <button
-          disabled={!geoJSONPoints.features.length}
-          className={styles.button}
-          onClick={fit}
-        >
-          <div className={styles.innerButton}>
-            <FontAwesomeIcon icon={faExpand} />
-          </div>
-        </button> */}
-        <button
+          click={e => this.checkForDisabled(e, removeLatestPoint)}
+          icon={faUndoAlt}
+          tooltip={'Undo Last'}
+        />
+        <ControlButton
+          click={showElevation}
+          icon={faMountain}
+          activeState={elevation}
+          tooltip={'elevation'}
+        />
+        <ControlButton
+          click={() => changeToClipPath(true)}
+          icon={faRoute}
+          activeState={clipPath}
+          tooltip={'clip path'}
+        />
+        <ControlButton
+          click={() => changeToClipPath(false)}
+          icon={faDrawPolygon}
+          activeState={!clipPath}
+          tooltip={'linear'}
+        />
+        <ControlButton
           disabled={!geoJSONLines.features.length}
-          className={styles.button}
-        >
-          <div
-            className={styles.innerButton}
-            onClick={() => saveRoute(routeData)}
-          >
-            <FontAwesomeIcon icon={faSave} />
-          </div>
-          <div className={styles.tooltip}>save route</div>
-        </button>
+          click={e => this.checkForDisabled(e, saveRoute, routeData)}
+          icon={faSave}
+          tooltip={'save route'}
+        />
+        <Modal open={this.state.open} toggle={this.toggleModal} />
       </div>
     );
   }

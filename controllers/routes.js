@@ -23,9 +23,6 @@ exports.addRoute = async (req, res, next) => {
     distance,
   };
 
-  console.log(newRoute);
-
-  res.status(200).send(newRoute);
   const updatedUser = await User.findOneAndUpdate(
     { _id: _id },
     { $push: { routes: newRoute } }

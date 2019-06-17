@@ -1,0 +1,67 @@
+.section {
+  width: 100vw;
+  height: 100vh;
+  padding: 100px;
+}
+
+.row {
+  display: flex;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-areas:
+    'distance distance distance distance distance distance date date date date date date'
+    'hrs hrs hrs hrs mins mins mins mins secs secs secs secs'
+    '. . . . submit submit submit submit . . . .';
+
+  & div:nth-of-type(1) {
+    grid-area: distance;
+  }
+
+  & div:nth-of-type(2) {
+    grid-area: date;
+  }
+
+  & div:nth-of-type(3) {
+    grid-area: hrs;
+  }
+
+  & div:nth-of-type(4) {
+    grid-area: mins;
+  }
+
+  & div:nth-of-type(5) {
+    grid-area: secs;
+  }
+
+  & button {
+    grid-area: submit;
+  }
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+}
+
+.submitBtn {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #0991d3;
+  text-transform: lowercase;
+  border-radius: 50px;
+  margin-top: 20px;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken(#0991d3, 10%);
+  }
+}

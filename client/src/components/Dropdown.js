@@ -16,6 +16,9 @@ const Dropdown = ({ dropdownOpen }) => {
         <Link className={styles.dropdownBtn} to="/profile/log">
           view runs
         </Link>
+        <Link className={styles.dropdownBtn} to="/profile/run-form">
+          log a run
+        </Link>
       </div>
     </div>
   );

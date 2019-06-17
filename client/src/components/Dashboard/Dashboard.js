@@ -11,6 +11,7 @@ import DashboardLink from './DashboardLink';
 import PathList from '../PathList';
 import StatsContainer from './StatsContainer';
 import RunLog from './RunLog';
+import UpdatedRunForm from '../Forms/UpdatedRunForm';
 import requireAuth from '../requireAuth';
 import styles from '../../stylesheets/Dashboard.module.scss';
 
@@ -54,12 +55,16 @@ class Dashboard extends Component {
                 path={path}
               />
             </li>
+            <li>
+              <DashboardLink
+                id={'run-form'}
+                title={'log run'}
+                icon={faWalking}
+                link={'/profile/run-form'}
+                path={path}
+              />
+            </li>
           </ul>
-          <div className={styles.btn}>
-            <Link to="/log">
-              <button>Log a run</button>
-            </Link>
-          </div>
         </nav>
         <div className={styles.profileContent}>
           {path[2] === 'stats' && <StatsContainer />}
@@ -69,6 +74,7 @@ class Dashboard extends Component {
             </div>
           )}
           {path[2] === 'log' && <RunLog />}
+          {path[2] === 'run-form' && <UpdatedRunForm />}
         </div>
       </section>
     );

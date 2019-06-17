@@ -3,26 +3,33 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
-
-import RunLogger from './RunLogger';
-import UnderlinedInput from './UndelinedInput';
-
-import { logRun } from '../../actions/runLog';
-import styles from '../../stylesheets/RunningForm.module.scss';
-import dateFns from 'date-fns';
 import * as Yup from 'yup';
+import dateFns from 'date-fns';
+import { logRun } from '../../actions/runLog';
+
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
+import Input from './Input';
+import inputStyles from '../../stylesheets/Input.module.scss';
+import styles from '../../stylesheets/UpdatedRunningForm.module.scss';
 
 const RunSchema = Yup.object().shape({
-  distance: Yup.string().required(),
+  distance: Yup.number()
+    .typeError('value must be a number')
+    .min(0)
+    .required('This value is required'),
   hrs: Yup.number()
+    .typeError('value must be a number')
     .min(0)
-    .required(),
+    .required('This value is required'),
   mins: Yup.number()
+    .typeError('value must be a number')
     .min(0)
-    .required(),
+    .required('This value is required'),
   secs: Yup.number()
+    .typeError('value must be a number')
     .min(0)
-    .required(),
+    .required('This value is required'),
 });
 
 class RunForm extends React.Component {
@@ -74,58 +81,78 @@ class RunForm extends React.Component {
             const week = dateFns.getISOWeek(new Date(date));
             const month = dateFns.getMonth(new Date(date));
             //set date, month, and week values in values object
-
             values.date = formattedDate;
             values.week = week;
             values.month = month;
             //const updatedValues = parseValues(values);
-            console.log(values);
-            {
-              /* logRun(values, setSubmitting, history); */
-            }
+            logRun(values, setSubmitting, history);
           }}
         >
           {({ isSubmitting }) => (
-            <Form>
+            <Form className={styles.container}>
               <Field
-                type="text"
+                type="number"
                 name="distance"
                 render={({ field, form }) => (
-                  <RunLogger
-                    updateMilesRan={this.updateMilesRan}
-                    handleDayChange={this.handleDayChange}
+                  <Input
+                    type="number"
                     field={field}
                     form={form}
+                    id="distance"
+                    label="distance"
+                    placeholder="24"
                   />
                 )}
               />
-              <div className={styles.formGroup}>
-                in
-                <Field
-                  type="text"
-                  name="hrs"
-                  render={({ field, form }) => (
-                    <UnderlinedInput field={field} form={form} id="hrs" />
-                  )}
-                />
-                hours
-                <Field
-                  type="text"
-                  name="mins"
-                  render={({ field, form }) => (
-                    <UnderlinedInput field={field} form={form} id="mins" />
-                  )}
-                />
-                minutes
-                <Field
-                  type="text"
-                  name="secs"
-                  render={({ field, form }) => (
-                    <UnderlinedInput field={field} form={form} id="secs" />
-                  )}
-                />
-                seconds
-              </div>
+              <DayPickerInput
+                onDayChange={this.handleDayChange}
+                dayPickerProps={{
+                  fromMonth: new Date(2019, 0),
+                  toMonth: new Date(),
+                }}
+                component={props => {
+                  return <input {...props} className={inputStyles.input} />;
+                }}
+              />
+              <Field
+                type="number"
+                name="hrs"
+                render={({ field, form }) => (
+                  <Input
+                    type="number"
+                    field={field}
+                    form={form}
+                    id="hrs"
+                    label="hours"
+                  />
+                )}
+              />
+              <Field
+                type="number"
+                name="mins"
+                render={({ field, form }) => (
+                  <Input
+                    type="number"
+                    field={field}
+                    form={form}
+                    id="mins"
+                    label="minutes"
+                  />
+                )}
+              />
+              <Field
+                type="number"
+                name="secs"
+                render={({ field, form }) => (
+                  <Input
+                    type="number"
+                    field={field}
+                    form={form}
+                    id="secs"
+                    label="seconds"
+                  />
+                )}
+              />
               <button
                 className={styles.submitBtn}
                 type="submit"

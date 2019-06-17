@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Header from './components/Header';
 import { withRouter } from 'react-router-dom';
+import Header from './Header';
 
-class App extends Component {
+export class App extends Component {
   componentDidMount() {
     this.props.loadUser();
   }

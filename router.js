@@ -5,6 +5,7 @@ const Routes = require('./controllers/routes');
 const User = require('./controllers/user');
 const Goal = require('./controllers/goal');
 const Image = require('./controllers/image');
+const MapImage = require('./controllers/mapImage');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -32,7 +33,7 @@ module.exports = app => {
   app.post(
     '/routes/:id',
     requireAuth,
-    Image.screenshotMap,
+    MapImage.screenshotMap,
     catchErrors(Routes.addRoute)
   );
   app.get('/routes', requireAuth, catchErrors(Routes.getAllRoutes));
