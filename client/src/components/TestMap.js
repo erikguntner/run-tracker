@@ -13,8 +13,8 @@ const TestMap = ({ points, setMapLoaded }) => {
   var bBox = bbox(line);
 
   const viewport = new WebMercatorViewport({
-    width: 400,
-    height: 400,
+    width: 640,
+    height: 360,
   }).fitBounds([[bBox[0], bBox[1]], [bBox[2], bBox[3]]], {
     padding: 5,
     offset: [0, -20],

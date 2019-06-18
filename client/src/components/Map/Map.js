@@ -11,7 +11,6 @@ import { GeolocateControl } from 'mapbox-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 // import lineString from '@turf/helpers';
 import * as turfHelpers from '@turf/helpers';
-import bbox from '@turf/bbox';
 
 import Controls from './Controls';
 import Tooltip from '../Tooltip';
@@ -26,6 +25,11 @@ class Map extends Component {
     distanceFromStart: 0,
     hoveredObject: null,
     hoveredCoordinates: [],
+    events: {},
+    marker: {
+      lat: 34.10732544667302,
+      lon: -117.72038540114687,
+    },
   };
 
   componentDidMount() {
@@ -121,12 +125,6 @@ class Map extends Component {
       transportationType,
       clipPath
     );
-  };
-
-  fit = () => {
-    const map = this.reactMap.getMap();
-    const bBox = bbox(this.props.geoJSONPoints);
-    const boundaries = map.fitBounds(bBox);
   };
 
   render() {
