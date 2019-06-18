@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ReactMapGL, {
-  NavigationControl,
-  LinearInterpolator,
-  Marker,
-} from 'react-map-gl';
+import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl';
 import { GeolocateControl } from 'mapbox-gl';
-import DeckGL, { GeoJsonLayer } from 'deck.gl';
+// import DeckGL, { GeoJsonLayer } from 'deck.gl';
 // import lineString from '@turf/helpers';
 import * as turfHelpers from '@turf/helpers';
 
@@ -16,20 +12,17 @@ import Controls from './Controls';
 import Tooltip from '../Tooltip';
 import Popup from '../Utilities/Popup';
 import ElevationProfile from './ElevationProfile';
+import PolylineOverlay from '../PolylineOverlay';
+import MapMarker from './MapMarker';
 import { updateViewport } from '../../actions';
 import styles from '../../stylesheets/Map.module.scss';
-import { hexToRGBA, getDistanceFromLatLonInMi } from '../../utils/utils';
+import { getDistanceFromLatLonInMi } from '../../utils/utils';
 
 class Map extends Component {
   state = {
     distanceFromStart: 0,
     hoveredObject: null,
     hoveredCoordinates: [],
-    events: {},
-    marker: {
-      lat: 34.10732544667302,
-      lon: -117.72038540114687,
-    },
   };
 
   componentDidMount() {
@@ -75,6 +68,23 @@ class Map extends Component {
       hoveredObject: object,
       hoveredCoordinates: coordinate,
     });
+  };
+
+  renderMarkers = () => {
+    const { geoJSONPoints } = this.props;
+    if (geoJSONPoints.features.length > 0) {
+      const coords = geoJSONPoints.features.map(
+        line => line.geometry.coordinates
+      );
+
+      const markers = coords.map(point => (
+        <MapMarker key={point[1]} point={point} />
+      ));
+
+      return markers;
+    } else {
+      return;
+    }
   };
 
   handleClick = event => {
@@ -137,6 +147,17 @@ class Map extends Component {
       startPoint,
       match,
     } = this.props;
+    let linePoints;
+
+    if (geoJSONLines.features.length > 0) {
+      const coords = geoJSONLines.features.map(
+        line => line.geometry.coordinates
+      );
+
+      linePoints = coords.reduce((accum, arr) => {
+        return accum.concat(arr);
+      }, []);
+    }
 
     return (
       <div className={styles.mapContainer}>
@@ -155,10 +176,6 @@ class Map extends Component {
           }}
           onClick={this.handleClick}
           mapStyle="mapbox://styles/mapbox/outdoors-v10"
-          transitionDuration={300}
-          transitionInterpolator={
-            new LinearInterpolator(['latitude', 'longitude'])
-          }
         >
           <Marker
             latitude={startPoint.length > 0 ? startPoint[1] : 1}
@@ -168,38 +185,8 @@ class Map extends Component {
           >
             <div className={styles.startPoint}>Start</div>
           </Marker>
-          <DeckGL {...viewport} controller={true}>
-            <GeoJsonLayer
-              id="geojson-lines-layer"
-              data={geoJSONLines}
-              pickable={true}
-              stroked={false}
-              filled={true}
-              extrudedd={true}
-              lineWidthScale={15}
-              lineWidthMinPixels={2}
-              getLineColor={[33, 121, 224, 225]}
-              getRadius={100}
-              getLineWidth={1}
-              getElevation={30}
-            />
-            <GeoJsonLayer
-              id="geojson-points-layer"
-              data={geoJSONPoints}
-              pickable={true}
-              stroked={false}
-              filled={true}
-              extrudedd={true}
-              lineWidthScale={20}
-              lineWidthMinPixels={2}
-              getFillColor={d => hexToRGBA(d.properties.color, 255)}
-              getRadius={20}
-              getLineWidth={1}
-              getElevation={30}
-              onHover={this.handleHover}
-            />
-            {this.renderTooltip}
-          </DeckGL>
+          <PolylineOverlay points={linePoints} />
+          {this.renderMarkers()}
           <div className={styles.zoom}>
             <NavigationControl
               onViewportChange={viewport => updateViewport(viewport)}
