@@ -9,23 +9,16 @@ exports.screenshotMap = async (req, res, next) => {
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
+    // open new browser
     const page = await browser.newPage();
-    // Test coordinates to be replaced with the coordinates for the route being saved
-    // const coords = [
-    //   [-117.72059997787743, 34.103463520496675],
-    //   [-117.72768100967674, 34.107410067717396],
-    //   [-117.72944053878828, 34.112944590071365],
-    //   [-117.73699363937939, 34.1173411747159],
-    // ];
 
+    // create array of coordinates from geojson features
     const coords = lineFeatures.map(line => line.geometry.coordinates);
-
+    // reduce to 2D array of [lat, lon] coords
     const flattenedCoords = coords.reduce((accum, arr) => {
       return accum.concat(arr);
     }, []);
-
-    // console.log(flattenedCoords);
-
+    // Stringify coords before using them as query string
     const coordsStr = JSON.stringify(flattenedCoords);
 
     const URL =
@@ -33,12 +26,10 @@ exports.screenshotMap = async (req, res, next) => {
         ? 'https://pacific-crag-45485.herokuapp.com/test'
         : 'http://localhost:3000/test';
 
-    await page.goto(
-      `https://pacific-crag-45485.herokuapp.com/test?coords=${coordsStr}`,
-      {
-        waitUntil: 'networkidle0',
-      }
-    );
+    // goto page with map sending coordintaes along
+    await page.goto(`${URL}?coords=${coordsStr}`, {
+      waitUntil: 'networkidle0',
+    });
 
     // wait for map to load, call onLoad callback, and set state to make the h1 visible
     // await page.waitForSelector('h1');
@@ -51,16 +42,16 @@ exports.screenshotMap = async (req, res, next) => {
       clip: {
         x: 0,
         y: 70,
-        width: 400,
-        height: 400,
+        width: 640,
+        height: 360,
       },
       omitBackground: true,
     });
 
     await browser.close();
-
+    // convert buffer to base64 string
     const base64Image = await image.toString('base64');
-
+    // attach to request object to be used in the next middleware
     req.image = base64Image;
     next();
 
