@@ -75,11 +75,6 @@ export const removeLastPoint = state => {
   return {
     ...state,
     endPoint,
-    viewport: {
-      ...state.viewport,
-      latitude: endPoint.length !== 0 ? endPoint[1] : state.startPoint[1],
-      longitude: endPoint.length !== 0 ? endPoint[0] : state.startPoint[0],
-    },
     elevationData: [...state.elevationData.slice(0, -1)],
     geoJSONPoints: {
       type: 'FeatureCollection',

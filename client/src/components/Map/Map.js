@@ -70,6 +70,11 @@ class Map extends Component {
     });
   };
 
+  handleDragEnd = (e, id) => {
+    console.log(e.lngLat, id);
+    
+  };
+
   renderMarkers = () => {
     const { geoJSONPoints } = this.props;
     if (geoJSONPoints.features.length > 0) {
@@ -77,8 +82,13 @@ class Map extends Component {
         line => line.geometry.coordinates
       );
 
-      const markers = coords.map(point => (
-        <MapMarker key={point[1]} point={point} />
+      const markers = coords.map((point, i) => (
+        <MapMarker
+          handleDragEnd={this.handleDragEnd}
+          id={i}
+          key={point[1]}
+          point={point}
+        />
       ));
 
       return markers;
@@ -214,7 +224,7 @@ const mapStateToProps = store => ({
   startPoint: store.map.startPoint,
   transportationType: store.map.transportationType,
   clipPath: store.map.clipPath,
-  viewport: store.map.viewport,
+  viewport: store.viewport,
 });
 
 const mapDispatchToProps = dispatch => ({

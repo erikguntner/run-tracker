@@ -131,7 +131,7 @@ const mapStateToProps = store => ({
   elevationData: store.map.elevationData,
   startPoint: store.map.startPoint,
   endPoint: store.map.endPoint,
-  viewport: store.map.viewport,
+  viewport: store.viewport,
   distance: store.map.distance,
 });
 

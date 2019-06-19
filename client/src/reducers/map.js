@@ -9,7 +9,6 @@ import {
   CHANGE_TO_CLIP_PATH,
   SHOW_ELEVATION,
   UPDATE_TRANSPORTATION,
-  UPDATE_VIEWPORT,
 } from '../actions/types';
 import { updateElevationData, removeLastPoint } from '../utils/mapUtils';
 
@@ -23,13 +22,6 @@ const initialState = {
   elevationData: [],
   startPoint: [],
   endPoint: [],
-  viewport: {
-    latitude: 34.105999576,
-    longitude: -117.718497126,
-    zoom: 14,
-    bearing: 0,
-    pitch: 0,
-  },
   geoJSONPoints: {
     type: 'FeatureCollection',
     properties: {
@@ -120,56 +112,7 @@ export default function(state = initialState, action) {
         ...state,
         transportationType: action.payload,
       };
-    case UPDATE_VIEWPORT:
-      return {
-        ...state,
-        viewport: action.payload,
-      };
     default:
       return state;
   }
-}
-
-function undoable(reducer) {
-  // Call the reducer with empty action to populate the initial state
-  const initialState = {
-    past: [],
-    present: reducer(undefined, {}),
-    future: [],
-  };
-
-  // Return a reducer that handles undo and redo
-  return function(state = initialState, action) {
-    const { past, present, future } = state;
-
-    switch (action.type) {
-      case 'UNDO':
-        const previous = past[past.length - 1];
-        const newPast = past.slice(0, past.length - 1);
-        return {
-          past: newPast,
-          present: previous,
-          future: [present, ...future],
-        };
-      case 'REDO':
-        const next = future[0];
-        const newFuture = future.slice(1);
-        return {
-          past: [...past, present],
-          present: next,
-          future: newFuture,
-        };
-      default:
-        // Delegate handling the action to the passed reducer
-        const newPresent = reducer(present, action);
-        if (present === newPresent) {
-          return state;
-        }
-        return {
-          past: [...past, present],
-          present: newPresent,
-          future: [],
-        };
-    }
-  };
 }
