@@ -185,7 +185,7 @@ class Map extends Component {
           >
             <div className={styles.startPoint}>Start</div>
           </Marker>
-          <PolylineOverlay points={linePoints} />
+          <PolylineOverlay color="#0991d3" points={linePoints} />
           {this.renderMarkers()}
           <div className={styles.zoom}>
             <NavigationControl

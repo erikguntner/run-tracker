@@ -1,15 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RouteMap from './RouteMap';
 import styles from '../stylesheets/Route.module.scss';
 
 const Route = ({ route, id, deleteRoute }) => {
   const { image } = route;
-  const points = route.lineFeatures
-    .map(line => {
-      return line.geometry.coordinates;
-    })
-    .flat();
 
   return (
     <div className={styles.routeContainer}>
