@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as turf from '@turf/turf';
 import RouteMap from './RouteMap';
 import styles from '../stylesheets/Route.module.scss';
 
 const Route = ({ route, id, deleteRoute }) => {
   const { image } = route;
+  const distance = route.distance[route.distance.length - 1];
   const points = route.lineFeatures
     .map(line => {
       return line.geometry.coordinates;
@@ -16,7 +18,7 @@ const Route = ({ route, id, deleteRoute }) => {
       <div className={styles.mapContainer}>
         <img src={`data:image/png;base64, ${image}`} alt="map" />
       </div>
-      <div>{route.distance[route.distance.length - 1]} miles</div>
+      <div>{turf.round(distance, 2)} miles</div>
       <button onClick={() => deleteRoute(id)}>Delete</button>
     </div>
   );

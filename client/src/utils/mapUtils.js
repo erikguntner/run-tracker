@@ -22,6 +22,8 @@ export const updateElevationData = (state, elevationData) => {
 };
 
 const calculateElevationDataArray = (elevationData, points, distance) => {
+  let incrementedDistance = distance;
+
   return elevationData.results.map((location, i) => {
     const endingLong = location.location.lng;
     const endingLat = location.location.lat;
@@ -38,12 +40,12 @@ const calculateElevationDataArray = (elevationData, points, distance) => {
     );
 
     const turfroundedDistance = turf.round(turfDistance, 2);
-
-    const updatedDistance = distance + turfroundedDistance;
+    const updatedDistance = incrementedDistance + turfroundedDistance;
+    incrementedDistance += turfDistance;
 
     return {
       elevation: roundTo(location.elevation * 3.28084, 2),
-      distance: updatedDistance,
+      distance: turf.round(updatedDistance, 2),
     };
   });
 };
@@ -75,11 +77,6 @@ export const removeLastPoint = state => {
   return {
     ...state,
     endPoint,
-    viewport: {
-      ...state.viewport,
-      latitude: endPoint.length !== 0 ? endPoint[1] : state.startPoint[1],
-      longitude: endPoint.length !== 0 ? endPoint[0] : state.startPoint[0],
-    },
     elevationData: [...state.elevationData.slice(0, -1)],
     geoJSONPoints: {
       type: 'FeatureCollection',

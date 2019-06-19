@@ -63,11 +63,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         endPoint: action.payload.newPoint.geometry.coordinates,
-        viewport: {
-          ...state.viewport,
-          latitude: action.payload.newPoint.geometry.coordinates[1],
-          longitude: action.payload.newPoint.geometry.coordinates[0],
-        },
         geoJSONPoints: {
           type: 'FeatureCollection',
           features: [...state.geoJSONPoints.features, action.payload.newPoint],

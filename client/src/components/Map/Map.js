@@ -155,10 +155,6 @@ class Map extends Component {
           }}
           onClick={this.handleClick}
           mapStyle="mapbox://styles/mapbox/outdoors-v10"
-          transitionDuration={300}
-          transitionInterpolator={
-            new LinearInterpolator(['latitude', 'longitude'])
-          }
         >
           <Marker
             latitude={startPoint.length > 0 ? startPoint[1] : 1}
