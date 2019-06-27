@@ -87,12 +87,15 @@ exports.getThisWeeksRuns = async (req, res, next) => {
           totalDistance: { $sum: '$runlog.distance' },
           totalHrs: { $sum: '$runlog.hrs' },
           totalMins: { $sum: '$runlog.mins' },
+          totalSecs: { $sum: '$runlog.secs' },
           totalDays: { $size: '$runlog' },
         },
         runlog: '$runlog',
       },
     },
   ]);
+
+  console.log(aggregatedData[0].totals);
 
   return res.status(200).json({
     runlog: aggregatedData[0].runlog,

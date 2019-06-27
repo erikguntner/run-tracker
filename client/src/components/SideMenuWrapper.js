@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTransition, animated } from 'react-spring';
+import { useTransition, useSpring, animated } from 'react-spring';
 
 import Portal from './Utilities/Portal';
 import Icon from './Utilities/Icon';
@@ -8,38 +8,34 @@ import styles from '../stylesheets/SideMenu.module.scss';
 import PathList from './PathList';
 
 const SideMenuWrapper = ({ children, toggle, open, username }) => {
-  const transition = useTransition(open, null, {
-    from: { transform: 'translate3d(-100%, 0, 0)' },
-    enter: { transform: 'translate3d(0, 0, 0)' },
-    leave: { transform: 'translate3d(-100%, 0, 0)' },
+  const { x, y, z } = useSpring({
+    x: open ? 0 : 100,
+    y: open ? 0.2 : 0,
   });
 
-  const pointerEvents = open ? 'all' : 'none';
-
   return (
-    <Portal>
-      {transition.map(({ item, key, props: animation }) => {
-        return (
-          item && (
-            <div key={4534534} className={styles.modalWrapper}>
-              <div
-                className={styles.background}
-                onClick={toggle}
-                style={{ pointerEvents }}
-              />
-              <animated.div style={animation} className={styles.menuCard}>
-                <button className={styles.close} onClick={toggle}>
-                  <Icon name="close" />
-                </button>
-                <div className={styles.circle} />
-                <h3>{username}</h3>
-                <PathList open={open} type={'list'} />
-              </animated.div>
-            </div>
-          )
-        );
-      })}
-    </Portal>
+    <>
+      {/* <animated.div
+        className={styles.background}
+        onClick={toggle}
+        style={{
+          opacity: y.interpolate(y => y),
+        }}
+      /> */}
+      <animated.div
+        className={styles.menuCard}
+        style={{
+          transform: x.interpolate(x => `translate3d(-${x}%, 0, 0)`),
+        }}
+      >
+        <button className={styles.close} onClick={toggle}>
+          <Icon name="close" />
+        </button>
+        <div className={styles.circle} />
+        <h3>{username}</h3>
+        <PathList open={open} type={'list'} />
+      </animated.div>
+    </>
   );
 };
 

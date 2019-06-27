@@ -11,6 +11,7 @@ const initialState = {
     totalHrs: 0,
     totalMins: 0,
     totalDays: 0,
+    totalSecs: 0,
   },
   thisWeeksRuns: [],
   chartedRuns: [],

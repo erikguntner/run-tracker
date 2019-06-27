@@ -108,7 +108,9 @@ class Controls extends Component {
           icon={faSave}
           tooltip={'save route'}
         />
-        <Modal open={this.state.open} toggle={this.toggleModal} />
+        <Modal open={this.state.open} toggle={this.toggleModal} >
+
+        </Modal>
       </div>
     );
   }

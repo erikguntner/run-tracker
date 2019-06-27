@@ -18,7 +18,6 @@ import styles from '../../stylesheets/Chart.module.scss';
 class DistanceChart extends Component {
   state = {
     month: dateFns.getMonth(new Date()),
-    activeBtn: 1,
     title: 'Choose Month',
     months: [
       { id: 0, selected: false, title: 'January' },
@@ -65,12 +64,6 @@ class DistanceChart extends Component {
     });
   };
 
-  handleButtonClick = e => {
-    this.setState({
-      activeBtn: parseInt(e.target.id),
-    });
-  };
-
   parseDataForChart = data => {
     const { month } = this.state;
     const runs = [];
@@ -108,33 +101,12 @@ class DistanceChart extends Component {
   };
 
   render() {
-    const { activeBtn, months, month } = this.state;
+    const { months, month } = this.state;
     const { chartedRuns } = this.props;
 
     return (
       <section className={styles.container}>
         <div className={styles.row}>
-          <div />
-          <ul className={styles.buttonList}>
-            <li>
-              <button
-                id={1}
-                className={activeBtn === 1 ? styles.activeBtn : styles.button}
-                onClick={this.handleButtonClick}
-              >
-                monthly
-              </button>
-            </li>
-            <li>
-              <button
-                id={2}
-                className={activeBtn === 2 ? styles.activeBtn : styles.button}
-                onClick={this.handleButtonClick}
-              >
-                yearly
-              </button>
-            </li>
-          </ul>
           <CustomSelect
             setSelected={this.setSelected}
             headerTitle={months[month].title}

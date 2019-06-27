@@ -28,7 +28,7 @@ exports.addRoute = async (req, res, next) => {
     { $push: { routes: newRoute } }
   );
 
-  res.status(200).send(updatedUser);
+  res.status(200).send(updatedUser.routes[updatedUser.routes.length - 1]);
 };
 
 exports.getAllRoutes = async (req, res, next) => {

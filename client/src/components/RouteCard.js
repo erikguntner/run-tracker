@@ -4,7 +4,7 @@ import * as turf from '@turf/turf';
 import RouteMap from './RouteMap';
 import styles from '../stylesheets/Route.module.scss';
 
-const Route = ({ route, id, deleteRoute }) => {
+const RouteCard = ({ route, id, deleteRoute }) => {
   const { image } = route;
   const distance = route.distance[route.distance.length - 1];
   const points = route.lineFeatures
@@ -24,10 +24,10 @@ const Route = ({ route, id, deleteRoute }) => {
   );
 };
 
-Route.propTypes = {
+RouteCard.propTypes = {
   route: PropTypes.object,
   id: PropTypes.string,
   deleteRoute: PropTypes.func,
 };
 
-export default Route;
+export default React.memo(RouteCard);

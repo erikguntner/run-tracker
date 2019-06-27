@@ -40,9 +40,11 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
   margin-bottom: 15px;
-  transition: all 0.1s linear;
+  transition: all 0.5s linear;
+}
 
-  &:hover {
-    transform: scale(1.02);
-  }
+.content {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }

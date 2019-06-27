@@ -29,6 +29,7 @@ exports.signup = async (req, res, next) => {
 
   await user.save();
 
+  res.cookie('token', token, { httpOnly: true });
   return res.json({
     token: tokenForUser(user),
     user: user,
@@ -38,6 +39,7 @@ exports.signup = async (req, res, next) => {
 exports.signin = async (req, res, next) => {
   //User has already had their username and password auth'd
   // we just need to give them a token
+  res.cookie('token', token, { httpOnly: true });
   res.send({ token: tokenForUser(req.user), user: req.user });
 };
 

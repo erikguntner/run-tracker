@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const routeSchema = new Schema({
   userId: String,
   image: String,
+  title: { type: String, default: 'tile' },
   elevationData: [
     [
       {

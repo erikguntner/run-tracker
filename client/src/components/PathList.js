@@ -1,12 +1,22 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Route from './Route';
+import RouteCard from './RouteCard';
 import styles from '../stylesheets/Route.module.scss';
 
 class PathList extends PureComponent {
   componentDidMount() {
     this.props.getRoutes();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.authenticated !== this.props.authenticated &&
+      this.props.authenticated !== ''
+    ) {
+      console.log('refetch routes');
+      this.props.getRoutes();
+    }
   }
 
   render() {
@@ -21,7 +31,7 @@ class PathList extends PureComponent {
         {loadingRoutes && routes.length === 0 && <div>...Loading</div>}
         {routes.map(route => {
           return (
-            <Route
+            <RouteCard
               key={route._id}
               deleteRoute={deleteRoute}
               id={route._id}
@@ -37,6 +47,7 @@ class PathList extends PureComponent {
 const mapStateToProps = store => ({
   routes: store.routes.routes,
   loadingRoutes: store.routes.loadingRoutes,
+  authenticated: store.auth.authenticated,
 });
 
 const mapDispatchToProps = dispatch => ({

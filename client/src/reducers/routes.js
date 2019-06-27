@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
       };
     case ADD_ROUTE:
       return {
-        routes: [...state.routes],
+        routes: [action.payload, ...state.routes],
       };
     case LOADING_ROUTES:
       return {

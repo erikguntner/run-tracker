@@ -18,6 +18,7 @@ const RunSchema = Yup.object().shape({
     .typeError('value must be a number')
     .min(0)
     .required('This value is required'),
+  date: Yup.date().required('You must select a date'),
   hrs: Yup.number()
     .typeError('value must be a number')
     .min(0)
@@ -71,7 +72,7 @@ class RunForm extends React.Component {
           }}
           validationSchema={RunSchema}
           onSubmit={(values, { setSubmitting }) => {
-            const { date } = this.state;
+            const { date } = values;
             const { history, logRun } = this.props;
             //turn string into year/day/month string
             const datesArr = date.toLocaleDateString().split('/');
@@ -104,15 +105,46 @@ class RunForm extends React.Component {
                   />
                 )}
               />
-              <DayPickerInput
-                onDayChange={this.handleDayChange}
-                dayPickerProps={{
-                  fromMonth: new Date(2019, 0),
-                  toMonth: new Date(),
-                }}
-                component={props => {
-                  return <input {...props} className={inputStyles.input} />;
-                }}
+              <Field
+                type="text"
+                name="date"
+                render={({ field, form }) => (
+                  <DayPickerInput
+                    onDayChange={selectedDay => {
+                      form.setFieldValue('date', selectedDay);
+                    }}
+                    dayPickerProps={{
+                      fromMonth: new Date(2019, 0),
+                      toMonth: new Date(),
+                    }}
+                    component={props => {
+                      const { name } = field;
+                      const { touched, errors } = form;
+                      return (
+                        <div>
+                          <div className={inputStyles.inputGroup}>
+                            <input {...props} className={inputStyles.input} />
+                            <label
+                              className={`${inputStyles.label} ${
+                                touched[name] && errors[name]
+                                  ? inputStyles.error
+                                  : ''
+                              }`}
+                              htmlFor={name}
+                            >
+                              date
+                            </label>
+                          </div>
+                          {touched[name] && errors[name] && (
+                            <div className={inputStyles.errorMessage}>
+                              {errors[name]}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }}
+                  />
+                )}
               />
               <Field
                 type="number"

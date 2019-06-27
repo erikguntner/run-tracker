@@ -84,6 +84,10 @@
 .activeBtn {
   background-color: lighten(#0991d3, 45%);
 
+  & > b {
+    color: #3a8bbb;
+  }
+
   &:active {
     outline: none;
   }

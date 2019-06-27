@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../stylesheets/Input.module.scss';
 
-const Input = ({ field, form, type, label }) => {
+const Input = ({ field = {}, form = {}, dateProps = {}, type, label }) => {
   const { name } = field;
   const { touched, errors } = form;
 
   return (
     <div>
-      <div className={styles.inputGroup}>
-        <input type={type} {...field} className={styles.input} required />
+      <div
+        className={`${styles.inputGroup} ${
+          touched[name] && errors[name] ? styles.error : ''
+        }`}
+      >
+        <input type={type} {...dateProps} {...field} className={styles.input} />
         <label
           className={`${styles.label} ${
             touched[name] && errors[name] ? styles.error : ''

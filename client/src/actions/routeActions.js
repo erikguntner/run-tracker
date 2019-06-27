@@ -59,6 +59,8 @@ export function* saveRoute({
       }
     );
 
+    console.log('newly created route', postRouteData.data);
+
     yield put({
       type: ADD_ROUTE,
       payload: postRouteData.data,
