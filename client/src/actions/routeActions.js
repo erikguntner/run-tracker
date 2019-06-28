@@ -24,17 +24,23 @@ const apiGetRequest = (url, headers) => axios.get(url, { headers: headers });
 export function* saveRoute({
   type,
   payload: {
-    matchParams,
-    elevationData,
-    startPoint,
-    endPoint,
-    viewport,
-    geoJSONLines,
-    geoJSONPoints,
-    distance,
+    routeData: {
+      title,
+      matchParams,
+      elevationData,
+      startPoint,
+      endPoint,
+      viewport,
+      geoJSONLines,
+      geoJSONPoints,
+      distance,
+    },
+    setSubmitting,
+    toggleModal,
   },
 }) {
   const body = {
+    title,
     elevationData,
     startPoint: {
       coordinates: startPoint,
@@ -59,12 +65,15 @@ export function* saveRoute({
       }
     );
 
-    console.log('newly created route', postRouteData.data);
+    console.log(postRouteData.data);
 
     yield put({
       type: ADD_ROUTE,
       payload: postRouteData.data,
     });
+
+    setSubmitting(false);
+    toggleModal();
 
     yield put({
       type: NOTIFY_SUCCESS,

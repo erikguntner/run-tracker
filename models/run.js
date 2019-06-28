@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const runSchema = new Schema({
+  created: {
+    type: Date,
+    default: Date.now,
+  },
   distance: { type: Number, required: true },
   date: { type: Date, required: true },
   hrs: { type: Number, required: true },

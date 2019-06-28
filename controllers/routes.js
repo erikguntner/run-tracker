@@ -2,6 +2,7 @@ const User = require('../models/user');
 
 exports.addRoute = async (req, res, next) => {
   const {
+    title,
     elevationData,
     startPoint,
     endPoint,
@@ -13,6 +14,7 @@ exports.addRoute = async (req, res, next) => {
   const { _id } = req.user;
 
   const newRoute = {
+    title,
     image: req.image,
     elevationData,
     startPoint,
@@ -25,8 +27,11 @@ exports.addRoute = async (req, res, next) => {
 
   const updatedUser = await User.findOneAndUpdate(
     { _id: _id },
-    { $push: { routes: newRoute } }
+    { $push: { routes: newRoute } },
+    { new: true }
   );
+
+  console.log(updatedUser.routes[updatedUser.routes.length - 1]);
 
   res.status(200).send(updatedUser.routes[updatedUser.routes.length - 1]);
 };

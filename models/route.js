@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 const routeSchema = new Schema({
   userId: String,
   image: String,
-  title: { type: String, default: 'tile' },
+  title: { type: String, default: 'title' },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
   elevationData: [
     [
       {

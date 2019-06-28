@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTransition, useSpring, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
-import Portal from './Utilities/Portal';
 import Icon from './Utilities/Icon';
 import styles from '../stylesheets/SideMenu.module.scss';
 import PathList from './PathList';

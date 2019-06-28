@@ -17,7 +17,7 @@ const Modal = ({ children, toggle, open }) => {
       {transition.map(({ item, key, props: animation }) => {
         return (
           item && (
-            <div className={styles.modalWrapper}>
+            <div key={'modal'} className={styles.modalWrapper}>
               <div className={styles.background} onClick={toggle} />
               <animated.div className={styles.modalCard} style={animation}>
                 <button className={styles.close} onClick={toggle}>
@@ -34,7 +34,7 @@ const Modal = ({ children, toggle, open }) => {
 };
 
 Modal.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   toggle: PropTypes.func,
   open: PropTypes.bool,
 };

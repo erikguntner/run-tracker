@@ -20,6 +20,7 @@ import {
 import styles from '../../stylesheets/Controls.module.scss';
 
 import Modal from '../Utilities/Modal';
+import SaveRoute from '../Forms/SaveRoute';
 import ControlButton from './ControlButton';
 
 class Controls extends Component {
@@ -104,12 +105,16 @@ class Controls extends Component {
         />
         <ControlButton
           disabled={!geoJSONLines.features.length}
-          click={e => this.checkForDisabled(e, saveRoute, routeData)}
+          click={e => this.checkForDisabled(e, this.toggleModal)}
           icon={faSave}
           tooltip={'save route'}
         />
-        <Modal open={this.state.open} toggle={this.toggleModal} >
-
+        <Modal open={this.state.open} toggle={this.toggleModal}>
+          <SaveRoute
+            toggleModal={this.toggleModal}
+            saveRoute={saveRoute}
+            routeData={routeData}
+          />
         </Modal>
       </div>
     );
@@ -122,7 +127,11 @@ const mapDispatchToProps = dispatch => ({
   closeRoute: () => dispatch(closeRoute()),
   changeToClipPath: status => dispatch(changeToClipPath(status)),
   showElevation: () => dispatch(showElevation()),
-  saveRoute: routeData => dispatch({ type: 'SAVE_ROUTE', payload: routeData }),
+  saveRoute: (routeData, setSubmitting, toggleModal) =>
+    dispatch({
+      type: 'SAVE_ROUTE',
+      payload: { routeData, setSubmitting, toggleModal },
+    }),
 });
 
 const mapStateToProps = store => ({
