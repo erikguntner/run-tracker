@@ -7,7 +7,7 @@ import Map from './components/Map/Map';
 import Signin from './components/Signin';
 import Test from './components/Test';
 import Dashboard from './components/Dashboard/Dashboard';
-import UpdatedRunForm from './components/Forms/UpdatedRunForm';
+import ImageUploader from './components/ImageUploader/ImageUploader';
 import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -24,6 +24,7 @@ ReactDOM.render(
           <Route path="/profile/run-form" component={Dashboard} />
           <Route path="/profile" exact component={Dashboard} />
           <Route path="/test" component={Test} />
+          <Route path="/image-upload" component={ImageUploader} />
           <Route path="/" component={Map} />
         </Switch>
       </App>
