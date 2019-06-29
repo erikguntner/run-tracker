@@ -19,7 +19,11 @@ const apiPostWithHeaders = (url, body, headers) =>
 
 const callDeleteRoute = (url, body) => axios.delete(url, body);
 
-const apiGetRequest = (url, headers) => axios.get(url, { headers: headers });
+const apiGetRequest = (url, headers = {}) =>
+  axios.get(url, { headers: headers });
+
+const putToS3 = (url, body, headers) =>
+  axios.put(url, body, { headers: headers });
 
 export function* saveRoute({
   type,
@@ -55,10 +59,28 @@ export function* saveRoute({
   const token = localStorage.getItem('token');
 
   try {
+    // Post to upload to take screenshot and return the signedURL from aws
+    const uploadConfig = yield call(
+      apiPostWithHeaders,
+      `${server}/upload`,
+      { lineFeatures: body.lineFeatures },
+      { 'Content-Type': 'application/json', authorization: token }
+    );
+
+    // Make put request to S3 to store image in bucket (experimental)
+    // const uploadFileToS3 = yield call(
+    //   putToS3,
+    //   uploadConfig.data.url,
+    //   uploadConfig.data.buf,
+    //   {
+    //     'Content-Type': 'image/jpeg',
+    //   }
+    // );
+
     const postRouteData = yield call(
       apiPostWithHeaders,
       `${server}/routes/${matchParams.id}`,
-      body,
+      { image: uploadConfig.data.Location, ...body },
       {
         'Content-Type': 'application/json',
         authorization: token,
@@ -83,7 +105,8 @@ export function* saveRoute({
         status: 'success',
       },
     });
-  } catch {
+  } catch (err) {
+    console.log(err);
     yield put({
       type: NOTIFY_FAILURE,
       payload: {

@@ -6,6 +6,7 @@ const User = require('./controllers/user');
 const Goal = require('./controllers/goal');
 const Image = require('./controllers/image');
 const MapImage = require('./controllers/mapImage');
+const Upload = require('./controllers/upload');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -30,12 +31,13 @@ module.exports = app => {
 
   // Routes for adding running routes
   app.delete('/routes/delete', requireAuth, catchErrors(Routes.deleteRoute));
-  app.post(
-    '/routes/:id',
-    requireAuth,
-    MapImage.screenshotMap,
-    catchErrors(Routes.addRoute)
-  );
+  // app.post(
+  //   '/routes/:id',
+  //   requireAuth,
+  //   MapImage.screenshotMap,
+  //   catchErrors(Routes.addRoute)
+  // );
+  app.post('/routes/:id', requireAuth, catchErrors(Routes.addRoute));
   app.get('/routes', requireAuth, catchErrors(Routes.getAllRoutes));
 
   //ROutes for logging runs
@@ -49,4 +51,7 @@ module.exports = app => {
 
   // ROUTE FOR SAVING MAP IMAGES
   app.get('/image', Image.screenshotMap);
+
+  //ROUTE FOR UPLOADING AND HANDLING IMAGES TO S#
+  app.post('/upload', requireAuth, MapImage.screenshotMap, Upload.uploadImage);
 };

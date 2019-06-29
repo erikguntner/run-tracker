@@ -5,6 +5,7 @@ const puppeteer = require('puppeteer');
 exports.screenshotMap = async (req, res, next) => {
   try {
     const { lineFeatures } = req.body;
+
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
@@ -50,9 +51,9 @@ exports.screenshotMap = async (req, res, next) => {
 
     await browser.close();
     // convert buffer to base64 string
-    const base64Image = await image.toString('base64');
+    // const base64Image = await image.toString('base64');
     // attach to request object to be used in the next middleware
-    req.image = base64Image;
+    req.image = image;
     next();
 
     // writeFileToDesktop(image, res);

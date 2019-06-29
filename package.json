@@ -26,6 +26,7 @@
     "url": "https://github.com/erikguntner/run-plotter/issues"
   },
   "dependencies": {
+    "aws-sdk": "^2.485.0",
     "axios": "^0.18.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
@@ -52,6 +53,7 @@
     "react-dom": "^16.8.6",
     "read-pkg-up": "^6.0.0",
     "resolve-cwd": "^3.0.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "uuid": "^3.3.2"
   }
 }

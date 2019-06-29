@@ -16,7 +16,7 @@ const RouteCard = ({ route, id, deleteRoute }) => {
   return (
     <div className={styles.routeContainer}>
       <div className={styles.mapContainer}>
-        <img src={`data:image/png;base64, ${image}`} alt="map" />
+        <img src={image} alt="map" />
       </div>
       <div>{route.title ? route.title : 'title'}</div>
       <div>{turf.round(distance, 2)} miles</div>

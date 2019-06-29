@@ -28,22 +28,22 @@ exports.screenshotMap = async (req, res, next) => {
 
     const page = await browser.newPage();
     // Test coordinates to be replaced with the coordinates for the route being saved
-    // const coords = [
-    //   [-117.72059997787743, 34.103463520496675],
-    //   [-117.72768100967674, 34.107410067717396],
-    //   [-117.72944053878828, 34.112944590071365],
-    //   [-117.73699363937939, 34.1173411747159],
-    // ];
+    const coords = [
+      [-117.72059997787743, 34.103463520496675],
+      [-117.72768100967674, 34.107410067717396],
+      [-117.72944053878828, 34.112944590071365],
+      [-117.73699363937939, 34.1173411747159],
+    ];
 
-    const coords = lineFeatures.map(line => line.geometry.coordinates);
+    // const coords = lineFeatures.map(line => line.geometry.coordinates);
 
-    const flattenedCoords = coords.reduce((accum, arr) => {
-      return accum.concat(arr);
-    }, []);
+    // const flattenedCoords = coords.reduce((accum, arr) => {
+    //   return accum.concat(arr);
+    // }, []);
 
-    console.log(flattenedCoords);
+    // console.log(flattenedCoords);
 
-    const coordsStr = JSON.stringify(flattenedCoords);
+    const coordsStr = JSON.stringify(coords);
 
     const URL =
       process.env.NODE_ENV === 'production'
@@ -52,7 +52,7 @@ exports.screenshotMap = async (req, res, next) => {
 
     console.log('going to page');
 
-    await page.goto(`${URL}?coords=${coords}`, {
+    await page.goto(`${URL}?coords=${coordsStr}`, {
       waitUntil: 'networkidle0',
     });
 
@@ -80,9 +80,9 @@ exports.screenshotMap = async (req, res, next) => {
 
     await browser.close();
 
-    const base64Image = await image.toString('base64');
+    // const base64Image = await image.toString('base64');
 
-    req.image = base64Image;
+    req.image = image;
     next();
 
     // writeFileToDesktop(image, res);

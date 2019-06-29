@@ -2,6 +2,7 @@ const User = require('../models/user');
 
 exports.addRoute = async (req, res, next) => {
   const {
+    image,
     title,
     elevationData,
     startPoint,
@@ -15,7 +16,7 @@ exports.addRoute = async (req, res, next) => {
 
   const newRoute = {
     title,
-    image: req.image,
+    image,
     elevationData,
     startPoint,
     endPoint,
