@@ -4,7 +4,6 @@ const RunLog = require('./controllers/runLog');
 const Routes = require('./controllers/routes');
 const User = require('./controllers/user');
 const Goal = require('./controllers/goal');
-const Image = require('./controllers/image');
 const MapImage = require('./controllers/mapImage');
 const Upload = require('./controllers/upload');
 const passportService = require('./services/passport');
@@ -48,9 +47,6 @@ module.exports = app => {
 
   // ROUTES FOR GOALS
   app.post('/goal', requireAuth, catchErrors(Goal.setGoal));
-
-  // ROUTE FOR SAVING MAP IMAGES
-  app.get('/image', Image.screenshotMap);
 
   //ROUTE FOR UPLOADING AND HANDLING IMAGES TO S#
   app.post('/upload', requireAuth, MapImage.screenshotMap, Upload.uploadImage);
