@@ -52,5 +52,5 @@ module.exports = app => {
   app.get('/image', Image.screenshotMap);
 
   //ROUTE FOR UPLOADING AND HANDLING IMAGES TO S#
-  app.get('/upload', Upload.uploadImage);
+  app.get('/upload', requireAuth, Upload.uploadImage);
 };
