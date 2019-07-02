@@ -9,14 +9,14 @@ const DistanceChart = ({ thisWeeksRuns }) => {
 
   return (
     <AreaChart
-      width={300}
+      width={400}
       height={125}
       data={newData}
       margin={{
         top: 20,
         right: 20,
         bottom: 20,
-        left: 20,
+        left: 0,
       }}
     >
       <XAxis dataKey="day" />

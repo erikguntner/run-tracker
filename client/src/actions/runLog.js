@@ -104,7 +104,7 @@ export function* postRun({ payload: { values, setSubmitting, history } }) {
   try {
     const token = localStorage.getItem('token');
 
-    const postedRun = yield call(apiPost, `${server}/runs`, values, {
+    yield call(apiPost, `${server}/runs`, values, {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,

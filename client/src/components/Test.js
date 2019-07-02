@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import RouteMap from './RouteMap';
 import TestMap from './TestMap';
 
 const Test = props => {

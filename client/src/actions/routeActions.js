@@ -22,8 +22,8 @@ const callDeleteRoute = (url, body) => axios.delete(url, body);
 const apiGetRequest = (url, headers = {}) =>
   axios.get(url, { headers: headers });
 
-const putToS3 = (url, body, headers) =>
-  axios.put(url, body, { headers: headers });
+// const putToS3 = (url, body, headers) =>
+//   axios.put(url, body, { headers: headers });
 
 export function* saveRoute({
   type,

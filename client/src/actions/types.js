@@ -38,6 +38,7 @@ export const CLOSE_POPUP = 'CLOSE_POPUP';
 
 //RUNLOGS
 export const LOG_RUN = 'LOG_RUN';
+export const CLEAR_RUNS = 'CLEAR_RUNS';
 export const POPULATE_RUNLOG = 'POPULATE_RUNLOG';
 export const GET_RUNS_BY_DATE = 'GET_RUNS_BY_DATE';
 export const GET_RUNS_BY_DATE_SUCCESS = 'GET_RUNS_BY_DATE_SUCCESS';
@@ -49,5 +50,6 @@ export const GET_RUNS_BY_MONTH_SUCCESS = 'GET_RUNS_BY_MONTH_SUCCESS';
 
 // GOAL
 export const SET_GOAL = 'SET_GOAL';
+export const CLEAR_GOAL = 'CLEAR_GOAL';
 export const SET_GOAL_SUCCESS = 'SET_GOAL_SUCCESS';
 export const POPULATE_GOAL = 'POPULATE_GOAL';

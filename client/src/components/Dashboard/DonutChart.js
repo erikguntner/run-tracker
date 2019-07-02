@@ -62,8 +62,8 @@ class DonutChart extends Component {
 }
 
 DonutChart.defaultProps = {
-  size: 150,
-  strokewidth: 15,
+  size: 125,
+  strokewidth: 10,
 };
 
 DonutChart.propTypes = {

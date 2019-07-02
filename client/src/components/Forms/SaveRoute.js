@@ -58,7 +58,11 @@ const mapDispatchToProps = dispatch => ({});
 
 const mapStateToProps = store => ({});
 
-NewRoute.propTypes = {};
+NewRoute.propTypes = {
+  saveRoute: PropTypes.func.isRequired,
+  routeData: PropTypes.object.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};
 
 export default connect(
   mapStateToProps,

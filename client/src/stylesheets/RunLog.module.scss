@@ -1,8 +1,9 @@
-.list {
+.monthList {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 85%;
 }
 
 .month {
@@ -13,15 +14,15 @@
   font-size: 32px;
   color: #aaa;
 
-  &::after {
-    content: '';
-    position: absolute;
-    width: 90%;
-    height: 8px;
-    right: 0;
-    top: calc(50% - 5px);
-    background-color: #aaa;
-  }
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   width: 90%;
+  //   height: 8px;
+  //   right: 0;
+  //   top: calc(50% - 5px);
+  //   background-color: #aaa;
+  // }
 
   .text {
     position: relative;
@@ -35,17 +36,56 @@
   width: 100%;
 }
 
-.run {
-  margin-bottom: 30px;
-  padding: 20px 30px;
+.runList {
   width: 100%;
-  background-color: #fff;
-  border: none;
-  border-left: 3px solid coral;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
+  position: relative;
 
-  &:hover {
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: #ddd;
+    width: 3px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translate3d(25px, 0, 0);
+  }
+}
+
+.run {
+  position: relative;
+
+  & > div {
+    margin-bottom: 30px;
+    margin-left: 100px;
+    padding: 20px 30px;
+    background-color: #fff;
+    border: none;
+    border-left: 3px solid coral;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+  }
+
+  &:hover > div {
     transform: scale(1.05);
+  }
+
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    line-height: 0;
+    transform: translate3d(57%, 140%, 0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
+    z-index: 10;
   }
 }

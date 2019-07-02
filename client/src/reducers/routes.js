@@ -41,4 +41,4 @@ export default (state = initialState, action) => {
   }
 };
 
-const removeRoute = (id, routes) => {};
+// const removeRoute = (id, routes) => {};

@@ -3,6 +3,7 @@ import {
   GET_WEEKLY_RUNS_SUCCESS,
   GET_RUNS_BY_MONTH_SUCCESS,
   POPULATE_RUNLOG,
+  CLEAR_RUNS,
 } from '../actions/types';
 
 const initialState = {
@@ -43,6 +44,10 @@ export default function(state = initialState, action) {
       return {
         ...state,
         runs: [...action.payload],
+      };
+    case CLEAR_RUNS:
+      return {
+        ...initialState,
       };
     default:
       return {

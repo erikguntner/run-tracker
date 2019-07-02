@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../stylesheets/Dashboard.module.scss';
-import { Link } from 'react-router-dom';
 
 const Stats = ({
   weeklyTotals: { totalDistance, totalHrs, totalMins, totalSecs, totalDays },
@@ -22,7 +21,9 @@ const Stats = ({
 
   return (
     <div className={styles.userProgress}>
-      <div className={styles.userProgressCircle}>S</div>
+      <div>
+        <div className={styles.userProgressCircle}>S</div>
+      </div>
       <ul className={styles.userProgressTable}>
         <li className={styles.userProgressCol}>
           <div>Time</div>

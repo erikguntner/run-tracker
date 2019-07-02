@@ -8,7 +8,7 @@ const server =
     : 'http://localhost:3090';
 
 const apiPost = (url, body, config = {}) => axios.post(url, body, config);
-const apiGet = (url, config = {}) => axios.get(url, config);
+// const apiGet = (url, config = {}) => axios.get(url, config);
 
 export const setGoal = goal => {
   return { type: SET_GOAL, payload: goal };

@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ReactMapGL, {
-  NavigationControl,
-  LinearInterpolator,
-  Marker,
-} from 'react-map-gl';
+import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl';
 import { GeolocateControl } from 'mapbox-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 // import lineString from '@turf/helpers';

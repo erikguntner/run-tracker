@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import styles from '../../stylesheets/Forms.module.scss';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+
+import Input from './Input';
+import styles from '../../stylesheets/Forms.module.scss';
 
 const SigninSchema = Yup.object().shape({
   username: Yup.string().required('username is required'),
@@ -34,30 +36,32 @@ class SigninForm extends Component {
         >
           {({ isSubmitting }) => (
             <Form>
-              <div className={styles.formGroup}>
-                <Field
-                  type="text"
-                  name="username"
-                  placeholder="username"
-                  label="username"
-                />
-                <label htmlFor="username">Username</label>
-              </div>
-              <ErrorMessage name="username">
-                {msg => <div className={styles.formError}>{msg}</div>}
-              </ErrorMessage>
-              <div className={styles.formGroup}>
-                <Field
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  label="password"
-                />
-                <label htmlFor="pasword">Passsword</label>
-              </div>
-              <ErrorMessage name="password">
-                {msg => <div className={styles.formError}>{msg}</div>}
-              </ErrorMessage>
+              <Field
+                type="text"
+                name="username"
+                render={({ field, form }) => (
+                  <Input
+                    type="text"
+                    field={field}
+                    form={form}
+                    id="username"
+                    label="username"
+                  />
+                )}
+              />
+              <Field
+                type="password"
+                name="password"
+                render={({ field, form }) => (
+                  <Input
+                    type="password"
+                    field={field}
+                    form={form}
+                    id="password"
+                    label="password"
+                  />
+                )}
+              />
               <button type="submit" disabled={isSubmitting}>
                 Sign In
               </button>

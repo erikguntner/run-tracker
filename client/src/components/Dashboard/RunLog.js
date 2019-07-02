@@ -17,14 +17,14 @@ class RunLog extends Component {
     const datesbyMonth = reduceDatesByMonth(filteredRuns);
 
     return (
-      <section className={styles.list}>
+      <section className={styles.monthList}>
         {Object.keys(datesbyMonth).map((month, i) => {
           return (
-            <div key={`month-${i}`} style={{ width: '100%' }}>
+            <div key={`month-${i}`} className={styles.container}>
               <h2 className={styles.month}>
                 <span className={styles.text}>{month}</span>
               </h2>
-              <div className={styles.container}>
+              <div className={styles.runList}>
                 {datesbyMonth[month].map((run, i) => {
                   const jsDate = new Date(run.date);
                   const dateAdjustedForTZ = jsDate.setTime(
@@ -33,9 +33,15 @@ class RunLog extends Component {
                   const date = dateFns.format(dateAdjustedForTZ, 'MM/DD/YYYY');
 
                   return (
-                    <article className={styles.run} key={`run-${i}`}>
-                      <h3>{date}</h3>
-                      <h4>{run.distance} miles</h4>
+                    <article
+                      className={styles.run}
+                      key={`run-${i}`}
+                      data-text={date.split('/')[1]}
+                    >
+                      <div>
+                        <h3>{date}</h3>
+                        <h4>{run.distance} miles</h4>
+                      </div>
                     </article>
                   );
                 })}

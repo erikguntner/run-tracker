@@ -3,6 +3,8 @@ import { call, put } from 'redux-saga/effects';
 import {
   AUTH_USER,
   CLEAR_ROUTES,
+  CLEAR_RUNS,
+  CLEAR_GOAL,
   SET_USERNAME,
   LOADING_USER,
   POPULATE_RUNLOG,
@@ -95,6 +97,14 @@ export function* signout({ payload }) {
 
   yield put({
     type: CLEAR_ROUTES,
+  });
+
+  yield put({
+    type: CLEAR_RUNS,
+  });
+
+  yield put({
+    type: CLEAR_GOAL,
   });
 
   payload.push('/');

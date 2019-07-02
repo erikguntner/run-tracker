@@ -1,4 +1,4 @@
-import { SET_GOAL_SUCCESS, POPULATE_GOAL } from '../actions/types';
+import { SET_GOAL_SUCCESS, POPULATE_GOAL, CLEAR_GOAL } from '../actions/types';
 
 const initialState = {
   goal: 0,
@@ -15,6 +15,10 @@ export default function(state = initialState, action) {
       return {
         ...state,
         goal: action.payload,
+      };
+    case CLEAR_GOAL:
+      return {
+        goal: 0,
       };
     default:
       return {

@@ -18,18 +18,20 @@ class StatsContainer extends Component {
     const { thisWeeksRuns, weeklyTotals } = this.props;
 
     return (
-      <>
-        <section className={styles.row}>
+      <div className={styles.stats}>
+        <div className={styles.statsContainer}>
           <Stats weeklyTotals={weeklyTotals} />
+        </div>
+        <div className={styles.weeklyContainer}>
           <div className={styles.row}>
             <WeeklyChart thisWeeksRuns={thisWeeksRuns} />
             <Donut />
           </div>
-        </section>
-        <section className={styles.chart}>
+        </div>
+        <div className={styles.chartContainer}>
           <DistanceChart />
-        </section>
-      </>
+        </div>
+      </div>
     );
   }
 }

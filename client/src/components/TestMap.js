@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactMapGL from 'react-map-gl';
 import WebMercatorViewport from 'viewport-mercator-project';
 import PolylineOverlay from './PolylineOverlay';
