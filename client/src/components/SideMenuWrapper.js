@@ -7,20 +7,21 @@ import styles from '../stylesheets/SideMenu.module.scss';
 import PathList from './PathList';
 
 const SideMenuWrapper = ({ children, toggle, open, username }) => {
-  const { x, y, z } = useSpring({
+  const { x, y } = useSpring({
     x: open ? 0 : 100,
-    y: open ? 0.2 : 0,
+    y: open ? 0.3 : 0,
   });
 
   return (
     <>
-      {/* <animated.div
+      <animated.div
         className={styles.background}
         onClick={toggle}
         style={{
           opacity: y.interpolate(y => y),
+          pointerEvents: open ? 'auto' : 'none',
         }}
-      /> */}
+      />
       <animated.div
         className={styles.menuCard}
         style={{

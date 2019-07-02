@@ -209,7 +209,7 @@ class Map extends Component {
             miles
           </div>
         </ReactMapGL>
-        <ElevationProfile />
+        <ElevationProfile image={this.state.image} />
         <Popup />
       </div>
     );

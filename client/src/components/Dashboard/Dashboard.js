@@ -13,6 +13,7 @@ import StatsContainer from './StatsContainer';
 import RunLog from './RunLog';
 import UpdatedRunForm from '../Forms/UpdatedRunForm';
 import requireAuth from '../requireAuth';
+
 import styles from '../../stylesheets/Dashboard.module.scss';
 
 class Dashboard extends Component {
