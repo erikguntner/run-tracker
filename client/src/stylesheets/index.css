@@ -2,6 +2,7 @@ html {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  font-size: 10px;
 }
 
 * {
@@ -40,14 +41,14 @@ code {
 
 .mapboxgl-ctrl-top-right {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 2rem;
+  left: 2rem;
   right: auto;
-  top: 103px;
+  top: 10.3rem;
 }
 
 @media only screen and (max-width: 800px) {
   .mapboxgl-ctrl-top-right {
-    top: 192px;
+    top: 19.2rem;
   }
 }

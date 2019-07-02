@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  padding: 100px;
+  padding: 10rem;
 }
 
 .row {
@@ -11,8 +11,8 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   grid-template-areas:
     'distance distance distance distance distance distance date date date date date date'
     'hrs hrs hrs hrs mins mins mins mins secs secs secs secs'
@@ -50,13 +50,13 @@
 }
 
 .submitBtn {
-  padding: 10px 15px;
-  font-size: 16px;
+  padding: 1rem 1.5rem;
+  font-size: 1.6rem;
   color: #fff;
   background-color: #0991d3;
   text-transform: lowercase;
-  border-radius: 50px;
-  margin-top: 20px;
+  border-radius: 5rem;
+  margin-top: 2rem;
   border: none;
 
   &:hover {

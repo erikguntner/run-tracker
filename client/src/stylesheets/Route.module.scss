@@ -4,7 +4,7 @@
   flex: 1;
   width: 100%;
   padding: 5px;
-  padding-top: 15px;
+  padding-top: 1.5rem;
   overflow: scroll;
   align-items: center;
   background-color: #fcfcfc;
@@ -15,11 +15,11 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: min-content;
-  grid-gap: 20px;
+  grid-gap: 2rem;
   justify-content: center;
   width: 100%;
   padding: 5px;
-  padding-top: 15px;
+  padding-top: 1.5rem;
   overflow: scroll;
   align-items: center;
   background-color: #fcfcfc;
@@ -32,7 +32,7 @@
 }
 
 .mapContainer {
-  height: 150px;
+  height: 15rem;
   overflow: hidden;
   border-radius: 5px 5px 0 0;
 
@@ -43,15 +43,15 @@
 }
 
 .routeContainer {
-  width: 290px;
+  width: 29rem;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
-  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 2rem rgba(0, 0, 0, 0.04);
+  margin-bottom: 1.5rem;
   transition: all 0.5s linear;
 }
 
 .routeDetails {
-  padding: 10px 20px;
+  padding: 1rem 2rem;
 }
 
 .row {

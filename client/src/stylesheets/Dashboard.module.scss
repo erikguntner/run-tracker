@@ -1,7 +1,7 @@
 .profileGrid {
   display: grid;
   grid-template-columns: 1fr 5fr;
-  grid-template-rows: calc(100vh - 70px);
+  grid-template-rows: calc(100vh - 7rem);
   background-color: #fcfcfc;
 }
 
@@ -19,26 +19,26 @@
     margin-bottom: auto;
 
     li {
-      height: 40px;
+      height: 4rem;
       width: 100%;
-      margin-top: 10px;
+      margin-top: 1rem;
     }
   }
 }
 
 .btn {
   width: 90%;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 
   a {
     width: 90%;
-    margin-top: 10px;
+    margin-top: 1rem;
 
     button {
       width: 100%;
-      padding: 8px 20px;
+      padding: 8px 2rem;
       background-color: #0991d3;
-      font-size: 16px;
+      font-size: 1.6rem;
       border: none;
       border-radius: 5px;
       color: #fff;
@@ -53,7 +53,7 @@
 }
 
 .navBtn {
-  font-size: 14px;
+  font-size: 1.4rem;
   text-transform: uppercase;
   height: 100%;
   width: 100%;
@@ -71,7 +71,7 @@
   }
 
   svg {
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #333;
   }
 
@@ -96,7 +96,7 @@
 
 .profileContent {
   border: 1px solid #f5f5f5;
-  padding: 30px;
+  padding: 3rem;
   align-items: center;
   overflow: scroll;
 }
@@ -106,8 +106,8 @@
   grid-template-areas:
     'stats stats stats stats chart chart chart chart chart chart chart chart'
     'monthly monthly monthly monthly monthly monthly monthly monthly monthly monthly monthly monthly';
-  grid-gap: 30px;
-  grid-template-rows: 200px min-content;
+  grid-gap: 3rem;
+  grid-template-rows: 20rem min-content;
 }
 
 .statsContainer {
@@ -116,7 +116,7 @@
   height: 100%;
   width: 100%;
   background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 2rem rgba(0, 0, 0, 0.04);
 }
 
 .weeklyContainer {
@@ -127,8 +127,8 @@
   height: 100%;
   width: 100%;
   background-color: #fff;
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 2rem rgba(0, 0, 0, 0.04);
 
   & > div {
     display: flex;
@@ -143,7 +143,7 @@
   height: 100%;
   width: 100%;
   background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 2rem rgba(0, 0, 0, 0.04);
 }
 
 .inputContainer {
@@ -164,7 +164,7 @@
 .input {
   border: none;
   background-color: transparent;
-  font-size: 36px;
+  font-size: 3.6rem;
   transition: border-bottom 0.2s ease;
   padding: 0;
 
@@ -183,22 +183,22 @@
   // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.04);
 
   &Circle {
-    height: 50px;
-    width: 50px;
+    height: 5rem;
+    width: 5rem;
     color: #fff;
     background-color: coral;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    font-size: 18px;
+    font-size: 1.8rem;
     text-transform: uppercase;
   }
 
   &Table {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
   }
 
   &Col {
@@ -208,17 +208,17 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 0px 10px;
+    padding: 0px 1rem;
     list-style: none;
     text-align: center;
     min-width: max-content;
 
     & div:nth-last-of-type(2) {
-      font-size: 15px;
+      font-size: 1.5rem;
     }
 
     & div:nth-last-of-type(1) {
-      font-size: 24px;
+      font-size: 2.4rem;
     }
 
     &:not(:last-child) {
@@ -227,7 +227,7 @@
         position: absolute;
         right: 0;
         top: 30%;
-        height: 20px;
+        height: 2rem;
         width: 1px;
         background-color: #ccc;
       }
@@ -236,10 +236,10 @@
 }
 
 .chart {
-  margin-top: 50px;
+  margin-top: 5rem;
 }
 
 .runLogger {
-  font-size: 36px;
+  font-size: 3.6rem;
   font-weight: 900;
 }

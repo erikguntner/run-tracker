@@ -10,15 +10,15 @@ $light-grey-4: #9aa5b1;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 77px;
-  right: 40px;
-  width: 100px;
+  top: 7.7rem;
+  right: 4rem;
+  width: 10rem;
   z-index: 10;
   background-color: #fff;
   overflow: hidden;
 
   @media screen and (max-width: 800px) {
-    top: 64px;
+    top: 6.4rem;
   }
 
   &:hover ul {
@@ -34,8 +34,8 @@ $light-grey-4: #9aa5b1;
   }
 
   &Select {
-    font-size: 20px;
-    height: 40px;
+    font-size: 2rem;
+    height: 4rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -62,7 +62,7 @@ $light-grey-4: #9aa5b1;
     padding: 0;
     margin: 0;
     width: 100%;
-    font-size: 20px;
+    font-size: 2rem;
     display: none;
 
     li {
