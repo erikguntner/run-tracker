@@ -11,18 +11,22 @@ export default ChildComponent => {
     componentDidUpdate() {
       this.shouldNavigateAway();
     }
+
     shouldNavigateAway() {
       const { authenticated, history } = this.props;
       if (!authenticated) {
         history.push('/');
       }
     }
+
     render() {
       return <ChildComponent {...this.props} />;
     }
   }
+
   function mapStateToProps(store) {
     return { authenticated: store.auth.authenticated };
   }
+
   return connect(mapStateToProps)(ComposedComponent);
 };

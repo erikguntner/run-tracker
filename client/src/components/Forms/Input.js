@@ -23,6 +23,7 @@ const Input = ({ field = {}, form = {}, dateProps = {}, type, label }) => {
           {label}
         </label>
       </div>
+      <div />
       {touched[name] && errors[name] && (
         <div className={styles.errorMessage}>{errors[name]}</div>
       )}

@@ -47,7 +47,11 @@ export const parseDates = runs => {
 
     var result = dateFns.getISODay(new Date(...splitDate));
 
-    runData[result - 1].distance = runs[i].distance;
+    if (runData[result - 1].distance) {
+      runData[result - 1].distance += runs[i].distance;
+    } else {
+      runData[result - 1].distance = runs[i].distance;
+    }
   }
   return runData;
 };

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import RouteCard from './RouteCard';
 import styles from '../stylesheets/Route.module.scss';
 
-class PathList extends PureComponent {
+export class PathList extends PureComponent {
   componentDidMount() {
     this.props.getRoutes();
   }
@@ -14,7 +14,6 @@ class PathList extends PureComponent {
       prevProps.authenticated !== this.props.authenticated &&
       this.props.authenticated !== ''
     ) {
-      console.log('refetch routes');
       this.props.getRoutes();
     }
   }

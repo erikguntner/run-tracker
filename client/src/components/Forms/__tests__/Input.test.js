@@ -50,8 +50,7 @@ describe('<Input />', () => {
         },
       },
     });
-
-    expect(wrapper.find('.error').length).toBe(1);
+    
     expect(wrapper.find('.errorMessage').length).toBe(1);
     expect(wrapper.find('.errorMessage').text()).toEqual('is required');
   });
