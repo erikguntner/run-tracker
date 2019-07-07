@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PathList } from '../PathList';
+import { RouteCard } from '../RouteCard';
 
 const setUp = () => {
   const enzymeProps = {
@@ -43,7 +44,6 @@ describe('<PathList />', () => {
   });
 
   it('should render a loading div when loading is true and list is empty', () => {
-    console.log(wrapper.debug());
     expect(
       wrapper
         .find('.list')
@@ -52,5 +52,27 @@ describe('<PathList />', () => {
     ).toBe('...Loading');
   });
 
-  it('should render show a list of routes', () => {});
+  it('should render show a list of routes', () => {
+    const routes = [
+      {
+        title: 'route 1',
+        _id: 1,
+      },
+      {
+        title: 'route 2',
+        _id: 2,
+      },
+    ];
+
+    wrapper.setProps({
+      routes,
+    });
+
+    expect(
+      wrapper
+        .find('div')
+        .first()
+        .children().length
+    ).toBe(2);
+  });
 });

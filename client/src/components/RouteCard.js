@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as turf from '@turf/turf';
 import styles from '../stylesheets/Route.module.scss';
 
-const RouteCard = ({ route, id, deleteRoute }) => {
+export const RouteCard = ({ route, id, deleteRoute }) => {
   const { image } = route;
   const distance = route.distance[route.distance.length - 1];
 
