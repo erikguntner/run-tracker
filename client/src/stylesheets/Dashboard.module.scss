@@ -1,8 +1,16 @@
+@import './shared/shared.scss';
+
 .profileGrid {
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-rows: calc(100vh - 7rem);
   background-color: #fcfcfc;
+
+  @include respond(tab-port) {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 7rem);
+  }
 }
 
 .profileSidebar {
@@ -11,17 +19,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  // overflow: scroll;
 
   ul {
     width: 100%;
     list-style: none;
     margin-bottom: auto;
 
+    @include respond(tab-port) {
+      display: flex;
+      margin-bottom: 0;
+    }
+
     li {
       height: 4rem;
       width: 100%;
-      margin-top: 1rem;
+
+      @include respond(tab-port) {
+        margin-top: 0;
+      }
     }
   }
 }
@@ -99,6 +114,7 @@
   padding: 3rem;
   align-items: center;
   overflow: scroll;
+  --webkit-overflow-scrolling: touch;
 }
 
 .stats {

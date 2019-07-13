@@ -1,8 +1,14 @@
+@import './shared/shared.scss';
+
 html {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  font-size: 10px;
+  font-size: 62.5%;
+
+  @include respond(tab-port) {
+    font-size: 56.25%; // 1rem = 9px; 9/16 = 50%
+  }
 }
 
 * {
