@@ -4,6 +4,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { withRouter } from 'react-router-dom';
 import Header from './Header';
 
+import styles from '../stylesheets/App.module.scss';
+
 export class App extends Component {
   componentDidMount() {
     this.props.loadUser();
@@ -11,14 +13,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          height: '100%',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+      <div className={styles.app}>
         <Header />
         {this.props.children}
       </div>
