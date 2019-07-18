@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import styles from '../../stylesheets/CustomSelect.module.scss';
 
 class CustomSelect extends Component {

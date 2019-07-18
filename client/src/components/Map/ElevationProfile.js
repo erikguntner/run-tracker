@@ -14,6 +14,7 @@ import {
 } from 'recharts';
 import { useTransition, animated } from 'react-spring';
 import flatten from 'lodash/flatten';
+
 import styles from '../../stylesheets/ElevationProfile.module.scss';
 
 const ElevationProfile = ({ elevationData, elevation }) => {
@@ -38,7 +39,7 @@ const ElevationProfile = ({ elevationData, elevation }) => {
               {elevationData.length === 0 ? (
                 'No elevation data yet'
               ) : (
-                <ResponsiveContainer width="80%" height="90%">
+                <ResponsiveContainer width="100%" height="90%">
                   <AreaChart
                     data={data}
                     margin={{

@@ -1,0 +1,49 @@
+@import './shared/shared.scss';
+
+.navBtn {
+  height: 100%;
+  width: 100%;
+  padding-left: 4rem;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  outline: none;
+
+  @include respond(tab-port) {
+    font-size: 1rem;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  svg {
+    font-size: 1.8rem;
+    color: #333;
+
+    @include respond(tab-port) {
+      font-size: 1.4rem;
+    }
+  }
+
+  b {
+    color: lighten(#333, 5%);
+    margin-left: 5px;
+  }
+}
+
+.activeBtn {
+  background-color: lighten(#0991d3, 45%);
+
+  &:active {
+    outline: none;
+  }
+}

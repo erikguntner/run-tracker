@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import CustomSelect from '../Utilities/CustomSelect';
 import {
   XAxis,
   YAxis,
@@ -13,6 +12,9 @@ import {
 } from 'recharts';
 import { getMonthlyRuns } from '../../actions/runLog';
 import dateFns from 'date-fns';
+
+import CustomSelect from '../Utilities/CustomSelect';
+
 import styles from '../../stylesheets/Chart.module.scss';
 
 class DistanceChart extends Component {

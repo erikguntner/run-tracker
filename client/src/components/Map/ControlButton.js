@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from '../../stylesheets/Controls.module.scss';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import styles from '../../stylesheets/ControlButton.module.scss';
 
 const ControlButton = ({ disabled, click, icon, tooltip, activeState }) => {
   return (

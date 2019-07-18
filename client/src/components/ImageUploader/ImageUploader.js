@@ -12,7 +12,6 @@ class ImageUploader extends Component {
   };
 
   render() {
-    console.log(this.state.image);
     return (
       <div>
         <h5>Add An Image</h5>

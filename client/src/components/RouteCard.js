@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as turf from '@turf/turf';
-import styles from '../stylesheets/Route.module.scss';
 
-export const RouteCard = ({ route, id, deleteRoute }) => {
+import styles from '../stylesheets/RouteCard.module.scss';
+
+export const RouteCard = ({ route, id, deleteRoute, deleteBtn }) => {
   const { image } = route;
   const distance = route.distance[route.distance.length - 1];
 
@@ -14,13 +15,17 @@ export const RouteCard = ({ route, id, deleteRoute }) => {
       </div>
       <div className={styles.routeDetails}>
         <div className={styles.row}>
-          <div>{route.title ? route.title : 'title'}</div>
-          <div>{turf.round(distance, 2)} miles</div>
+          <p>{route.title ? route.title : 'title'}</p>
+          <p>{turf.round(distance, 2)} miles</p>
         </div>
-        <button onClick={() => deleteRoute(id)}>Delete</button>
+        {deleteBtn && <button onClick={() => deleteRoute(id)}>Delete</button>}
       </div>
     </article>
   );
+};
+
+RouteCard.defaultProps = {
+  deleteBtn: true,
 };
 
 RouteCard.propTypes = {

@@ -15,7 +15,12 @@
 .message {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 2rem;
+
+  p {
+    font-size: 1.4rem;
+  }
 
   button {
     margin-left: 3px;

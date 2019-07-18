@@ -2,7 +2,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import styles from '../../stylesheets/Dashboard.module.scss';
+
+import styles from '../../stylesheets/DashboardLink.module.scss';
 
 const DashboardLink = ({ title, icon, link, id, path }) => (
   <Link to={link}>

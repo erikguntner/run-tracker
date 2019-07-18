@@ -1,3 +1,6 @@
+$light-grey: #f8f8fd;
+$danger: #dd3545;
+
 @mixin respond($breakpoint) {
   @if ($breakpoint == phone) {
     //600px

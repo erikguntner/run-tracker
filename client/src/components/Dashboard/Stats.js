@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import styles from '../../stylesheets/Dashboard.module.scss';
 
 const Stats = ({
   weeklyTotals: { totalDistance, totalHrs, totalMins, totalSecs, totalDays },
+  username,
 }) => {
   let hours = totalHrs;
   let mins = totalMins;
@@ -22,7 +24,9 @@ const Stats = ({
   return (
     <div className={styles.userProgress}>
       <div>
-        <div className={styles.userProgressCircle}>S</div>
+        <div className={styles.userProgressCircle}>
+          {username && username.split('')[0].toUpperCase()}
+        </div>
       </div>
       <ul className={styles.userProgressTable}>
         <li className={styles.userProgressCol}>

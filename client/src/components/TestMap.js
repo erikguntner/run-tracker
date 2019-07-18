@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactMapGL from 'react-map-gl';
 import WebMercatorViewport from 'viewport-mercator-project';
-import PolylineOverlay from './PolylineOverlay';
 import * as turfHelpers from '@turf/helpers';
 // import center from '@turf/center';
 import bbox from '@turf/bbox';
+
+import PolylineOverlay from './PolylineOverlay';
 
 const TestMap = ({ points, setMapLoaded }) => {
   // const points = [[-117.731672, 34.106999], [-117.72708, 34.107004]];

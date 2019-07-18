@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../stylesheets/Donut.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
+
+import styles from '../../stylesheets/SetGoal.module.scss';
 
 const SetGoal = ({
   setGoal,

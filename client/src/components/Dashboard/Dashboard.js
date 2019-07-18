@@ -6,8 +6,10 @@ import {
   faWalking,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { faClipboard } from '@fortawesome/free-regular-svg-icons';
+
 import DashboardLink from './DashboardLink';
-import PathList from '../PathList';
+import RouteList from '../RouteList';
 import StatsContainer from './StatsContainer';
 import RunLog from './RunLog';
 import UpdatedRunForm from '../Forms/UpdatedRunForm';
@@ -59,7 +61,7 @@ class Dashboard extends Component {
               <DashboardLink
                 id={'run-form'}
                 title={'log run'}
-                icon={faWalking}
+                icon={faClipboard}
                 link={'/profile/run-form'}
                 path={path}
               />
@@ -69,8 +71,8 @@ class Dashboard extends Component {
         <div className={styles.profileContent}>
           {path[2] === 'stats' && <StatsContainer />}
           {path[2] === 'routes' && (
-            <div className={styles.pathListContainer}>
-              <PathList type={'grid'} />
+            <div className={styles.routeListContainer}>
+              <RouteList type={'grid'} />
             </div>
           )}
           {path[2] === 'log' && <RunLog />}

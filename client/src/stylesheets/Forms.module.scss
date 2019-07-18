@@ -15,17 +15,14 @@
     justify-content: center;
     width: 100%;
 
-    input {
-      margin-bottom: 2rem;
-    }
-
     button {
-      font-size: 1.6rem;
-      padding: 13px 2.0rem;
       width: 100%;
+      padding: 13px 2rem;
+      margin-top: 2rem;
       background-color: #0991d3;
       border: none;
       border-radius: 5px;
+      font-size: 1.6rem;
       color: #fff;
       transition: all 0.1s ease;
 
@@ -44,7 +41,7 @@
 
 .formError {
   color: red;
-  margin-top: -2.0rem;
+  margin-top: -2rem;
   margin-bottom: 5px;
   font-size: 1.5rem;
 }

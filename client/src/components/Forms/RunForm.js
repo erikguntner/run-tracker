@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import dateFns from 'date-fns';
+import * as Yup from 'yup';
+import { logRun } from '../../actions/runLog';
 
 import RunLogger from './RunLogger';
 import UnderlinedInput from './UndelinedInput';
 
-import { logRun } from '../../actions/runLog';
 import styles from '../../stylesheets/RunningForm.module.scss';
-import dateFns from 'date-fns';
-import * as Yup from 'yup';
 
 const RunSchema = Yup.object().shape({
   distance: Yup.string().required(),

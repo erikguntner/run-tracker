@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { setGoal } from '../../actions/goal';
+
 import DonutChart from './DonutChart';
 import SetGoal from './SetGoal';
-import { setGoal } from '../../actions/goal';
+
 import styles from '../../stylesheets/Donut.module.scss';
 
 class Donut extends Component {
@@ -57,7 +59,6 @@ class Donut extends Component {
 
     return (
       <div className={styles.donutContainer}>
-        <h4>Weekly Goal</h4>
         {goal && !setGoal ? (
           <DonutChart
             goal={goal}

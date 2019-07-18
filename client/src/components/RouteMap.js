@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL from 'react-map-gl';
 import WebMercatorViewport from 'viewport-mercator-project';
-import PolylineOverlay from './PolylineOverlay';
 import * as turfHelpers from '@turf/helpers';
 // import center from '@turf/center';
 import bbox from '@turf/bbox';
+
+import PolylineOverlay from './PolylineOverlay';
 
 class RouteMap extends PureComponent {
   render() {

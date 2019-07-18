@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
+import { reduceDatesByMonth } from '../../utils/reduceDatesByMonth';
 
 import styles from '../../stylesheets/RunLog.module.scss';
-import { reduceDatesByMonth } from '../../utils/reduceDatesByMonth';
 
 class RunLog extends Component {
   render() {
@@ -38,9 +38,9 @@ class RunLog extends Component {
                       key={`run-${i}`}
                       data-text={date.split('/')[1]}
                     >
-                      <div>
-                        <h3>{date}</h3>
-                        <h4>{run.distance} miles</h4>
+                      <div className={styles.runDetails}>
+                        <p>{date}</p>
+                        <p>{run.distance} miles</p>
                       </div>
                     </article>
                   );

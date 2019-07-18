@@ -1,0 +1,44 @@
+@import './shared/shared.scss';
+
+.list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  padding-top: 1.5rem;
+  overflow: scroll;
+  background-color: $light-grey;
+  list-style: none;
+  --webkit-overflow-scrolling: touch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: min-content;
+  grid-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  padding-top: 1.5rem;
+  overflow: scroll;
+  background-color: #fcfcfc;
+  list-style: none;
+  --webkit-overflow-scrolling: touch;
+
+  @include respond(tab-port) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond(phone) {
+    grid-template-columns: repeat(1, 30rem);
+  }
+
+  & > article {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}

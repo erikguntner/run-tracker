@@ -8,10 +8,12 @@ import dateFns from 'date-fns';
 import { logRun } from '../../actions/runLog';
 
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-import 'react-day-picker/lib/style.css';
 import Input from './Input';
+import RoutePicker from '../RoutePicker';
+
 import inputStyles from '../../stylesheets/Input.module.scss';
 import styles from '../../stylesheets/UpdatedRunningForm.module.scss';
+import 'react-day-picker/lib/style.css';
 
 const RunSchema = Yup.object().shape({
   distance: Yup.number()

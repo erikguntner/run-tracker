@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import styles from '../../stylesheets/Input.module.scss';
 
 const Input = ({ field = {}, form = {}, dateProps = {}, type, label }) => {
@@ -23,7 +24,6 @@ const Input = ({ field = {}, form = {}, dateProps = {}, type, label }) => {
           {label}
         </label>
       </div>
-      <div />
       {touched[name] && errors[name] && (
         <div className={styles.errorMessage}>{errors[name]}</div>
       )}

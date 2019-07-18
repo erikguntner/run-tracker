@@ -1,0 +1,38 @@
+.mapContainer {
+  height: 15rem;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.routeContainer {
+  width: 29rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 2rem rgba(0, 0, 0, 0.04);
+  margin-bottom: 1.5rem;
+  transition: all 0.5s linear;
+}
+
+.routeDetails {
+  padding: 1rem 2rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > p {
+    font-size: 1.6rem;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}

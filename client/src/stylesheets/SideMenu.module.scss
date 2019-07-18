@@ -24,13 +24,20 @@
   h3 {
     margin-top: 0px;
     margin-bottom: 2rem;
+    font-size: 1.6rem;
   }
 }
 
 .circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.6rem;
   height: 10rem;
   width: 10rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   background-color: coral;
   border-radius: 50%;
 }

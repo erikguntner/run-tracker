@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
-import Input from './Input';
-import styles from '../../stylesheets/Forms.module.scss';
 import * as Yup from 'yup';
+
+import Input from './Input';
+
+import styles from '../../stylesheets/Forms.module.scss';
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()

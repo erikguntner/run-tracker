@@ -1,3 +1,5 @@
+@import 'shared/shared.scss';
+
 .dropdown {
   visibility: hidden;
   position: absolute;
@@ -30,6 +32,27 @@
     color: #fff;
     transition: opacity 0.2s ease;
     width: 100%;
+
+    & > button {
+      display: none;
+      padding: 8px 1rem;
+      width: 100%;
+      background: transparent;
+      border: none;
+      font-size: 1.4rem;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+
+      @include respond(phone) {
+        display: inline-block;
+      }
+
+      &:hover {
+        background-color: #0991d3;
+        color: #fff;
+      }
+    }
   }
 
   &Btn {

@@ -9,6 +9,7 @@ import {
   faAngleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { updateTransportation } from '../../actions/index';
+
 import styles from '../../stylesheets/TransportationSelect.module.scss';
 
 class TransportationSelect extends Component {

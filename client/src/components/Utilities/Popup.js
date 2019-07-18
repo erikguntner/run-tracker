@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { closePopup } from '../../actions/popup';
+
 import Portal from './Portal';
+
 import styles from '../../stylesheets/Popup.module.scss';
 
-import { closePopup } from '../../actions/popup';
 
 class Popup extends Component {
   componentDidUpdate() {

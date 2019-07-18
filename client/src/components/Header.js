@@ -55,7 +55,7 @@ export class Header extends Component {
                     <button onClick={() => signout(history)}>sign out</button>
                   </>
                 ) : (
-                  <button onClick={() => history.push('/signin')}>Login</button>
+                  <button onClick={() => history.push('/signin')}>login</button>
                 )}
                 <SideMenuWrapper
                   open={open}
@@ -76,7 +76,11 @@ export class Header extends Component {
                         <FontAwesomeIcon icon={faChevronDown} />
                       </span>
                     </div>
-                    <Dropdown dropdownOpen={dropdownOpen} />
+                    <Dropdown
+                      history={history}
+                      signout={signout}
+                      dropdownOpen={dropdownOpen}
+                    />
                   </div>
                 )}
 

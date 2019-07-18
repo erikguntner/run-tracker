@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getWeeklyRuns } from '../../actions/runLog';
+
 import DistanceChart from './DistanceChart';
 import WeeklyChart from './WeeklyChart';
 import Donut from './Donut';
 import Stats from './Stats';
-import { getWeeklyRuns } from '../../actions/runLog';
 
 import styles from '../../stylesheets/Dashboard.module.scss';
 
@@ -15,12 +16,12 @@ class StatsContainer extends Component {
   }
 
   render() {
-    const { thisWeeksRuns, weeklyTotals } = this.props;
+    const { thisWeeksRuns, weeklyTotals, username } = this.props;
 
     return (
       <div className={styles.stats}>
         <div className={styles.statsContainer}>
-          <Stats weeklyTotals={weeklyTotals} />
+          <Stats username={username} weeklyTotals={weeklyTotals} />
         </div>
         <div className={styles.weeklyContainer}>
           <div className={styles.row}>
@@ -43,6 +44,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = store => ({
   thisWeeksRuns: store.runLog.thisWeeksRuns,
   weeklyTotals: store.runLog.weeklyTotals,
+  username: store.auth.username,
 });
 
 StatsContainer.propTypes = {

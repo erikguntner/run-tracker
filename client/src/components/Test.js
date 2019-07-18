@@ -10,7 +10,6 @@ const Test = props => {
       .then(res => res.json())
       .then(data => {
         const base64 = data.data.toString('base64');
-        console.log(base64);
         setImage(base64);
       })
       .catch(err => console.log(err));

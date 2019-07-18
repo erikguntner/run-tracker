@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import SigninForm from './Forms/SigninForm';
 import SignupForm from './Forms/SignupForm';
+
 import styles from '../stylesheets/SigninContainer.module.scss';
 
 class Signin extends Component {
   renderFormChangeMessage = (path, history) => {
     return path === '/signup' ? (
       <div className={styles.message}>
-        <div>Already have an account?</div>
+        <p>Already have an account?</p>
         <button onClick={() => history.push('/signin')}>Signin</button>
       </div>
     ) : (
       <div className={styles.message}>
-        <div>Want to Signup for a new account?</div>
+        <p>Want to Signup for a new account?</p>
         <button onClick={() => history.push('/signup')}>Signup</button>
       </div>
     );

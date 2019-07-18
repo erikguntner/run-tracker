@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { useSpring, animated } from 'react-spring';
 
 import Icon from './Utilities/Icon';
+import RouteList from './RouteList';
+
 import styles from '../stylesheets/SideMenu.module.scss';
-import PathList from './PathList';
 
 const SideMenuWrapper = ({ children, toggle, open, username }) => {
   const { x, y } = useSpring({
@@ -31,9 +32,11 @@ const SideMenuWrapper = ({ children, toggle, open, username }) => {
         <button className={styles.close} onClick={toggle}>
           <Icon name="close" />
         </button>
-        <div className={styles.circle} />
+        <div className={styles.circle}>
+          {username && username.split('')[0].toUpperCase()}
+        </div>
         <h3>{username}</h3>
-        <PathList open={open} type={'list'} />
+        <RouteList open={open} type={'list'} deleteBtn={false} />
       </animated.div>
     </>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { PathList } from '../PathList';
+import { RouteList } from '../RouteList';
 import { RouteCard } from '../RouteCard';
 
 const setUp = () => {
@@ -13,7 +13,7 @@ const setUp = () => {
     type: 'list',
   };
 
-  const enzymeWrapper = shallow(<PathList {...enzymeProps} />);
+  const enzymeWrapper = shallow(<RouteList {...enzymeProps} />);
 
   return {
     enzymeProps,
@@ -21,7 +21,7 @@ const setUp = () => {
   };
 };
 
-describe('<PathList />', () => {
+describe('<RouteList />', () => {
   let wrapper;
   let props;
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'formik';
+
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+
 import 'react-day-picker/lib/style.css';
 import styles from '../../stylesheets/RunningForm.module.scss';
 import pickerStyles from '../../stylesheets/DayPicker.module.scss';

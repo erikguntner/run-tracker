@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import RouteCard from './RouteCard';
-import styles from '../stylesheets/Route.module.scss';
 
-export class PathList extends PureComponent {
+import RouteCard from './RouteCard';
+
+import styles from '../stylesheets/RouteList.module.scss';
+
+export class RouteList extends PureComponent {
   componentDidMount() {
     this.props.getRoutes();
   }
@@ -23,7 +25,7 @@ export class PathList extends PureComponent {
       grid: styles.grid,
       list: styles.list,
     };
-    const { routes, loadingRoutes, deleteRoute, type } = this.props;
+    const { routes, loadingRoutes, deleteRoute, type, deleteBtn } = this.props;
 
     return (
       <div className={listStyles[type]}>
@@ -35,6 +37,7 @@ export class PathList extends PureComponent {
               deleteRoute={deleteRoute}
               id={route._id}
               route={route}
+              deleteBtn={deleteBtn}
             />
           );
         })}
@@ -61,7 +64,7 @@ const mapDispatchToProps = dispatch => ({
     }),
 });
 
-PathList.propTypes = {
+RouteList.propTypes = {
   routes: PropTypes.array,
   loadingRoutes: PropTypes.bool,
   deleteRoute: PropTypes.func,
@@ -71,4 +74,4 @@ PathList.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PathList);
+)(RouteList);

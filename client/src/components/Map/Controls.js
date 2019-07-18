@@ -16,11 +16,12 @@ import {
   changeToClipPath,
   showElevation,
 } from '../../actions';
-import styles from '../../stylesheets/Controls.module.scss';
 
 import Modal from '../Utilities/Modal';
 import SaveRoute from '../Forms/SaveRoute';
 import ControlButton from './ControlButton';
+
+import styles from '../../stylesheets/Controls.module.scss';
 
 class Controls extends Component {
   state = {

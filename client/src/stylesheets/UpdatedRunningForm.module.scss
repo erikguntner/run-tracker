@@ -1,6 +1,11 @@
+@import './shared/shared.scss';
+
 .section {
   width: 100%;
-  padding: 10rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
@@ -16,7 +21,17 @@
   grid-template-areas:
     'distance distance distance distance distance distance date date date date date date'
     'hrs hrs hrs hrs mins mins mins mins secs secs secs secs'
+    'route route route route route route route route route route route route'
     '. . . . submit submit submit submit . . . .';
+
+  @include respond(phone) {
+    grid-template-areas:
+      'distance distance distance distance distance distance distance distance distance distance distance distance'
+      'date date date date date date date date date date date date'
+      'hrs hrs hrs hrs mins mins mins mins secs secs secs secs'
+      'route route route route route route route route route route route route'
+      '. . . . submit submit submit submit . . . .';
+  }
 
   & div:nth-of-type(1) {
     grid-area: distance;
@@ -36,6 +51,10 @@
 
   & div:nth-of-type(5) {
     grid-area: secs;
+  }
+
+  & div:nth-of-type(6) {
+    grid-area: route;
   }
 
   & button {
