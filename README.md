@@ -14,4 +14,4 @@
 - __Save Routes:__ By creating an account, you can save your routes and revisit them before going for a run
 - __Log Runs:__ From your dashboard, go to the log runs tab fill out the form to submit the run you just went on. These can all be in the run log tab
 - __Set Goals:__ Set your weekly goals and watch the bar fill up as you log runs for the week
-- __Monthyl Charts:__ A bar chart of your runs every month allows you to see how far you have come as a runner
+- __Monthly Charts:__ A bar chart of your runs every month allows you to see how far you have come as a runner
