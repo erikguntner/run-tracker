@@ -51,12 +51,14 @@
     color: #fff;
     transition: all 0.2s ease;
 
-    &:hover {
-      cursor: pointer;
-      background-color: black;
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+        background-color: black;
 
-      span:nth-of-type(2) {
-        transform: translateY(20%);
+        span:nth-of-type(2) {
+          transform: translateY(20%);
+        }
       }
     }
 
@@ -111,8 +113,10 @@
   height: 100%;
   padding: 0 8px;
 
-  &:hover {
-    background: black;
+  @media (hover: hover) {
+    &:hover {
+      background: black;
+    }
   }
 
   &:hover .bar1,
@@ -161,9 +165,11 @@
     margin-right: 1rem;
     transition: all 0.2s ease;
 
-    &:hover {
-      cursor: pointer;
-      background-color: black;
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+        background-color: black;
+      }
     }
 
     @include respond(phone) {

@@ -83,12 +83,16 @@ class Donut extends Component {
           ''
         )}
         {!setGoal && goal ? (
-          <button onClick={this.updateSetGoal}>Change Goal</button>
+          <button className={styles.btn} onClick={this.updateSetGoal}>
+            Change Goal
+          </button>
         ) : (
           ''
         )}
         {setGoal && goal ? (
-          <button onClick={this.cancelUpdateGoal}>cancel</button>
+          <button className={styles.btnCancel} onClick={this.cancelUpdateGoal}>
+            cancel
+          </button>
         ) : (
           ''
         )}

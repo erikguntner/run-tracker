@@ -61,3 +61,22 @@
     outline: none;
   }
 }
+
+@mixin btn($color) {
+  border: none;
+  font-size: 1.4rem;
+  color: $color;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline $color;
+  }
+}
+
+.btn {
+  @include btn(blue);
+}
+
+.btnCancel {
+  @include btn(red);
+}
