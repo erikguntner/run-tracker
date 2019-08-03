@@ -80,6 +80,10 @@
   align-items: center;
   overflow: scroll;
   --webkit-overflow-scrolling: touch;
+
+  @include respond(phone) {
+    padding: 1rem;
+  }
 }
 
 .stats {

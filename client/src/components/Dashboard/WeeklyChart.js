@@ -9,7 +9,7 @@ const DistanceChart = ({ thisWeeksRuns }) => {
 
   return (
     <AreaChart
-      width={400}
+      width={300}
       height={125}
       data={newData}
       margin={{

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../stylesheets/CustomSelect.module.scss';
 
@@ -30,11 +32,16 @@ class CustomSelect extends Component {
     const { options } = this.props;
     const { open, headerTitle } = this.state;
 
+    const rotateStyle = open ? styles.rotate : '';
+
     return (
       <div className={styles.container}>
-        <div className={styles.header} onClick={this.handleOpen}>
+        <div className={styles.select} onClick={this.handleOpen}>
           <div className={styles.title}>{headerTitle}</div>
-          <div>Arrow</div>
+          <FontAwesomeIcon
+            className={`${styles.icon} ${rotateStyle}`}
+            icon={faChevronRight}
+          />
         </div>
         <ul className={`${styles.dropdown} ${open ? styles.open : ''}`}>
           {options.map(({ id, selected, title }, i) => (
