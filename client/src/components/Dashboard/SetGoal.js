@@ -27,7 +27,7 @@ const SetGoal = ({
               type="number"
               placeholder="5"
             />
-            <button onClick={updateGoal}>Save Goal</button>
+            <button onClick={updateGoal}>save goal</button>
           </>
         ) : (
           <div className={styles.setGoal} onClick={updateSetGoal}>

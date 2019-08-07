@@ -95,8 +95,6 @@ exports.getThisWeeksRuns = async (req, res, next) => {
     },
   ]);
 
-  console.log(aggregatedData[0].totals);
-
   return res.status(200).json({
     runlog: aggregatedData[0].runlog,
     totals: aggregatedData[0].totals,

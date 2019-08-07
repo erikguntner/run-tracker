@@ -84,7 +84,7 @@ class Donut extends Component {
         )}
         {!setGoal && goal ? (
           <button className={styles.btn} onClick={this.updateSetGoal}>
-            Change Goal
+            change goal
           </button>
         ) : (
           ''

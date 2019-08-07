@@ -1,3 +1,5 @@
+@import './shared/shared.scss';
+
 .formContainer {
   display: flex;
   flex-direction: column;
@@ -19,7 +21,7 @@
       width: 100%;
       padding: 13px 2rem;
       margin-top: 2rem;
-      background-color: #0991d3;
+      background-color: $blue;
       border: none;
       border-radius: 5px;
       font-size: 1.6rem;
@@ -28,7 +30,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: lighten(#0991d3, 2%);
+        background-color: lighten($blue, 2%);
       }
     }
   }

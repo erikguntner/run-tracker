@@ -1,3 +1,5 @@
+@import './shared/shared.scss';
+
 .donutContainer {
   display: flex;
   flex-direction: column;
@@ -74,9 +76,9 @@
 }
 
 .btn {
-  @include btn(blue);
+  @include btn($blue);
 }
 
 .btnCancel {
-  @include btn(red);
+  @include btn($danger);
 }

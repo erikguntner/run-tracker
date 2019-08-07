@@ -18,7 +18,11 @@ export const RouteCard = ({ route, id, deleteRoute, deleteBtn }) => {
           <p>{route.title ? route.title : 'title'}</p>
           <p>{turf.round(distance, 2)} miles</p>
         </div>
-        {deleteBtn && <button onClick={() => deleteRoute(id)}>Delete</button>}
+        {deleteBtn && (
+          <button className={styles.btnDelete} onClick={() => deleteRoute(id)}>
+            Delete
+          </button>
+        )}
       </div>
     </article>
   );

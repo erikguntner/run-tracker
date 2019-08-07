@@ -1,5 +1,12 @@
+$primary-color: #333;
 $light-grey: #f8f8fd;
+$light-grey-1: #f5f7fa;
+$light-grey-2: #e4e7eb;
+$light-grey-3: #cbd2d9;
+$light-grey-4: #9aa5b1;
+$blue: #0991d3;
 $danger: #dd3545;
+// #dd2c00
 
 @mixin respond($breakpoint) {
   @if ($breakpoint == phone) {

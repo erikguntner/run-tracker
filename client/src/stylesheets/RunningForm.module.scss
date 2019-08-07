@@ -1,3 +1,5 @@
+@import './shared/shared.scss';
+
 .section {
   width: 100vw;
   height: 100vh;
@@ -52,7 +54,7 @@
       font-size: 1.6rem;
       padding: 1.3rem 2rem;
       width: 100%;
-      background-color: #0991d3;
+      background-color: $blue;
       border: none;
       border-radius: 5px;
       color: #fff;
@@ -60,7 +62,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: lighten(#0991d3, 2%);
+        background-color: lighten(#$blue, 2%);
       }
     }
   }
@@ -130,7 +132,7 @@
   padding: 1rem 1.5rem;
   font-size: 1.6rem;
   color: #fff;
-  background-color: #0991d3;
+  background-color: #$blue;
   text-transform: lowercase;
   border-radius: 5rem;
   margin-top: 2rem;
@@ -138,6 +140,6 @@
 
   &:hover {
     cursor: pointer;
-    background-color: darken(#0991d3, 10%);
+    background-color: darken(#$blue, 10%);
   }
 }

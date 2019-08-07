@@ -1,3 +1,5 @@
+@import './shared/shared.scss';
+
 .setGoal {
   display: flex;
   justify-content: center;
@@ -36,11 +38,11 @@
     & > button {
       border: none;
       font-size: 1.4rem;
-      color: blue;
+      color: $blue;
 
       &:hover {
         cursor: pointer;
-        text-decoration: underline blue;
+        text-decoration: underline $blue;
       }
     }
   }

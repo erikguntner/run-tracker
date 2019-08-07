@@ -27,9 +27,11 @@
   color: #fff;
   transition: all 0.2s ease;
 
-  &:hover {
-    cursor: pointer;
-    background-color: black;
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      background-color: black;
+    }
   }
 }
 
