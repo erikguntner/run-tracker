@@ -46,7 +46,7 @@ export const logRun = (values, setSubmitting, history) => {
 export function* getThisWeeksRuns() {
   try {
     const token = localStorage.getItem('token');
-    const thisWeeksRuns = yield call(apiGet, `${server}/runs/week`, {
+    const thisWeeksRuns = yield call(apiGet, `${server}/api/runs/week`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,
@@ -67,12 +67,16 @@ export function* getThisWeeksRuns() {
 export function* getRunsByMonth({ payload }) {
   try {
     const token = localStorage.getItem('token');
-    const monthlyRuns = yield call(apiGet, `${server}/runs/month/${payload}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: token,
-      },
-    });
+    const monthlyRuns = yield call(
+      apiGet,
+      `${server}/api/runs/month/${payload}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: token,
+        },
+      }
+    );
 
     const { runs } = monthlyRuns.data;
 
@@ -89,7 +93,7 @@ export function* getRunsByDate() {
   try {
     const token = localStorage.getItem('token');
 
-    yield call(apiGet, `${server}/runs`, {
+    yield call(apiGet, `${server}/api/runs`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,
@@ -104,7 +108,7 @@ export function* postRun({ payload: { values, setSubmitting, history } }) {
   try {
     const token = localStorage.getItem('token');
 
-    yield call(apiPost, `${server}/runs`, values, {
+    yield call(apiPost, `${server}/api/runs`, values, {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,

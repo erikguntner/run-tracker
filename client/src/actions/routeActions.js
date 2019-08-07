@@ -62,32 +62,20 @@ export function* saveRoute({
     // Post to upload to take screenshot and return the signedURL from aws
     const uploadConfig = yield call(
       apiPostWithHeaders,
-      `${server}/upload`,
+      `${server}/api/upload`,
       { lineFeatures: body.lineFeatures },
       { 'Content-Type': 'application/json', authorization: token }
     );
 
-    // Make put request to S3 to store image in bucket (experimental)
-    // const uploadFileToS3 = yield call(
-    //   putToS3,
-    //   uploadConfig.data.url,
-    //   uploadConfig.data.buf,
-    //   {
-    //     'Content-Type': 'image/jpeg',
-    //   }
-    // );
-
     const postRouteData = yield call(
       apiPostWithHeaders,
-      `${server}/routes/${matchParams.id}`,
+      `${server}/api/routes/${matchParams.id}`,
       { image: uploadConfig.data.Location, ...body },
       {
         'Content-Type': 'application/json',
         authorization: token,
       }
     );
-
-    console.log(postRouteData.data);
 
     yield put({
       type: ADD_ROUTE,
@@ -107,6 +95,7 @@ export function* saveRoute({
     });
   } catch (err) {
     console.log(err);
+
     yield put({
       type: NOTIFY_FAILURE,
       payload: {
@@ -118,12 +107,22 @@ export function* saveRoute({
   }
 }
 
+// Make put request to S3 to store image in bucket (experimental)
+// const uploadFileToS3 = yield call(
+//   putToS3,
+//   uploadConfig.data.url,
+//   uploadConfig.data.buf,
+//   {
+//     'Content-Type': 'image/jpeg',
+//   }
+// );
+
 export function* getRoutes() {
   yield put(setLoadingRoutes(true));
 
   try {
     const token = localStorage.getItem('token');
-    const getRoutesData = yield call(apiGetRequest, `${server}/routes`, {
+    const getRoutesData = yield call(apiGetRequest, `${server}/api/routes`, {
       'Content-Type': 'application/json',
       authorization: token,
     });
@@ -144,7 +143,7 @@ export function* getRoutes() {
 export function* deleteRoute({ id }) {
   try {
     const token = localStorage.getItem('token');
-    yield call(callDeleteRoute, `${server}/routes/delete`, {
+    yield call(callDeleteRoute, `${server}/api/routes/delete`, {
       params: { id },
       headers: {
         'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ const apiGetRequest = (url, headers) => axios.get(url, { headers: headers });
 
 export function* signin({ type, payload: { values, history } }) {
   try {
-    const response = yield call(apiPost, `${server}/signin`, values);
+    const response = yield call(apiPost, `${server}/api/signin`, values);
 
     yield put({
       type: AUTH_USER,
@@ -46,7 +46,7 @@ export function* loadUser() {
 
   if (token === null) return;
 
-  const getUserData = yield call(apiGetRequest, `${server}/user`, {
+  const getUserData = yield call(apiGetRequest, `${server}/api/user`, {
     'Content-Type': 'application/json',
     authorization: token,
   });
@@ -68,7 +68,7 @@ export function* loadUser() {
 
 export function* signup({ type, payload: { values, history } }) {
   try {
-    const response = yield call(apiPost, `${server}/signup`, values);
+    const response = yield call(apiPost, `${server}/api/signup`, values);
 
     yield put({
       type: AUTH_USER,

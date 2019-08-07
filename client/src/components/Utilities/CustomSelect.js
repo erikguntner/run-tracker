@@ -7,9 +7,15 @@ import styles from '../../stylesheets/CustomSelect.module.scss';
 
 class CustomSelect extends Component {
   state = {
-    headerTitle: this.props.headerTitle,
+    headerTitle: '',
     open: false,
   };
+
+  componentWillMount() {
+    this.setState({
+      headerTitle: this.props.headerTitle,
+    });
+  }
 
   handleOpen = () => {
     this.setState(prevState => ({

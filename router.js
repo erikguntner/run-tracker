@@ -16,38 +16,46 @@ const requireSignin = passport.authenticate('local', { session: false });
 
 module.exports = app => {
   // Third party api routes
-  app.post('/locations', ThirdPartyApis.getLocations);
-  app.post('/elevation', ThirdPartyApis.getElevation);
+  app.post('/api/locations', ThirdPartyApis.getLocations);
+  app.post('/api/elevation', ThirdPartyApis.getElevation);
 
   // Authentication routes
-  app.post('/signin', requireSignin, catchErrors(Authentication.signin));
-  app.post('/signup', catchErrors(Authentication.signup));
-  app.get('/users', Authentication.getall);
+  app.post('/api/signin', requireSignin, catchErrors(Authentication.signin));
+  app.post('/api/signup', catchErrors(Authentication.signup));
+  app.get('/api/users', Authentication.getall);
 
   // User
-  app.get('/user/:id', User.getUserById);
-  app.get('/user', requireAuth, User.getUserData);
+  app.get('/api/user/:id', User.getUserById);
+  app.get('/api/user', requireAuth, User.getUserData);
 
   // Routes for adding running routes
-  app.delete('/routes/delete', requireAuth, catchErrors(Routes.deleteRoute));
+  app.delete(
+    '/api/routes/delete',
+    requireAuth,
+    catchErrors(Routes.deleteRoute)
+  );
   // app.post(
   //   '/routes/:id',
   //   requireAuth,
   //   MapImage.screenshotMap,
   //   catchErrors(Routes.addRoute)
   // );
-  app.post('/routes/:id', requireAuth, catchErrors(Routes.addRoute));
-  app.get('/routes', requireAuth, catchErrors(Routes.getAllRoutes));
+  app.post('/api/routes/:id', requireAuth, catchErrors(Routes.addRoute));
+  app.get('/api/routes', requireAuth, catchErrors(Routes.getAllRoutes));
 
   //ROutes for logging runs
-  app.post('/runs', requireAuth, catchErrors(RunLog.postRun));
-  app.get('/runs', requireAuth, catchErrors(RunLog.getRunsByDate));
-  app.get('/runs/week', requireAuth, catchErrors(RunLog.getThisWeeksRuns));
-  app.get('/runs/month/:id', requireAuth, catchErrors(RunLog.getRunsByMonth));
+  app.post('/api/runs', requireAuth, catchErrors(RunLog.postRun));
+  app.get('/api/runs', requireAuth, catchErrors(RunLog.getRunsByDate));
+  app.get('/api/runs/week', requireAuth, catchErrors(RunLog.getThisWeeksRuns));
+  app.get(
+    '/api/runs/month/:id',
+    requireAuth,
+    catchErrors(RunLog.getRunsByMonth)
+  );
 
   // ROUTES FOR GOALS
-  app.post('/goal', requireAuth, catchErrors(Goal.setGoal));
+  app.post('/api/goal', requireAuth, catchErrors(Goal.setGoal));
 
   //ROUTE FOR UPLOADING AND HANDLING IMAGES TO S#
-  app.post('/upload', requireAuth, MapImage.screenshotMap, Upload.uploadImage);
+  app.post('/api/upload', requireAuth, MapImage.screenshotMap, Upload.uploadImage);
 };

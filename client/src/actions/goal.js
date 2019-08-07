@@ -19,7 +19,7 @@ export function* postNewGoal({ payload }) {
     const token = localStorage.getItem('token');
     const newGoal = yield call(
       apiPost,
-      `${server}/goal`,
+      `${server}/api/goal`,
       { goal: payload },
       {
         headers: {

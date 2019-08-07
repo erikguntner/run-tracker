@@ -101,7 +101,7 @@ export function* fetchPathData(action, ...args) {
 
       if (clipPath) {
         // Path data contains the result from the api call
-        const pathData = yield call(apiPost, `${server}/locations`, {
+        const pathData = yield call(apiPost, `${server}/api/locations`, {
           startLat,
           startLong,
           newLat,
@@ -185,7 +185,7 @@ export function* fetchPathData(action, ...args) {
 export function* fetchElevationData(data) {
   const { pointString, numberOfPoints } = data.data;
 
-  const elevationData = yield call(apiPost, `${server}/elevation`, {
+  const elevationData = yield call(apiPost, `${server}/api/elevation`, {
     pointString,
     numberOfPoints,
   });
