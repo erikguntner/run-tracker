@@ -6,6 +6,8 @@ exports.screenshotMap = async (req, res, next) => {
   try {
     const { lineFeatures } = req.body;
 
+    console.log();
+
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
@@ -19,6 +21,7 @@ exports.screenshotMap = async (req, res, next) => {
     const flattenedCoords = coords.reduce((accum, arr) => {
       return accum.concat(arr);
     }, []);
+
     // Stringify coords before using them as query string
     const coordsStr = JSON.stringify(flattenedCoords);
 
