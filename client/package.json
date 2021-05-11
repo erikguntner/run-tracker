@@ -24,7 +24,7 @@
     "enzyme-adapter-react-16": "^1.8.0",
     "formik": "^1.4.3",
     "immutable": "^4.0.0-rc.12",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "mapbox-gl": "^0.52.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
