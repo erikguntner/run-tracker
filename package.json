@@ -40,7 +40,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
     "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
+    "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "puppeteer": "^1.17.0",
     "read-pkg-up": "^6.0.0",
